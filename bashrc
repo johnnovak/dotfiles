@@ -6,9 +6,6 @@ export HISTSIZE=5000
 export HISTFILESIZE=1000
 export HISTIGNORE="&:ls:ll:la:l.:pwd:exit:clear"
 
-export LC_ALL=en_US.UTF-8
-export LANG=en_US.UTF-8
-
 # Tab completion for sudo
 complete -cf sudo
 
