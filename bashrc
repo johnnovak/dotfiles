@@ -38,3 +38,40 @@ alias ..='cd ..'
 alias oo='open .'
 
 alias gst='git status'
+
+# A little clock that appeares in the terminal window
+clock() {
+  while true;do clear;echo "===========";date +"%r";echo "===========";sleep 1;done
+}
+
+# Show the current IP address if connected to the internet
+showip() {
+  lynx -dump -hiddenlinks=ignore -nolist http://checkip.dyndns.org:8245/ | awk '{ print $4 }' | sed '/^$/d; s/^[ ]*//g; s/[ ]*$//g'
+}
+
+# Recursive delete functions
+rm-vimbackup() {
+  echo -n "Recursively removing vim backup files from "
+  pwd
+  find ./ -name '*~' -exec rm '{}' \; -print -or -name ".*~" -exec rm {} \; -print
+}
+
+rm-dsstore() {
+  echo -n "Recursively removing .DS_Store files from "
+  pwd
+  find ./ -name '.DS_Store' -exec rm -rf '{}' \; -print
+}
+
+rm-pyc() {
+  echo -n "Recursively removing .pyc files from "
+  pwd
+  find ./ -name '*.pyc' -exec rm '{}' \; -print
+}
+
+
+rm-pyc() {
+  echo -n "Recursively removing .svn files from"
+  pwd
+  find ./ -name '.svn' -exec rm -rf '{}' \; -print
+}
+
