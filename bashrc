@@ -12,19 +12,83 @@ complete -cf sudo
 # Append to history rather than overwrite
 shopt -s histappend
 
-# Show git branch name in prompt
-function parse_git_branch () {
+# Show git branch or tag name in prompt
+parse_git_branch() {
   git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ [\1]/'
 }
 
-# Command prompt
-NO_COLOR="\[\033[m\]"
-RED="\[\033[0;31m\]"
-GREEN="\[\033[0;32m\]"
-YELLOW="\[\033[0;33m\]"
-BOLD_YELLOW="\[\033[1;33m\]"
+parse_git_tag() {
+  git describe --tags 2> /dev/null
+}
 
-PS1="$YELLOW\u@\h$NO_COLOR $BOLD_YELLOW\w$NO_COLOR$GREEN\$(parse_git_branch)$NO_COLOR $RED\$$NO_COLOR "
+parse_git_branch_or_tag() {
+  local OUT="$(parse_git_branch)"
+  if [ "$OUT" == " ((no branch))" ]; then
+    OUT="($(parse_git_tag))";
+  fi
+  printf "$OUT"
+}
+
+# Command prompt
+function _fancy_prompt {
+  local RED="\[\033[01;31m\]"
+  local GREEN="\[\033[01;32m\]"
+  local YELLOW="\[\033[01;33m\]"
+  local BLUE="\[\033[01;34m\]"
+  local WHITE="\[\033[00m\]"
+
+  local PROMPT=""
+
+  # Working directory
+  PROMPT=$PROMPT"$YELLOW\w"
+
+  # Git-specific
+  local GIT_STATUS=$(git status 2> /dev/null)
+  if [ -n "$GIT_STATUS" ] # Are we in a git directory?
+  then
+    # Open paren
+    PROMPT=$PROMPT" $GREEN("
+
+    # Branch
+    PROMPT=$PROMPT$(git branch --no-color 2> /dev/null | sed -e "/^[^*]/d" -e "s/* \(.*\)/\1/")
+
+    # Warnings
+    PROMPT=$PROMPT$RED
+
+    # Merging
+    echo $GIT_STATUS | grep "Unmerged paths" > /dev/null 2>&1
+    if [ "$?" -eq "0" ]
+    then
+      PROMPT=$PROMPT"|MERGING"
+    fi
+
+    # Dirty flag
+    echo $GIT_STATUS | grep "nothing to commit" > /dev/null 2>&1
+    if [ "$?" -eq 0 ]
+    then
+      PROMPT=$PROMPT
+    else
+      PROMPT=$PROMPT"*"
+    fi
+
+    # Warning for no email setting
+    git config user.email | grep @ > /dev/null 2>&1
+    if [ "$?" -ne 0 ]
+    then
+      PROMPT=$PROMPT" !!! NO EMAIL SET !!!"
+    fi
+
+    # Closing paren
+    PROMPT=$PROMPT"$GREEN)"
+  fi
+
+  # Final $ symbol
+  PROMPT=$PROMPT"$BLUE \$$WHITE "
+
+  export PS1=$PROMPT
+}
+
+export PROMPT_COMMAND="_fancy_prompt"
 
 # Enable terminal colors
 export CLICOLOR=1
