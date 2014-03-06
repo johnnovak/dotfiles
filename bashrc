@@ -33,6 +33,7 @@ parse_git_branch_or_tag() {
 function _fancy_prompt {
   local RED="\[\033[01;31m\]"
   local GREEN="\[\033[01;32m\]"
+  local YELLOW0="\[\033[00;33m\]"
   local YELLOW="\[\033[01;33m\]"
   local BLUE="\[\033[01;34m\]"
   local WHITE="\[\033[00m\]"
@@ -40,7 +41,7 @@ function _fancy_prompt {
   local PROMPT=""
 
   # Working directory
-  PROMPT=$PROMPT"$YELLOW\w"
+  PROMPT=$PROMPT"$YELLOW0\u@\h $YELLOW\w"
 
   # Git-specific
   local GIT_STATUS=$(git status 2> /dev/null)
