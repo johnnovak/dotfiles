@@ -6,6 +6,9 @@ export HISTSIZE=5000
 export HISTFILESIZE=1000
 export HISTIGNORE="&:ls:ll:la:l.:pwd:exit:clear"
 
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
+
 # Tab completion for sudo
 complete -cf sudo
 
@@ -41,14 +44,14 @@ function _fancy_prompt {
   local PROMPT=""
 
   # Working directory
-  PROMPT=$PROMPT"$YELLOW0\u@\h $YELLOW\w"
+  PROMPT=$PROMPT"$BLUE\u@\h $YELLOW\w"
 
   # Git-specific
   local GIT_STATUS=$(git status 2> /dev/null)
   if [ -n "$GIT_STATUS" ] # Are we in a git directory?
   then
     # Open paren
-    PROMPT=$PROMPT" $GREEN("
+    PROMPT=$PROMPT" $GREEN["
 
     # Branch
     PROMPT=$PROMPT$(git branch --no-color 2> /dev/null | sed -e "/^[^*]/d" -e "s/* \(.*\)/\1/")
@@ -80,11 +83,11 @@ function _fancy_prompt {
     fi
 
     # Closing paren
-    PROMPT=$PROMPT"$GREEN)"
+    PROMPT=$PROMPT"$GREEN]"
   fi
 
   # Final $ symbol
-  PROMPT=$PROMPT"$BLUE \$$WHITE "
+  PROMPT=$PROMPT"$RED \$$WHITE "
 
   export PS1=$PROMPT
 }
