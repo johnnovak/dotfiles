@@ -2,6 +2,7 @@
 " GENERAL
 "=============================================================================
 set nocompatible    " use Vim mode
+set modeline        " Allow file specific Vim settings
 
 set backspace=indent,eol,start  " allow backspacing in insert mode
 
@@ -22,13 +23,20 @@ set diffopt=vertical    " use vertical splits in diff mode
 
 set autoread        " automatically read a file that has changed on disk
 
+" Timeout on mappings after 1 second
+set timeoutlen=1000
+
 " Avoid the need to press ESC twice when running in terminal mode
-set timeoutlen=1000 ttimeoutlen=0
+set ttimeoutlen=0
+
+"set hidden                 " Keep changed buffers without requiring saves
 
 "set virtualedit=all " allow the cursor to go in to "invalid" places
 
 filetype plugin on
 filetype indent on
+
+set shellslash      " use forward slashes in path names on Windows
 
 " default folding is one level by syntax
 set foldmethod=syntax
@@ -40,6 +48,8 @@ set expandtab
 set softtabstop=4
 set shiftwidth=4
 set tabstop=4
+
+
 
 " use UTF8 encoding by default
 set encoding=utf8
@@ -114,10 +124,19 @@ set ttyfast
 " MACROS & SHORTCUTS
 "=============================================================================
 " shortcuts to move between window
-map <C-H> <C-W>h
 map <C-J> <C-W>j
 map <C-K> <C-W>k
+map <C-H> <C-W>h
 map <C-L> <C-W>l
+
+" Make window controls easy
+nnoremap <leader>w <C-w>
+
+" fix moving line by line in the paragraph, when soft wrap is on
+" nnoremap j gj
+" nnoremap k gk
+" vnoremap j gj
+" vnoremap k gk
 
 " shortcuts to shrink/expand windows
 map - <C-W>-
