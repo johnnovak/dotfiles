@@ -1,4 +1,9 @@
-export TERM=xterm-256color
+if [[ "$OSTYPE" == 'darwin'* ]]; then
+    export TERM=xterm
+else
+    export TERM=xterm-256color
+fi
+
 export EDITOR=vim
 export PATH=$PATH:$HOME/bin
 export LESS='-R'
@@ -30,7 +35,9 @@ PS1="\n$BLUE\u@\h $YELLOW\w $GREEN\$(parse_git_branch)\n$RED\$$WHITE "
 export CLICOLOR=1
 
 # ls colors
-alias ls='ls --color=auto'      # for Cygwin
+if [[ "$OSTYPE" == 'cygwin' ]]; then
+    alias ls='ls --color=auto'
+fi
 export LS_OPTIONS='--color=auto'
 export LSCOLORS='Bxgxfxfxcxdxdxhbadbxbx'
 
@@ -93,6 +100,12 @@ rm-dsstore() {
   find ./ -name '.DS_Store' -exec rm -rf '{}' \; -print
 }
 
+rm-pyc() {
+  echo -n "Recursively deleting .pyc files from "
+  pwd
+  find ./ -name '*.pyc' -exec rm -rf '{}' \; -print
+}
+
 # Extract files
 ex() {
   if [ -f $1 ] ; then
@@ -130,14 +143,13 @@ export ORACLE_SID=orcl
 #export ANT_OPTS="-Dhttp.proxyHost=aubne-s-vwprx01.ventyx.au.abb.com -Dhttp.proxyPort=8080 -Dhttp.nonProxyHosts=*.ventyx.abb.com,*.mincom.com,localhost"
 #export ANT_OPTS="-Dhttp.nonProxyHosts=*.ventyx.abb.com,*.mincom.com,localhost"
 
-
 ###############################################################################
 # OS SPECIFIC STUFF
 ###############################################################################
 case "$OSTYPE" in
   linux*)  ;;
-  darwin*) echo 'OS X' ;;
-  cygwin)  echo 'Cygwin' ;;
+  darwin*) ;;
+  cygwin)  ;;
   *bsd)    ;;
   *)       ;;
 esac

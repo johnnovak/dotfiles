@@ -1,75 +1,167 @@
 "=============================================================================
-" GENERAL
+" Vundle
 "=============================================================================
-set nocompatible    " use Vim mode
-set modeline        " Allow file specific Vim settings
 
-set backspace=indent,eol,start  " allow backspacing in insert mode
+set nocompatible              " be iMproved, required
+filetype off                  " required
 
-set backup		    " keep a backup file
-set undofile        " create undo files
-set history=100	    " keep 100 lines of command line history
+" set the runtime path to include Vundle and initialize
+if has('win32') || has('win64')
+  set rtp+=~/vimfiles/bundle/vundle/
+  call vundle#rc('$HOME/vimfiles/bundle/')
+else
+  set rtp+=~/.vim/bundle/vundle/
+  call vundle#rc()
+endif
 
-set showcmd		    " display incomplete commands
-set incsearch	    " do incremental searching
+" let Vundle manage Vundle, required
+Bundle 'gmarik/vundle'
 
-"set autoindent      " always set autoindenting on
-set cindent         " use C indenting
+" colorschemes
+Bundle 'altercation/vim-colors-solarized'
+Bundle 'jonathanfilip/vim-lucius'
+Bundle 'dsolstad/vim-wombat256i'
+Bundle 'tomasr/molokai'
+Bundle 'croaker/mustang-vim'
+Bundle 'jnurmine/Zenburn'
+Bundle 'chriskempson/vim-tomorrow-theme'
 
-set wildmenu        " make the command-line completion better
+" plugins
+Bundle 'tpope/vim-repeat'
+Bundle 'tpope/vim-unimpaired'
+Bundle 'tpope/vim-fugitive'
+Bundle 'tpope/vim-surround'
+Bundle 'bling/vim-airline'
+Bundle 'scrooloose/nerdtree'
+Bundle 'kien/ctrlp.vim'
+Bundle 'scrooloose/nerdcommenter'
+Bundle 'Shougo/neocomplcache.vim'
+Bundle 'godlygeek/tabular'
+Bundle 'plasticboy/vim-markdown'
+Bundle 'pangloss/vim-javascript'
 
-set diffopt+=iwhite     " ignore whitespaces in diff mode
-set diffopt=vertical    " use vertical splits in diff mode
+"Bundle 'mbbill/undotree'
+"Bundle 'Valloric/YouCompleteMe'
+"Bundle 'spf13/vim-autoclose'
+"Bundle 'majutsushi/tagbar'
 
-set autoread        " automatically read a file that has changed on disk
+filetype plugin indent on     " required
 
-" Timeout on mappings after 1 second
-set timeoutlen=1000
 
-" Avoid the need to press ESC twice when running in terminal mode
-set ttimeoutlen=0
+"=============================================================================
+" General settings
+"=============================================================================
 
-"set hidden                 " Keep changed buffers without requiring saves
+set history=100	        " keep 100 lines of command line history
 
-"set virtualedit=all " allow the cursor to go in to "invalid" places
+let mapleader=","       " set leader
 
-filetype plugin on
-filetype indent on
+"=== File handling ===========================================================
 
-set shellslash      " use forward slashes in path names on Windows
+set backup              " keep a backup file
+set undofile            " create undo files
+set autoread            " automatically read a file that has changed on disk
 
-" default folding is one level by syntax
-set foldmethod=syntax
-set foldnestmax=1
-set foldlevel=1
+" TODO use $VIM_HOME
+"set backupdir^=~/.vim/_backup//    " where to put backup files.
+"et directory^=~/.vim/_temp//      " where to put swap files.
 
-" default tab settings (4 spaces)
-set expandtab
+"=== Encoding ================================================================
+
+set encoding=utf-8      " use utf-8 encoding by default
+set termencoding=utf-8
+set fileencoding=utf-8
+setglobal fileencoding=utf-8
+
+"=== Appearance ==============================================================
+
+syntax on               " switch syntax highlighting on
+set synmaxcol=2048      " don't syntax highlight very long lines
+
+set fillchars+=vert:\   " get rid of vertical window separator characters
+
+set colorcolumn=78      " display max width marker
+set lazyredraw          " don't update the display while executing macros
+
+set ruler               " show the cursor position all the time
+set laststatus=2        " always display status line
+set showcmd	            " display incomplete commands
+set cmdheight=2         " 2 line high command prompt
+
+if $TERM == 'xterm-color-256'
+  set background=dark     " use the dark 'lucius' theme
+  colorscheme lucius
+endif
+
+"=== Navigation =============================================================
+
+set scrolloff=8         " keep the cursor 8 lines from the top and bottom when
+                        " the page scrolls
+
+"=== Searching ===============================================================
+
+set incsearch           " do incremental searching
+set hlsearch            " switch on highlighting the last used search pattern
+set ignorecase          " searches are case insensitive...
+set smartcase           " ... unless they contain at least one capital letter
+
+set wildmenu            " make the command-line completion better
+
+" disable output and vcs files
+set wildignore+=*.o,*.out,*.obj,.git,*.rbc,*.rbo,*.class,.svn,*.gem
+
+" disable archive files
+set wildignore+=*.zip,*.tar.gz,*.tar.bz2,*.rar,*.tar.xz
+
+" ignore bundler and sass cache
+set wildignore+=*/.bundle/*,*/.sass-cache/*
+
+" disable temp and backup files
+set wildignore+=*.swp,*~,._*
+
+"=== Whitespaces =============================================================
+set expandtab           " use 4 spaces for tabs
 set softtabstop=4
 set shiftwidth=4
 set tabstop=4
 
+" TODO
+set nowrap
+set list                    " show invisible characters
 
+" List chars
+set listchars=""            " reset the listchars
+set listchars=tab:\ \       " show tabs as two spaces
+set listchars+=trail:.      " show trailing spaces as dots
+set listchars+=extends:>    " display '>' if the line continues to the right
+set listchars+=precedes:<   " display '<' if the line continues to the left
 
-" use UTF8 encoding by default
-set encoding=utf8
-set fileencoding=utf8
+"=== Editing =================================================================
 
-set ignorecase
-set smartcase
+set backspace=indent,eol,start  " backspace through everything in insert mode
 
-set gdefault
+set autoindent          " always set autoindenting on
 
-" system default for mappings is now the "," character
-let mapleader=","
+set timeoutlen=2000     " timeout on mappings after 1 second
+set ttimeoutlen=0       " avoid the need to press ESC twice when in terminal
+
+set foldmethod=syntax   " default folding is one level, by syntax
+set foldnestmax=1
+set foldlevel=1
+
+"=== Diff ====================================================================
+
+set diffopt+=iwhite     " add ignorance of whitespace to diff
+set diffopt+=vertical   " open diff windows as a vertical split
+
 
 "=============================================================================
-" PLUGINS
+" Plugin settings
 "=============================================================================
 
 " Airline
 if !exists('g:airline_symbols')
-  let g:airline_symbols = {}
+  let g:airline_symbols={}
 endif
 
 let g:airline_left_sep = ''
@@ -80,102 +172,112 @@ let g:airline_symbols.branch = ''
 let g:airline_symbols.readonly = ''
 let g:airline_symbols.linenr = ''
 
-let g:airline_theme = "powerlineish"
+let g:airline_theme="powerlineish"
 
-" SuperTab
-let g:SuperTabDefaultCompletionType = "context"
-let g:SuperTabContextDefaultCompletionType = "<c-n>"
+" Nerdtree
+let g:NERDTreeIgnore=['\~$', '\.pyc']
 
-" NERDTree
-let g:NERDTreeIgnore=['\.vim$', '\~$', '\.pyc']
+" Ctrl-P
+map <C-K> :CtrlPBuffer<CR>
 
-"=============================================================================
-" COLORS & APPEAREANCE
-"=============================================================================
-set synmaxcol=2048  " don't syntax highlight overly longs lines
-syntax on           " switch syntax highlighting on
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+  \ 'file': '\.pyc$\|\.pyo$\|\.rbc$|\.rbo$\|\.class$\|\.o$\|\~$\',
+  \ }
 
-set ruler		    " show the cursor position all the time
+" neocachecompl
+let g:acp_enableAtStartup = 0               " disable AutoComplPop.
+let g:neocomplcache_enable_at_startup = 1
+let g:neocomplcache_enable_smart_case = 1
+let g:neocomplcache_min_syntax_length = 3
+let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
 
-set cmdheight=2     " use 2 line high command prompt
-set laststatus=2    " always display status line
+" NERDCommenter
+let NERDCommentWholeLinesInVMode=1
 
-set hlsearch        " switch on highlighting the last used search pattern
-set colorcolumn=80  " display max width marker
-set lazyredraw      " don't update the display while executing macros
-set scrolloff=8     " keep the cursor 8 lines from the top and bottom when
-                    " the page scrolls
-
-set fillchars+=vert:\   " get rid of vertical window separator characters
-
-set background=dark
-
-let g:lucius_contrast='high'
-colorscheme lucius
-
-set ttyfast
-
-"colorscheme railscasts
-"colorscheme zellner
-"colorscheme jellybeans
-"colorscheme mustang
 
 "=============================================================================
-" MACROS & SHORTCUTS
+" Shortcuts & macros
 "=============================================================================
-" shortcuts to move between window
+
+" General
+"-----------------------------------------------------------------------------
+" window navigation
+map <C-H> <C-W>h
 map <C-J> <C-W>j
 map <C-K> <C-W>k
-map <C-H> <C-W>h
 map <C-L> <C-W>l
 
-" Make window controls easy
-nnoremap <leader>w <C-w>
-
-" fix moving line by line in the paragraph, when soft wrap is on
-" nnoremap j gj
-" nnoremap k gk
-" vnoremap j gj
-" vnoremap k gk
-
-" shortcuts to shrink/expand windows
-map - <C-W>-
-map + <C-W>=
-map = <C-W>+
-map <C-N> <C-W><
-map <C-M> <C-W>>
-
-" use TAB to match parens
-nnoremap <tab> %
-vnoremap <tab> %
+" shrink/expand Windows
+"map - <C-W>-
+"map + <C-W>=
+"map = <C-W>+
+"map <C-N> <C-W>>
+"map <C-M> <C-W><
 
 " turn off highlight search
 nmap <silent> ,n :nohls<CR>
 
-" return the syntax highlighting group of the element under the cursor
+" upper/lower word
+nmap <leader>u mQviwU`Q
+nmap <leader>l mQviwu`Q
+
+" underline the current line with '='
+nmap <silent> <leader>ul :t.<CR>Vr=
+
+" set text wrapping toggles
+nmap <silent> <leader>tw :set invwrap<CR>:set wrap?<CR>
+
+" display the syntax highlighting group of the element under the cursor
 nmap <silent> ,qq :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<' . synIDattr(synID(line("."),col("."),0),"name") . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 
-" CTRL-U in insert mode deletes a lot.  Use CTRL-G u to first break undo,
-" so that you can undo CTRL-U after inserting a line break.
-inoremap <C-U> <C-G>u<C-U>
+" fugitive shortcuts
+"-----------------------------------------------------------------------------
+nmap <leader>gs :Gstatus<CR>
+nmap <leader>gd :Gdiff<CR>
+nmap <leader>gc :Gcommit<CR>
+nmap <leader>gb :Gblame<CR>
+nmap <leader>gl :Glog<CR>
+nmap <leader>gp :Git push<CR>
 
-" HTML escape/unescape (visual mode only)
-function HtmlEscape()
-  silent s/&/\&amp;/eg
-  silent s/</\&lt;/eg
-  silent s/>/\&gt;/eg
+" neocachecompl
+"-----------------------------------------------------------------------------
+" define keyword pattern
+if !exists('g:neocomplcache_keyword_patterns')
+    let g:neocomplcache_keyword_patterns = {}
+endif
+let g:neocomplcache_keyword_patterns['default'] = '\h\w*'
+
+" <CR>: close popup and save indent.
+inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+function! s:my_cr_function()
+  return neocomplcache#smart_close_popup() . "\<CR>"
 endfunction
 
-function HtmlUnEscape()
-  silent s/&lt;/</eg
-  silent s/&gt;/>/eg
-  silent s/&amp;/\&/eg
+" <TAB>: completion
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+" <C-h>, <BS>: close popup and delete backword char
+inoremap <expr><C-h>  neocomplcache#smart_close_popup() . "\<C-h>"
+inoremap <expr><BS>   neocomplcache#smart_close_popup() . "\<C-h>"
+inoremap <expr><C-y>  neocomplcache#close_popup()
+inoremap <expr><C-e>  neocomplcache#cancel_popup()
+
+" Tabularize
+"-----------------------------------------------------------------------------
+map <leader>a=  :Tabularize /=<CR>
+map <leader>a:  :Tabularize /:<CR>
+map <leader>a:: :Tabularize /:\zs<CR>
+map <leader>a,  :Tabularize /,<CR>
+
+"=============================================================================
+" Filetype settings
+"=============================================================================
+
+" Some file types should wrap their text
+function! s:setupWrapping()
+  set wrap
+  set linebreak
+  set textwidth=72
+  set nolist
 endfunction
-
-vmap <silent> <c-h> :call HtmlEscape()<CR>
-vmap <silent> <c-u> :call HtmlUnEscape()<CR>
-
-" Highlight potentially unwanted whitespaces
-"highlight BadWhitespace term=standout ctermbg=red guibg=red
-"match BadWhitespace /[^* \t]\zs\s\+$\| \+\ze\t/
 
