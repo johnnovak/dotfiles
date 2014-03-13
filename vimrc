@@ -56,6 +56,9 @@ set history=100	        " keep 100 lines of command line history
 
 let mapleader=","       " set leader
 
+set t_ti=7[r[?47h     " restore contents of terminal window on exit
+set t_te=[?47l8
+
 "=== File handling ===========================================================
 
 set backup              " keep a backup file
@@ -149,6 +152,8 @@ set foldmethod=syntax   " default folding is one level, by syntax
 set foldnestmax=1
 set foldlevel=1
 
+set textwidth=78
+
 "=== Diff ====================================================================
 
 set diffopt+=iwhite     " add ignorance of whitespace to diff
@@ -171,8 +176,6 @@ let g:airline_right_alt_sep = ''
 let g:airline_symbols.branch = ''
 let g:airline_symbols.readonly = ''
 let g:airline_symbols.linenr = ''
-
-let g:airline_theme="powerlineish"
 
 " Nerdtree
 let g:NERDTreeIgnore=['\~$', '\.pyc']
@@ -280,4 +283,5 @@ function! s:setupWrapping()
   set textwidth=72
   set nolist
 endfunction
+
 
