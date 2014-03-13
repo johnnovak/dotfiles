@@ -91,9 +91,9 @@ set laststatus=2        " always display status line
 set showcmd	            " display incomplete commands
 set cmdheight=2         " 2 line high command prompt
 
-if $TERM == 'xterm-color-256'
-  set background=dark     " use the dark 'lucius' theme
-  colorscheme lucius
+if $TERM == 'xterm-256color'
+  set background=dark   " use the dark 'lucius' theme if the terminal
+  colorscheme lucius    " supports 256 colors
 endif
 
 "=== Navigation =============================================================
