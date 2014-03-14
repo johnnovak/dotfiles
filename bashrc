@@ -71,6 +71,7 @@ alias gco='git checkout'
 alias gbr='git branch'
 alias ghst='git log --pretty=format:"%h %ad | %s%d [%an]" --graph --date=short'
 
+alias oo='open .'
 alias sqp='rlwrap sqlplus'
 
 ###############################################################################
@@ -142,15 +143,4 @@ export ORACLE_SID=orcl
 
 #export ANT_OPTS="-Dhttp.proxyHost=aubne-s-vwprx01.ventyx.au.abb.com -Dhttp.proxyPort=8080 -Dhttp.nonProxyHosts=*.ventyx.abb.com,*.mincom.com,localhost"
 #export ANT_OPTS="-Dhttp.nonProxyHosts=*.ventyx.abb.com,*.mincom.com,localhost"
-
-###############################################################################
-# OS SPECIFIC STUFF
-###############################################################################
-case "$OSTYPE" in
-  linux*)  ;;
-  darwin*) ;;
-  cygwin)  ;;
-  *bsd)    ;;
-  *)       ;;
-esac
 
