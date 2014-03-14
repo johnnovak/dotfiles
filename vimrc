@@ -62,8 +62,8 @@ if has('mouse')         " enable mouse
   set mouse=a
 endif
 
-"=== File handling ===========================================================
-
+" File handling
+"-----------------------------------------------------------------------------
 set backup              " keep a backup file
 set undofile            " create undo files
 set autoread            " automatically read a file that has changed on disk
@@ -71,15 +71,15 @@ set autoread            " automatically read a file that has changed on disk
 set backupdir^=$HOME/.vim/_backup//    " where to put backup files.
 set directory^=$HOME/.vim/_temp//      " where to put swap files.
 
-"=== Encoding ================================================================
-
+" Encoding
+"-----------------------------------------------------------------------------
 set encoding=utf-8      " use utf-8 encoding by default
 set termencoding=utf-8
 set fileencoding=utf-8
 setglobal fileencoding=utf-8
 
-"=== Appearance ==============================================================
-
+" Appearance
+"-----------------------------------------------------------------------------
 syntax on               " switch syntax highlighting on
 set synmaxcol=2048      " don't syntax highlight very long lines
 
@@ -100,13 +100,12 @@ if $TERM == 'xterm-256color'
 "  let g:airline_theme='powerlineish'
 endif
 
-"=== Navigation =============================================================
-
+" Navigation
+"-----------------------------------------------------------------------------
 set scrolloff=8         " keep the cursor 8 lines from the top and bottom when
                         " the page scrolls
-
-"=== Searching ===============================================================
-
+" Searching
+"-----------------------------------------------------------------------------
 set incsearch           " do incremental searching
 set hlsearch            " switch on highlighting the last used search pattern
 set ignorecase          " searches are case insensitive...
@@ -126,24 +125,25 @@ set wildignore+=*/.bundle/*,*/.sass-cache/*
 " disable temp and backup files
 set wildignore+=*.swp,*~,._*
 
-"=== Whitespaces =============================================================
-set expandtab           " use 4 spaces for tabs
+" Whitespaces
+"-----------------------------------------------------------------------------
+set expandtab               " use 4 spaces for tabs
 set softtabstop=4
 set shiftwidth=4
 set tabstop=4
 
 set wrap                    " wrap lines by default
-set list                    " show invisible characters
 
-" List chars
+set list                    " show invisible characters
 set listchars=""            " reset the listchars
 set listchars=tab:\ \       " show tabs as two spaces
-set listchars+=trail:.      " show trailing spaces as dots
-set listchars+=extends:>    " display '>' if the line continues to the right
-set listchars+=precedes:<   " display '<' if the line continues to the left
+set listchars+=trail:·      " show trailing spaces as dots
+set listchars+=extends:»    " display '»' if the line continues to the right
+set listchars+=precedes:«   " display '«' if the line continues to the left
+"set listchars+=eol:¶        " show newline characters a '¶'
 
-"=== Editing =================================================================
-
+" Editing
+"-----------------------------------------------------------------------------
 set backspace=indent,eol,start  " backspace through everything in insert mode
 
 set autoindent          " always set autoindenting on
@@ -157,8 +157,8 @@ set foldlevel=1
 
 set textwidth=78
 
-"=== Diff ====================================================================
-
+" Diff
+"-----------------------------------------------------------------------------
 set diffopt+=iwhite     " add ignorance of whitespace to diff
 set diffopt+=vertical   " open diff windows as a vertical split
 
@@ -197,14 +197,6 @@ let g:ctrlp_custom_ignore = {
   \ 'dir':  '\v[\/]\.(git|hg|svn)$',
   \ 'file': '\.pyc$\|\.pyo$\|\.rbc$|\.rbo$\|\.class$\|\.o$\|\~$\',
   \ }
-
-" neocachecompl
-"-----------------------------------------------------------------------------
-"let g:acp_enableAtStartup = 0               " disable AutoComplPop.
-"let g:neocomplcache_enable_at_startup = 1
-"let g:neocomplcache_enable_smart_case = 1
-"let g:neocomplcache_min_syntax_length = 3
-"let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
 
 " neocomplete
 "-----------------------------------------------------------------------------
@@ -269,7 +261,10 @@ nmap <silent> <leader>ul :t.<CR>Vr=
 nmap <silent> <leader>tw :set invwrap<CR>:set wrap?<CR>
 
 " display the syntax highlighting group of the element under the cursor
-nmap <silent> ,qq :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<' . synIDattr(synID(line("."),col("."),0),"name") . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
+nmap <silent> ,qq :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name")
+  \ . '> trans<' . synIDattr(synID(line("."),col("."),0),"name")
+  \ . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name")
+  \ . ">"<CR>
 
 " fugitive shortcuts
 "-----------------------------------------------------------------------------
@@ -310,9 +305,24 @@ map <leader>a:  :Tabularize /:<CR>
 map <leader>a:: :Tabularize /:\zs<CR>
 map <leader>a,  :Tabularize /,<CR>
 
+
 "=============================================================================
 " Filetype settings
 "=============================================================================
+
+" enable omni completion
+autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+
+" filetypes with tabwidth of 2
+autocmd FileType css,sass,html,vim,markdown,python,javascript
+  \ setlocal ts=2 sw=2 sts=2
+
+" wrap python comments at 72 chars
+autocmd FileType python setlocal textwidth=72
 
 " TODO
 function! s:textEdit()
@@ -324,11 +334,4 @@ function! s:textEdit()
   set linebreak
   set virtualedit
 endfunction
-
-" enable omni completion
-autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 
