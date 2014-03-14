@@ -68,8 +68,8 @@ set backup              " keep a backup file
 set undofile            " create undo files
 set autoread            " automatically read a file that has changed on disk
 
-set backupdir^=$HOME/.vim/_backup//    " where to put backup files.
-set directory^=$HOME/.vim/_temp//      " where to put swap files.
+set backupdir^=$HOME/.vim/_backup//    " where to put backup files
+set directory^=$HOME/.vim/_temp//      " where to put swap files
 
 " Encoding
 "-----------------------------------------------------------------------------
@@ -106,12 +106,12 @@ set scrolloff=8         " keep the cursor 8 lines from the top and bottom when
                         " the page scrolls
 " Searching
 "-----------------------------------------------------------------------------
-set incsearch           " do incremental searching
-set hlsearch            " switch on highlighting the last used search pattern
+set incsearch           " enable incremental searching
+set hlsearch            " highlight the last used search pattern
 set ignorecase          " searches are case insensitive...
-set smartcase           " ... unless they contain at least one capital letter
+set smartcase           " ...unless they contain at least one capital letter
 
-set wildmenu            " make the command-line completion better
+set wildmenu            " improved command-line completion better
 
 " disable output and vcs files
 set wildignore+=*.o,*.out,*.obj,.git,*.rbc,*.rbo,*.class,.svn,*.gem
