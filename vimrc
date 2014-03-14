@@ -35,13 +35,12 @@ Bundle 'bling/vim-airline'
 Bundle 'scrooloose/nerdtree'
 Bundle 'kien/ctrlp.vim'
 Bundle 'scrooloose/nerdcommenter'
-Bundle 'Shougo/neocomplcache.vim'
+Bundle 'Shougo/neocomplete.vim'
 Bundle 'godlygeek/tabular'
 Bundle 'plasticboy/vim-markdown'
 Bundle 'pangloss/vim-javascript'
 
 "Bundle 'mbbill/undotree'
-"Bundle 'Valloric/YouCompleteMe'
 "Bundle 'spf13/vim-autoclose'
 "Bundle 'majutsushi/tagbar'
 
@@ -59,15 +58,18 @@ let mapleader=","       " set leader
 set t_ti=7[r[?47h     " restore contents of terminal window on exit
 set t_te=[?47l8
 
+if has('mouse')         " enable mouse
+  set mouse=a
+endif
+
 "=== File handling ===========================================================
 
 set backup              " keep a backup file
 set undofile            " create undo files
 set autoread            " automatically read a file that has changed on disk
 
-" TODO use $VIM_HOME
-"set backupdir^=~/.vim/_backup//    " where to put backup files.
-"et directory^=~/.vim/_temp//      " where to put swap files.
+set backupdir^=$HOME/.vim/_backup//    " where to put backup files.
+set directory^=$HOME/.vim/_temp//      " where to put swap files.
 
 "=== Encoding ================================================================
 
@@ -94,6 +96,8 @@ set cmdheight=2         " 2 line high command prompt
 if $TERM == 'xterm-256color'
   set background=dark   " use the dark 'lucius' theme if the terminal
   colorscheme lucius    " supports 256 colors
+"  colorscheme mustang
+"  let g:airline_theme='powerlineish'
 endif
 
 "=== Navigation =============================================================
@@ -128,8 +132,7 @@ set softtabstop=4
 set shiftwidth=4
 set tabstop=4
 
-" TODO
-set nowrap
+set wrap                    " wrap lines by default
 set list                    " show invisible characters
 
 " List chars
@@ -165,6 +168,7 @@ set diffopt+=vertical   " open diff windows as a vertical split
 "=============================================================================
 
 " Airline
+"-----------------------------------------------------------------------------
 if !exists('g:airline_symbols')
   let g:airline_symbols={}
 endif
@@ -178,9 +182,15 @@ let g:airline_symbols.readonly = ''
 let g:airline_symbols.linenr = ''
 
 " Nerdtree
+"-----------------------------------------------------------------------------
 let g:NERDTreeIgnore=['\~$', '\.pyc']
 
+" NERDCommenter
+"-----------------------------------------------------------------------------
+let NERDCommentWholeLinesInVMode=1
+
 " Ctrl-P
+"-----------------------------------------------------------------------------
 map <C-K> :CtrlPBuffer<CR>
 
 let g:ctrlp_custom_ignore = {
@@ -189,14 +199,42 @@ let g:ctrlp_custom_ignore = {
   \ }
 
 " neocachecompl
-let g:acp_enableAtStartup = 0               " disable AutoComplPop.
-let g:neocomplcache_enable_at_startup = 1
-let g:neocomplcache_enable_smart_case = 1
-let g:neocomplcache_min_syntax_length = 3
-let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
+"-----------------------------------------------------------------------------
+"let g:acp_enableAtStartup = 0               " disable AutoComplPop.
+"let g:neocomplcache_enable_at_startup = 1
+"let g:neocomplcache_enable_smart_case = 1
+"let g:neocomplcache_min_syntax_length = 3
+"let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
 
-" NERDCommenter
-let NERDCommentWholeLinesInVMode=1
+" neocomplete
+"-----------------------------------------------------------------------------
+let g:acp_enableAtStartup = 0               " disable AutoComplPop
+let g:neocomplete#enable_at_startup = 1     " use neocomplete
+let g:neocomplete#enable_smart_case = 1     " use smartcase
+
+" set minimum syntax keyword length
+let g:neocomplete#sources#syntax#min_keyword_length = 3
+let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
+
+" define dictionary
+let g:neocomplete#sources#dictionary#dictionaries = {
+    \ 'default' : '',
+    \ 'vimshell' : $HOME.'/.vimshell_hist'
+    \ }
+
+" define keyword
+if !exists('g:neocomplete#keyword_patterns')
+    let g:neocomplete#keyword_patterns = {}
+endif
+let g:neocomplete#keyword_patterns['default'] = '\h\w*'
+
+" enable heavy omni completion
+if !exists('g:neocomplete#sources#omni#input_patterns')
+  let g:neocomplete#sources#omni#input_patterns = {}
+endif
+if !exists('g:neocomplete#force_omni_input_patterns')
+  let g:neocomplete#force_omni_input_patterns = {}
+endif
 
 
 "=============================================================================
@@ -212,9 +250,8 @@ map <C-K> <C-W>k
 map <C-L> <C-W>l
 
 " shrink/expand Windows
-"map - <C-W>-
-"map + <C-W>=
-"map = <C-W>+
+map _ <C-W>_
+map + <C-W>=<CR>
 "map <C-N> <C-W>>
 "map <C-M> <C-W><
 
@@ -243,27 +280,28 @@ nmap <leader>gb :Gblame<CR>
 nmap <leader>gl :Glog<CR>
 nmap <leader>gp :Git push<CR>
 
-" neocachecompl
+" neocomplete
 "-----------------------------------------------------------------------------
-" define keyword pattern
-if !exists('g:neocomplcache_keyword_patterns')
-    let g:neocomplcache_keyword_patterns = {}
-endif
-let g:neocomplcache_keyword_patterns['default'] = '\h\w*'
+" plugin key-mappings
+inoremap <expr><C-g>     neocomplete#undo_completion()
+inoremap <expr><C-l>     neocomplete#complete_common_string()
 
-" <CR>: close popup and save indent.
-inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-function! s:my_cr_function()
-  return neocomplcache#smart_close_popup() . "\<CR>"
+" <CR>: close popup and save indent
+inoremap <silent> <CR> <C-r>=<SID>neocomplete_cr_func()<CR>
+function! s:neocomplete_cr_func()
+  "return neocomplete#close_popup() . "\<CR>"
+  " for no inserting <CR> key
+  return pumvisible() ? neocomplete#close_popup() : "\<CR>"
 endfunction
 
 " <TAB>: completion
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+
 " <C-h>, <BS>: close popup and delete backword char
-inoremap <expr><C-h>  neocomplcache#smart_close_popup() . "\<C-h>"
-inoremap <expr><BS>   neocomplcache#smart_close_popup() . "\<C-h>"
-inoremap <expr><C-y>  neocomplcache#close_popup()
-inoremap <expr><C-e>  neocomplcache#cancel_popup()
+inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+inoremap <expr><C-y>  neocomplete#close_popup()
+inoremap <expr><C-e>  neocomplete#cancel_popup()
 
 " Tabularize
 "-----------------------------------------------------------------------------
@@ -276,12 +314,21 @@ map <leader>a,  :Tabularize /,<CR>
 " Filetype settings
 "=============================================================================
 
-" Some file types should wrap their text
-function! s:setupWrapping()
-  set wrap
+" TODO
+function! s:textEdit()
+  nmap <silent> j gj
+  nmap <silent> k gk
+  nmap <silent> 0 g0
+  nmap <silent> $ g$
+  nmap <silent> ^ g^
   set linebreak
-  set textwidth=72
-  set nolist
+  set virtualedit
 endfunction
 
+" enable omni completion
+autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 
