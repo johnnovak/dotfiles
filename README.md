@@ -3,7 +3,7 @@ Description
 
 My cross-platform **vim**, **bash** and **mintty** dotfiles.
 
-Should work on the following platforms without any changes:
+Should work on the following platforms without any major changes:
 
 * OS X
 * Linux
@@ -21,4 +21,9 @@ Requires **Vim 7.3.885+** with **Lua enabled** for
 Alternatively, you can use
 [neocomplcache](https://github.com/Shougo/neocomplcache.vim) with vanilla
 Vim (much slower), or disable neocomplete altogether in `vimrc`.
+
+If you want nice [airline](https://github.com/bling/vim-airline) symbols on
+your status line, you will need to install a powerline patched font (for
+example, from [here](https://github.com/Lokaltog/powerline-fonts)). The config
+assumes you have such a font installed.
 
