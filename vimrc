@@ -236,6 +236,18 @@ endif
 
 " General
 "-----------------------------------------------------------------------------
+" copy to clipboard on Windows
+if has('win32') || has('win64') || has('win32unix')
+  " remap cut, copy & paste to windows shortcuts
+  vnoremap <C-X> "+x
+  vnoremap <C-C> "+y
+  map <C-V> "+gP
+  cmap <C-V> <C-R>+
+
+  " remap block mode from CTRL-V to CTRL-Q
+  noremap <C-Q> <C-V>
+endif
+
 " window navigation
 map <C-H> <C-W>h
 map <C-J> <C-W>j

@@ -1,35 +1,54 @@
-if [[ "$OSTYPE" == 'darwin'* ]]; then
-    export TERM=xterm
-else
-    export TERM=xterm-256color
-fi
+##############################################################################
+# GENERAL
+##############################################################################
 
-export EDITOR=vim
 export PATH=$PATH:$HOME/bin
+export EDITOR=vim
 export LESS='-R'
+
+# History settings
 export HISTCONTROL=ignoredups
 export HISTSIZE=5000
 export HISTFILESIZE=1000
 export HISTIGNORE="&:ls:ll:la:l.:pwd:exit:clear"
 
+# Append to history rather than overwrite
+shopt -s histappend
+
 # Tab completion for sudo
 complete -cf sudo
 
-# Append to history rather than overwrite
-shopt -s histappend
+##############################################################################
+# PROMPT
+##############################################################################
 
 # Show git branch in prompt
 parse_git_branch() {
   git branch --no-color 2> /dev/null | sed -e "/^[^*]/d" -e "s/* \(.*\)/[\1]/"
 }
 
-RED="\[\033[01;31m\]"
-GREEN="\[\033[01;32m\]"
-YELLOW="\[\033[01;33m\]"
-BLUE="\[\033[01;34m\]"
-WHITE="\[\033[00m\]"
+RED=$'\e[01;31m'
+GREEN=$'\e[01;32m'
+YELLOW=$'\e[01;33m'
+BLUE=$'\e[01;34m'
+PURPLE=$'\e[01;35m'
+CYAN=$'\e[01;36m'
+WHITE=$'\e[01;37m'
+RESET=$'\e[00m'
 
-PS1="\n$BLUE\u@\h $YELLOW\w $GREEN\$(parse_git_branch)\n$RED\$$WHITE "
+PS1="\n\[$BLUE\]\u@\h \[$YELLOW\]\w \[$GREEN\]\$(parse_git_branch)\n"\
+"\[$RED\]\$\[$RESET\] "
+
+##############################################################################
+# COLORS
+##############################################################################
+
+# Use 16 colors in OS X Terminal.app, 256 colors on other platforms
+if [[ "$OSTYPE" == 'darwin'* ]]; then
+    export TERM=xterm
+else
+    export TERM=xterm-256color
+fi
 
 # Enable terminal colors
 export CLICOLOR=1
@@ -38,6 +57,7 @@ export CLICOLOR=1
 if [[ "$OSTYPE" == 'cygwin' ]]; then
     alias ls='ls --color=auto'
 fi
+
 export LS_OPTIONS='--color=auto'
 export LSCOLORS='Bxgxfxfxcxdxdxhbadbxbx'
 
@@ -45,15 +65,18 @@ export LSCOLORS='Bxgxfxfxcxdxdxhbadbxbx'
 export GREP_OPTIONS='--color=auto'
 
 # less colors
-export LESS_TERMCAP_mb=$'\E[01;32m'
-export LESS_TERMCAP_md=$'\E[01;31m'
-export LESS_TERMCAP_me=$'\E[0m'
-export LESS_TERMCAP_se=$'\E[0m'
-export LESS_TERMCAP_so=$'\E[01;35m'
-export LESS_TERMCAP_ue=$'\E[0m'
-export LESS_TERMCAP_us=$'\E[01;32m'
+export LESS_TERMCAP_mb=$GREEN
+export LESS_TERMCAP_md=$RED
+export LESS_TERMCAP_me=$RESET
+export LESS_TERMCAP_se=$RESET
+export LESS_TERMCAP_so=$PURPLE
+export LESS_TERMCAP_ue=$RESET
+export LESS_TERMCAP_us=$GREEN
 
-# Aliases
+##############################################################################
+# ALIASES
+##############################################################################
+
 alias l='ls -ahl'
 alias ..='cd ..'
 alias rm='rm -i'
@@ -74,9 +97,9 @@ alias ghst='git log --pretty=format:"%h %ad | %s%d [%an]" --graph --date=short'
 alias oo='open .'
 alias sqp='rlwrap sqlplus'
 
-###############################################################################
+##############################################################################
 # FUNCTIONS
-###############################################################################
+##############################################################################
 
 # Grep for process
 psgrep() {
@@ -129,18 +152,7 @@ ex() {
   fi
 }
 
-###############################################################################
-# CCLAS
-###############################################################################
-
-alias cdcclas='cd /cygdrive/c/work/cclas/'
-alias cdtools='cd /cygdrive/c/work/cclas/msd-cclas/appServices/jsc/tools'
-alias cdmsdcclas='cd /cygdrive/c/work/cclas/msd-cclas/'
-alias cddatamig='cd /cygdrive/c/work/cclas/cclas-data-migration/'
-alias cdjboss='cd /cygdrive/c/work/jboss7-1.4/bin'
-
-export ORACLE_SID=orcl
-
-#export ANT_OPTS="-Dhttp.proxyHost=aubne-s-vwprx01.ventyx.au.abb.com -Dhttp.proxyPort=8080 -Dhttp.nonProxyHosts=*.ventyx.abb.com,*.mincom.com,localhost"
-#export ANT_OPTS="-Dhttp.nonProxyHosts=*.ventyx.abb.com,*.mincom.com,localhost"
-
+##############################################################################
+# Source machine specific bashrc
+##############################################################################
+. ~/.bashrc.user
