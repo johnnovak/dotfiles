@@ -20,11 +20,12 @@ Bundle 'gmarik/vundle'
 " colorschemes
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'jonathanfilip/vim-lucius'
+Bundle 'cschlueter/vim-wombat'
 Bundle 'dsolstad/vim-wombat256i'
 Bundle 'tomasr/molokai'
 Bundle 'croaker/mustang-vim'
 Bundle 'jnurmine/Zenburn'
-Bundle 'chriskempson/vim-tomorrow-theme'
+Bundle 'noahfrederick/vim-hemisu'
 
 " plugins
 Bundle 'tpope/vim-repeat'
@@ -318,7 +319,7 @@ autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 
 " filetypes with tabwidth of 2
-autocmd FileType css,sass,html,vim,markdown,python,javascript
+autocmd FileType css,scss,html,xhtml,htmldjango,vim,markdown,python,javascript
   \ setlocal ts=2 sw=2 sts=2
 
 " wrap python comments at 72 chars
