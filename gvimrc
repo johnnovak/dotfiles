@@ -18,5 +18,4 @@ set vb
 set guifont=Menlo_For_Powerline:h12
 set antialias
 
-colorscheme mustang
-
+hi MatchParen gui=underline
