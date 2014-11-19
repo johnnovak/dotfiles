@@ -267,8 +267,11 @@ nmap <silent> ,n :nohls<CR>
 nmap <leader>u mQviwU`Q
 nmap <leader>l mQviwu`Q
 
-" underline the current line with '='
-nmap <silent> <leader>ul :t.<CR>Vr=
+" underline the current line
+nmap <silent> <leader>ul- :t.<CR>Vr-
+nmap <silent> <leader>ul= :t.<CR>Vr=
+nmap <silent> <leader>ul* :t.<CR>Vr*
+nmap <silent> <leader>ul^ :t.<CR>Vr^
 
 " set text wrapping toggles
 nmap <silent> <leader>tw :set invwrap<CR>:set wrap?<CR>
@@ -337,14 +340,36 @@ autocmd FileType css,scss,html,xhtml,htmldjango,vim,markdown,python,javascript
 " wrap python comments at 72 chars
 autocmd FileType python setlocal textwidth=72
 
-" TODO
-function! s:textEdit()
-  nmap <silent> j gj
-  nmap <silent> k gk
-  nmap <silent> 0 g0
-  nmap <silent> $ g$
-  nmap <silent> ^ g^
-  set linebreak
-  set virtualedit
+
+"=============================================================================
+" Custom toggles 
+"=============================================================================
+
+nnoremap <leader>te :call VirtualEditToggle()<CR>
+
+let g:virtualedit_is_on = 0
+
+function! VirtualEditToggle()
+  if g:virtualedit_is_on
+    nmap <silent> j j
+    nmap <silent> k k
+    nmap <silent> 0 0
+    nmap <silent> $ $
+    nmap <silent> ^ ^
+    set list
+    set nolinebreak
+    set virtualedit=""
+    let g:virtualedit_is_on = 0
+  else
+    nmap <silent> j gj
+    nmap <silent> k gk
+    nmap <silent> 0 g0
+    nmap <silent> $ g$
+    nmap <silent> ^ g^
+    set nolist
+    set linebreak
+    set virtualedit=all
+    let g:virtualedit_is_on = 1
+  endif
 endfunction
 
