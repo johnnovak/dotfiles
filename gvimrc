@@ -15,6 +15,9 @@ let g:airline_theme="powerlineish"
 
 set vb
 
+set background=dark
+colo lucius
+
 set guifont=Menlo_For_Powerline:h12
 set antialias
 

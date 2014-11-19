@@ -39,7 +39,9 @@ Bundle 'scrooloose/nerdcommenter'
 Bundle 'Shougo/neocomplete.vim'
 Bundle 'godlygeek/tabular'
 Bundle 'plasticboy/vim-markdown'
+Bundle 'tpope/vim-liquid'
 Bundle 'pangloss/vim-javascript'
+Bundle 'othree/html5.vim'
 
 "Bundle 'mbbill/undotree'
 "Bundle 'spf13/vim-autoclose'
@@ -348,3 +350,4 @@ function! s:textEdit()
   set virtualedit
 endfunction
 
+nmap <F5> :execute s:textEdit()<CR>
