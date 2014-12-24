@@ -54,12 +54,10 @@ fi
 export CLICOLOR=1
 
 # ls colors
-if [[ "$OSTYPE" == 'cygwin' ]]; then
-    alias ls='ls --color=auto'
-fi
-
 export LS_OPTIONS='--color=auto'
-export LSCOLORS='Bxgxfxfxcxdxdxhbadbxbx'
+#export LSCOLORS='Bxgxfxfxcxdxdxhbadbxbx'
+eval "`dircolors`"
+alias ls='ls $LS_OPTIONS'
 
 # grep colors
 export GREP_OPTIONS='--color=auto'
