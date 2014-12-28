@@ -22,10 +22,8 @@ Bundle 'altercation/vim-colors-solarized'
 Bundle 'jonathanfilip/vim-lucius'
 Bundle 'cschlueter/vim-wombat'
 Bundle 'dsolstad/vim-wombat256i'
-Bundle 'tomasr/molokai'
 Bundle 'croaker/mustang-vim'
 Bundle 'jnurmine/Zenburn'
-Bundle 'noahfrederick/vim-hemisu'
 
 " plugins
 Bundle 'tpope/vim-repeat'
@@ -53,14 +51,14 @@ filetype plugin indent on   " required
 " General settings
 "=============================================================================
 
-set history=100	        " keep 100 lines of command line history
+set history=100	          " keep 100 lines of command line history
 
-let mapleader=","       " set leader
+let mapleader=","         " set leader
 
-set t_ti=7[r[?47h     " restore contents of terminal window on exit
+set t_ti=7[r[?47h   " restore contents of terminal window on exit
 set t_te=[?47l8
 
-if has('mouse')         " enable mouse
+if has('mouse')           " enable mouse
   set mouse=a
 endif
 
@@ -88,18 +86,18 @@ set synmaxcol=2048      " don't syntax highlight very long lines
 set fillchars+=vert:\   " get rid of vertical window separator characters
 
 set colorcolumn=78      " display max width marker
-set lazyredraw          " don't update the display while executing macros
+set lazyredraw          " don't update the display while executing macetos
 
 set ruler               " show the cursor position all the time
 set laststatus=2        " always display status line
 set showcmd	            " display incomplete commands
 set cmdheight=2         " 2 line high command prompt
 
+" use the dark 'lucius' theme if the terminal supports 256 colors
 if $TERM == 'xterm-256color'
-  set background=dark   " use the dark 'lucius' theme if the terminal
-  colorscheme lucius    " supports 256 colors
-"  colorscheme mustang
-"  let g:airline_theme='powerlineish'
+  let g:lucius_no_term_bg = 1   " make background transparent
+  colorscheme lucius
+  LuciusDark
 endif
 
 " Navigation
