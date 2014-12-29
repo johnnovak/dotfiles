@@ -22,7 +22,7 @@ KEYTIMEOUT=1
 export EDITOR=vim
 
 # history settings
-export HISTSIZE=5000
+export HISTSIZE=10000
 setopt EXTENDED_HISTORY
 setopt INC_APPEND_HISTORY
 setopt HIST_IGNORE_ALL_DUPS
