@@ -33,4 +33,3 @@ FontSmoothing=full
 ScrollbackLines=999999
 Term=xterm-256color
 FontIsBold=no
-
