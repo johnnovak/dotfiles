@@ -1,6 +1,9 @@
 ##############################################################################
 # GENERAL
 ##############################################################################
+# disable loading global configs to fix cursor-not-at-the-end-of-line history
+# bug on Debian
+unsetopt global_rcs
 
 # load color definitions
 autoload -U colors && colors
@@ -32,6 +35,9 @@ setopt HIST_VERIFY
 ##############################################################################
 
 bindkey "^R" history-incremental-search-backward
+bindkey "^A" vi-beginning-of-line
+bindkey "^E" vi-end-of-line
+bindkey "^X" vi-kill-eol
 
 # fix for cursor position
 autoload -U history-search-end
