@@ -24,6 +24,7 @@ Bundle 'cschlueter/vim-wombat'
 Bundle 'dsolstad/vim-wombat256i'
 Bundle 'croaker/mustang-vim'
 Bundle 'jnurmine/Zenburn'
+Bundle 'christoomey/vim-tmux-navigator'
 
 " plugins
 Bundle 'tpope/vim-repeat'
@@ -55,8 +56,8 @@ set history=100	          " keep 100 lines of command line history
 
 let mapleader=","         " set leader
 
-set t_ti=7[r[?47h   " restore contents of terminal window on exit
-set t_te=[?47l8
+"set t_ti=7[r[?47h   " restore contents of terminal window on exit
+"set t_te=[?47l8
 
 if has('mouse')           " enable mouse
   set mouse=a
@@ -248,10 +249,10 @@ if has('win32') || has('win64') || has('win32unix')
 endif
 
 " window navigation
-map <C-H> <C-W>h
-map <C-J> <C-W>j
-map <C-K> <C-W>k
-map <C-L> <C-W>l
+"map <C-H> <C-W>h
+"map <C-J> <C-W>j
+"map <C-K> <C-W>k
+"map <C-L> <C-W>l
 
 " shrink/expand Windows
 map _ <C-W>_
@@ -280,6 +281,16 @@ nmap <silent> ,qq :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name")
   \ . '> trans<' . synIDattr(synID(line("."),col("."),0),"name")
   \ . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name")
   \ . ">"<CR>
+
+" tmux aware navigation shortcuts
+"-----------------------------------------------------------------------------
+let g:tmux_navigator_no_mappings = 1
+
+nnoremap <silent> <C-H> :TmuxNavigateLeft<cr>
+nnoremap <silent> <C-J> :TmuxNavigateDown<cr>
+nnoremap <silent> <C-K> :TmuxNavigateUp<cr>
+nnoremap <silent> <C-L> :TmuxNavigateRight<cr>
+"nnoremap <silent> <C-;> :TmuxNavigatePrevious<cr>
 
 " fugitive shortcuts
 "-----------------------------------------------------------------------------
