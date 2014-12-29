@@ -88,9 +88,8 @@ export LESS_TERMCAP_us=$GREEN       # begin underline
 # ALIASES
 ##############################################################################
 
-alias l='ls'
-alias la='ls -A'
-alias ll='ls -Ahl'
+alias l='ls -hl'
+alias la='ls -Ahl'
 alias lsl='ll --color=always | less'
 
 alias ..='cd ..'
