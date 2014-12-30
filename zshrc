@@ -22,7 +22,9 @@ KEYTIMEOUT=1
 export EDITOR=vim
 
 # history settings
-export HISTSIZE=10000
+export HISTFILE=~/.zsh_history
+export HISTSIZE=100000
+export SAVEHIST=HISTSIZE
 setopt EXTENDED_HISTORY
 setopt INC_APPEND_HISTORY
 setopt HIST_IGNORE_ALL_DUPS
@@ -48,6 +50,14 @@ zle -N history-beginning-search-forward-end history-search-end
 zle -A kill-whole-line vi-kill-line
 zle -A backward-kill-word vi-backward-kill-word
 zle -A backward-delete-char vi-backward-delete-char
+
+# Debian / Ubuntu sets these to vi-up-line-or-history etc,
+# which places the cursor at the start of line, not end of line.
+# See: http://www.zsh.org/mla/users/2009/msg00878.html
+bindkey -M viins "\e[A" up-line-or-history
+bindkey -M viins "\e[B" down-line-or-history
+bindkey -M viins "\eOA" up-line-or-history
+bindkey -M viins "\eOB" down-line-or-history
 
 ##############################################################################
 # PROMPT
