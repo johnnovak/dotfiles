@@ -182,7 +182,7 @@ let g:airline_symbols.branch = ''
 let g:airline_symbols.readonly = ''
 let g:airline_symbols.linenr = ''
 
-" Nerdtree
+" NERDTree
 "-----------------------------------------------------------------------------
 let g:NERDTreeIgnore=['\~$', '\.pyc']
 
@@ -286,11 +286,19 @@ nmap <silent> ,qq :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name")
 "-----------------------------------------------------------------------------
 let g:tmux_navigator_no_mappings = 1
 
-nnoremap <silent> <C-H> :TmuxNavigateLeft<cr>
-nnoremap <silent> <C-J> :TmuxNavigateDown<cr>
-nnoremap <silent> <C-K> :TmuxNavigateUp<cr>
-nnoremap <silent> <C-L> :TmuxNavigateRight<cr>
-"nnoremap <silent> <C-;> :TmuxNavigatePrevious<cr>
+nnoremap <silent> <C-H> :TmuxNavigateLeft<CR>
+""nnoremap <silent> <C-J> :TmuxNavigateDown<CR>
+nnoremap <silent> <C-K> :TmuxNavigateUp<CR>
+nnoremap <silent> <C-L> :TmuxNavigateRight<CR>
+"nnoremap <silent> <C-;> :TmuxNavigatePrevious<CR>
+
+" NERDTree
+"-----------------------------------------------------------------------------
+nnoremap <C-N> :NERDTreeToggle<CR>
+
+" NERDCommenter
+"-----------------------------------------------------------------------------
+map <C-_> ,c<Space>
 
 " fugitive shortcuts
 "-----------------------------------------------------------------------------
@@ -319,8 +327,8 @@ endfunction
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 
 " <C-h>, <BS>: close popup and delete backword char
-inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
-inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+inoremap <expr><C-h>  neocomplete#smart_close_popup()."\<C-h>"
+inoremap <expr><BS>   neocomplete#smart_close_popup()."\<C-h>"
 inoremap <expr><C-y>  neocomplete#close_popup()
 inoremap <expr><C-e>  neocomplete#cancel_popup()
 
