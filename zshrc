@@ -1,10 +1,6 @@
 ##############################################################################
 # GENERAL
 ##############################################################################
-# disable loading global configs to fix cursor-not-at-the-end-of-line history
-# bug on Debian
-unsetopt global_rcs
-
 # load color definitions
 autoload -U colors && colors
 
@@ -199,7 +195,15 @@ mcd() {
   cd $1
 }
 
-# Grep for process
+# mkdir and cd into a directory, defaults to current timestamp
+function mcd {
+  local dir=$1
+  [[ -n $dir ]] || dir=`date +%Y%m%d-%H%m%S`
+  [[ -e $dir ]] && echo "Already exists: $dir" && return 1
+  mkdir -p $dir && cd $dir
+}
+
+# grep for process
 psgrep() {
   if [ ! -z $1 ] ; then
     echo "Grepping for processes matching $1..."
@@ -209,7 +213,7 @@ psgrep() {
   fi
 }
 
-# Recursive delete functions
+# recursive delete functions
 rm-vimbackup() {
   echo -n "Recursively deleting vim backup files from "
   pwd
