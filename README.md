@@ -1,19 +1,12 @@
-Description
------------
+Notes
+-----
 
-My cross-platform **vim**, **bash** and **mintty** dotfiles.
-
-Should work on the following platforms without any major changes:
-
-* OS X
-* Linux
-* Cygwin
-* Windows (Vim only)
-
-Vim notes
----------
+Vim
+===
 
 The Vim config is [Vundle](https://github.com/gmarik/Vundle.vim) based.
+Install Vundle as described on the project page, then start vim and do a
+`:PluginInstall`.
 
 Requires **Vim 7.3.885+** with **Lua enabled** for
 [neocomplete](https://github.com/Shougo/neocomplete.vim) to work (see the
