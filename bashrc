@@ -2,6 +2,12 @@
 # GENERAL
 ##############################################################################
 
+# disable Ctrl-S
+stty stop undef
+
+# disable Ctrl-Q
+stty start under
+
 #export PATH=$PATH:$HOME/bin
 export EDITOR=vim
 export LESS='-R'
