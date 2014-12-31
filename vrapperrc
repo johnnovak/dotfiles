@@ -1,0 +1,24 @@
+"*****************************************************************************
+" GENERAL
+"*****************************************************************************
+
+set contentassistmode
+
+set tabstop=4
+set shiftwidth=4
+set softtabstop=4
+set expandtab
+
+set gvimpath="C:\Program Files\Vim\vim74\gvim.exe"
+
+"*****************************************************************************
+" KEY MAPPINGS
+"*****************************************************************************
+
+" unmap Ctrl+U and Ctrl+D keys in Eclipse to pass them through to vrapper
+
+" go to previous/next tab
+" unmap Ctrl+P and Ctrl+N keys in Eclipse to make this work
+map <C-p> gT
+map <C-n> gt
+
