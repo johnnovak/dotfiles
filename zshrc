@@ -2,10 +2,20 @@
 # GENERAL
 ##############################################################################
 # load color definitions
-autoload -U colors && colors
+autoload -U colors
+colors
 
-# enable autocomplete
-autoload -U compinit && compinit
+# autocomplete
+autoload -U compinit
+compinit
+
+zstyle ':completion:*' completer _complete _correct _approximate
+zstyle ':completion:*' expand prefix suffix
+zstyle ':completion:*' completer _expand_alias _complete _approximate
+zstyle ':completion:*' menu select
+zstyle ':completion:*' file-sort name
+zstyle ':completion:*' ignore-parents pwd
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 
 # zmv for mass renaming
 autoload -Uz zmv
@@ -27,6 +37,14 @@ setopt HIST_IGNORE_ALL_DUPS
 setopt HIST_IGNORE_SPACE
 setopt HIST_REDUCE_BLANKS
 setopt HIST_VERIFY
+
+# disable Ctrl-S
+stty stop undef
+
+# disable Ctrl-Q
+stty start undef
+
+unsetopt flowcontrol
 
 ##############################################################################
 # KEY BINDINGS
@@ -54,6 +72,14 @@ bindkey -M viins "\e[A" up-line-or-history
 bindkey -M viins "\e[B" down-line-or-history
 bindkey -M viins "\eOA" up-line-or-history
 bindkey -M viins "\eOB" down-line-or-history
+
+# use the vi navigation keys in menu completion
+zmodload zsh/complist
+
+bindkey -M menuselect 'h' vi-backward-char
+bindkey -M menuselect 'k' vi-up-line-or-history
+bindkey -M menuselect 'l' vi-forward-char
+bindkey -M menuselect 'j' vi-down-line-or-history
 
 ##############################################################################
 # PROMPT
@@ -172,6 +198,8 @@ alias free='free -mt'
 alias gaa='git add -u .'
 alias gcom='git commit'
 alias gst='git status'
+alias gdi='git diff'
+alias gdic='git diff --cached'
 alias gps='git pull --summary'
 alias gch='git show --pretty="format:" --name-only'
 alias gco='git checkout'
