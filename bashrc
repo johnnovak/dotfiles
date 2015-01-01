@@ -6,7 +6,7 @@
 stty stop undef
 
 # disable Ctrl-Q
-stty start under
+stty start undef
 
 #export PATH=$PATH:$HOME/bin
 export EDITOR=vim
