@@ -48,7 +48,6 @@ Plugin 'nvie/vim-togglemouse'
 call vundle#end()           " required
 filetype plugin indent on   " required
 
-
 "=============================================================================
 " General settings
 "=============================================================================
@@ -58,7 +57,7 @@ set shortmess+=I          " hide intro message when starting vim
 set history=1000          " keep this many lines of command line history
 set undolevels=1000       " keep this many undo steps
 
-let mapleader=","         " set leader
+let mapleader = ","       " set leader
 
 "set t_ti=7[r[?47h   " restore contents of terminal window on exit
 "set t_te=[?47l8
@@ -171,7 +170,6 @@ set formatoptions+=1    " don't end lines with 1-letter word when wrapping
 set diffopt+=iwhite     " add ignorance of whitespace to diff
 set diffopt+=vertical   " open diff windows as a vertical split
 
-
 "=============================================================================
 " Plugin settings
 "=============================================================================
@@ -179,24 +177,24 @@ set diffopt+=vertical   " open diff windows as a vertical split
 " Airline
 "-----------------------------------------------------------------------------
 if !exists('g:airline_symbols')
-  let g:airline_symbols={}
+  let g:airline_symbols = {}
 endif
 
-let g:airline_left_sep = ''
-let g:airline_left_alt_sep = ''
-let g:airline_right_sep = ''
-let g:airline_right_alt_sep = ''
-let g:airline_symbols.branch = ''
+let g:airline_left_sep         = ''
+let g:airline_left_alt_sep     = ''
+let g:airline_right_sep        = ''
+let g:airline_right_alt_sep    = ''
+let g:airline_symbols.branch   = ''
 let g:airline_symbols.readonly = ''
-let g:airline_symbols.linenr = ''
+let g:airline_symbols.linenr   = ''
 
 " NERDTree
 "-----------------------------------------------------------------------------
-let g:NERDTreeIgnore=['\~$', '\.pyc']
+let g:NERDTreeIgnore = ['\~$', '\.pyc']
 
 " NERDCommenter
 "-----------------------------------------------------------------------------
-let NERDCommentWholeLinesInVMode=1
+let NERDCommentWholeLinesInVMode = 1
 
 " Ctrl-P
 "-----------------------------------------------------------------------------
@@ -234,7 +232,6 @@ let g:neocomplete#keyword_patterns['default'] = '\h\w*'
 "if !exists('g:neocomplete#force_omni_input_patterns')
 "  let g:neocomplete#force_omni_input_patterns = {}
 "endif
-
 
 "=============================================================================
 " Shortcuts & macros
@@ -355,8 +352,8 @@ noremap <C-p> :CtrlPBuffer<CR>
 " neocomplete
 "-----------------------------------------------------------------------------
 " plugin key-mappings
-inoremap <expr><C-g>     neocomplete#undo_completion()
-inoremap <expr><C-l>     neocomplete#complete_common_string()
+inoremap <expr><C-g>  neocomplete#undo_completion()
+inoremap <expr><C-l>  neocomplete#complete_common_string()
 
 " <CR>: close popup and save indent
 inoremap <silent> <CR> <C-r>=<SID>neocomplete_cr_func()<CR>
@@ -383,17 +380,16 @@ noremap <silent> <leader>a:: :Tabularize /:\zs<CR>
 noremap <silent> <leader>a,  :Tabularize /,<CR>
 noremap <silent> <leader>as  :Tabularize / /l0<CR>
 
-
 "=============================================================================
 " Filetype settings
 "=============================================================================
 
 " enable omni completion
-autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType css           setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+autocmd FileType javascript    setlocal omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType python        setlocal omnifunc=pythoncomplete#Complete
+autocmd FileType xml           setlocal omnifunc=xmlcomplete#CompleteTags
 
 " filetypes with tabwidth of 2
 autocmd FileType css,scss,html,xhtml,htmldjango,vim,markdown,python,javascript
