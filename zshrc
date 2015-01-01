@@ -1,120 +1,174 @@
 ##############################################################################
 # GENERAL
 ##############################################################################
+# load color definitions
+autoload -U colors && colors
 
-# disable Ctrl-S
-stty stop undef
+# enable autocomplete
+autoload -U compinit && compinit
 
-# disable Ctrl-Q
-stty start under
+# zmv for mass renaming
+autoload -Uz zmv
 
-#export PATH=$PATH:$HOME/bin
+# vi mode
+bindkey -v
+KEYTIMEOUT=1
+
+# default editor
 export EDITOR=vim
-export LESS='-R'
 
-# History settings
-export HISTCONTROL=ignoredups
-export HISTSIZE=5000
-export HISTFILESIZE=1000
-export HISTIGNORE="&:ls:ll:la:l.:pwd:exit:clear"
-
-# Append to history rather than overwrite
-shopt -s histappend
-
-# Tab completion for sudo
-complete -cf sudo
+# history settings
+export HISTFILE=~/.zsh_history
+export HISTSIZE=100000
+export SAVEHIST=HISTSIZE
+setopt EXTENDED_HISTORY
+setopt INC_APPEND_HISTORY
+setopt HIST_IGNORE_ALL_DUPS
+setopt HIST_IGNORE_SPACE
+setopt HIST_REDUCE_BLANKS
+setopt HIST_VERIFY
 
 ##############################################################################
-# COLOR DEFINITIONS
+# KEY BINDINGS
 ##############################################################################
 
-RED=$'\e[01;31m'
-GREEN=$'\e[01;32m'
-YELLOW=$'\e[01;33m'
-BLUE=$'\e[01;34m'
-PURPLE=$'\e[01;35m'
-CYAN=$'\e[01;36m'
-WHITE=$'\e[01;37m'
+bindkey "^R" history-incremental-search-backward
+bindkey "^A" vi-beginning-of-line
+bindkey "^E" vi-end-of-line
+bindkey "^X" vi-kill-eol
 
-DARKRED=$'\e[00;31m'
-DARKGREEN=$'\e[00;32m'
-DARKYELLOW=$'\e[00;33m'
-DARKBLUE=$'\e[00;34m'
-DARKPURPLE=$'\e[00;35m'
-DARKCYAN=$'\e[00;36m'
-GREY=$'\e[00;37m'
+# fix for cursor position
+autoload -U history-search-end
+zle -N history-beginning-search-backward-end history-search-end
+zle -N history-beginning-search-forward-end history-search-end
 
-RESET=$'\e[00m'
+# prevent protected characters
+zle -A kill-whole-line vi-kill-line
+zle -A backward-kill-word vi-backward-kill-word
+zle -A backward-delete-char vi-backward-delete-char
+
+# Debian / Ubuntu sets these to vi-up-line-or-history etc,
+# which places the cursor at the start of line, not end of line.
+# See: http://www.zsh.org/mla/users/2009/msg00878.html
+bindkey -M viins "\e[A" up-line-or-history
+bindkey -M viins "\e[B" down-line-or-history
+bindkey -M viins "\eOA" up-line-or-history
+bindkey -M viins "\eOB" down-line-or-history
 
 ##############################################################################
 # PROMPT
 ##############################################################################
 
-# Show git branch in prompt
+# enable variable subtitution in PROMPT
+setopt PROMPT_SUBST
+
+# parse name of the git branch in the current directory
 parse_git_branch() {
   git branch --no-color 2> /dev/null | sed -e "/^[^*]/d" -e "s/* \(.*\)/[\1]/"
 }
 
-PS1="\n\[$DARKCYAN\]\u@\h \[$YELLOW\]\w \[$GREEN\]\$(parse_git_branch)\n"\
-"\[$PURPLE\]\$\[$RESET\] "
+# 2-line prompt displaying user@host, current dir and the git branch name:
+# john@stark ~/.dotfiles [master]
+# %
+PROMPT="%{$fg[cyan]%}%n@%m %{$fg_bold[yellow]%}%~ %{$fg_bold[green]%}\$(parse_git_branch)%{$reset_color%}
+%{$fg_bold[magenta]%}%% %{$reset_color%}"
+
+# print empty line before the prompt
+precmd() { print "" }
+
+vim_ins_mode=""
+vim_cmd_mode="%{$fg_bold[yellow]%}[cmd]%{$reset_color%}"
+vim_mode=$vim_ins_mode
+
+function zle-keymap-select {
+  vim_mode="${${KEYMAP/vicmd/${vim_cmd_mode}}/(main|viins)/${vim_ins_mode}}"
+  zle reset-prompt
+}
+zle -N zle-keymap-select
+
+function zle-line-finish {
+  vim_mode=$vim_ins_mode
+}
+zle -N zle-line-finish
+
+# Fix a bug when you C-c in CMD mode and you'd be prompted with CMD mode
+# indicator, while in fact you would be in INS mode
+# Fixed by catching SIGINT (C-c), set vim_mode to INS and then repropagate the
+# SIGINT, so if anything else depends on it, we will not break it
+function TRAPINT() {
+  vim_mode=$vim_ins_mode
+  return $(( 128 + $1 ))
+}
+
+RPROMPT='${vim_mode}'
 
 ##############################################################################
 # COLORS
 ##############################################################################
 
-# Use 16 colors in OS X Terminal.app, 256 colors on other platforms
+# use 16 colors in OS X Terminal.app, 256 colors on other platforms
 if [[ "$OSTYPE" == 'darwin'* ]]; then
     export TERM=xterm
 else
     export TERM=xterm-256color
 fi
 
-# Enable terminal colors
+# enable terminal colors
 export CLICOLOR=1
 
 # ls colors
-export LS_OPTIONS='--color=auto -CF'
-#export LSCOLORS='Bxgxfxfxcxdxdxhbadbxbx'
+alias ls='ls --color=auto -CF'
 eval "`dircolors`"
-alias ls='ls $LS_OPTIONS'
 
 # grep colors
-export GREP_OPTIONS='--color=auto'
+alias grep='grep --color=auto'
 
 # less colors
-export LESS_TERMCAP_mb=$RED         # begin blinking
-export LESS_TERMCAP_md=$DARKBLUE    # begin bold
-export LESS_TERMCAP_me=$RESET       # end mode
-export LESS_TERMCAP_se=$RESET       # end standout-mode
-export LESS_TERMCAP_so=$CYAN        # begin standout-mode - info box
-export LESS_TERMCAP_ue=$RESET       # end underline
-export LESS_TERMCAP_us=$GREEN       # begin underline
+export LESS_TERMCAP_mb=${fg_bold[red]}      # begin blinking
+export LESS_TERMCAP_md=${fg[blue]}          # begin bold
+export LESS_TERMCAP_me=${reset_color}       # end mode
+export LESS_TERMCAP_se=${reset_color}       # end standout-mode
+export LESS_TERMCAP_so=${fg_bold[cyan]}     # begin standout-mode - info box
+export LESS_TERMCAP_ue=${reset_color}       # end underline
+export LESS_TERMCAP_us=${fg_bold[green]}    # begin underline
 
 ##############################################################################
 # ALIASES
 ##############################################################################
 
+# clear terminal
+alias c='clear'
+
+# ls variations
 alias l='ls -hl'
 alias la='ls -Ahl'
-alias lsl='ll --color=always | less'
+alias lsl='la --color=always | less'
 
+# jump to n-th parent directory
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
 
+# always ask before deleting/overwriting stuff
 alias rm='rm -i'
 alias mv='mv -i'
 alias cp='cp -i'
+
+# create nested paths
 alias mkdir='mkdir -pv'
 
+# find from current dir
 alias fhere='find . -name'
 
+# enable vi mode in info
 alias info='info --vi-keys'
 
+# disk usage
 alias df='df -Tha --total'
 alias du='du -ach | sort -h'
 alias free='free -mt'
 
+# git shortcuts
 alias gaa='git add -u .'
 alias gcom='git commit'
 alias gst='git status'
@@ -124,7 +178,10 @@ alias gco='git checkout'
 alias gbr='git branch'
 alias ghst='git log --pretty=format:"%h %ad | %s%d [%an]" --graph --date=short'
 
+# used on OS X
 alias oo='open .'
+
+# history support for sqlplus
 alias sqp='rlwrap sqlplus'
 
 alias wget='wget -c'
@@ -138,7 +195,15 @@ mcd() {
   cd $1
 }
 
-# Grep for process
+# mkdir and cd into a directory, defaults to current timestamp
+function mcd {
+  local dir=$1
+  [[ -n $dir ]] || dir=`date +%Y%m%d-%H%m%S`
+  [[ -e $dir ]] && echo "Already exists: $dir" && return 1
+  mkdir -p $dir && cd $dir
+}
+
+# grep for process
 psgrep() {
   if [ ! -z $1 ] ; then
     echo "Grepping for processes matching $1..."
@@ -148,7 +213,7 @@ psgrep() {
   fi
 }
 
-# Recursive delete functions
+# recursive delete functions
 rm-vimbackup() {
   echo -n "Recursively deleting vim backup files from "
   pwd
@@ -200,6 +265,6 @@ function extract {
 }
 
 ##############################################################################
-# Source machine specific bashrc
-##############################################################################
+
+# Source machine-specific settings
 . ~/.bashrc.user

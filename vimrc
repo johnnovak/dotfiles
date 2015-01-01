@@ -7,11 +7,11 @@ filetype off                  " required
 
 " set the runtime path to include Vundle and initialize
 if has('win32') || has('win64')
-  set rtp+=~/vimfiles/bundle/vundle/
-  call vundle#rc('$HOME/vimfiles/bundle/')
+  set rtp+=~/vimfiles/bundle/Vundle.vim
+  call vundle#begin('$HOME/vimfiles/bundle/')
 else
-  set rtp+=~/.vim/bundle/vundle/
-  call vundle#rc()
+  set rtp+=~/.vim/bundle/Vundle.vim
+  call vundle#begin()
 endif
 
 " let Vundle manage Vundle, required
@@ -22,10 +22,8 @@ Bundle 'altercation/vim-colors-solarized'
 Bundle 'jonathanfilip/vim-lucius'
 Bundle 'cschlueter/vim-wombat'
 Bundle 'dsolstad/vim-wombat256i'
-Bundle 'tomasr/molokai'
 Bundle 'croaker/mustang-vim'
 Bundle 'jnurmine/Zenburn'
-Bundle 'noahfrederick/vim-hemisu'
 
 " plugins
 Bundle 'tpope/vim-repeat'
@@ -39,29 +37,29 @@ Bundle 'scrooloose/nerdcommenter'
 Bundle 'Shougo/neocomplete.vim'
 Bundle 'godlygeek/tabular'
 Bundle 'plasticboy/vim-markdown'
-Bundle 'tpope/vim-liquid'
 Bundle 'pangloss/vim-javascript'
-Bundle 'othree/html5.vim'
+Bundle 'christoomey/vim-tmux-navigator'
 
 "Bundle 'mbbill/undotree'
 "Bundle 'spf13/vim-autoclose'
 "Bundle 'majutsushi/tagbar'
 
-filetype plugin indent on     " required
+call vundle#end()           " required
+filetype plugin indent on   " required
 
 
 "=============================================================================
 " General settings
 "=============================================================================
 
-set history=100	        " keep 100 lines of command line history
+set history=100	          " keep 100 lines of command line history
 
-let mapleader=","       " set leader
+let mapleader=","         " set leader
 
-set t_ti=7[r[?47h     " restore contents of terminal window on exit
-set t_te=[?47l8
+"set t_ti=7[r[?47h   " restore contents of terminal window on exit
+"set t_te=[?47l8
 
-if has('mouse')         " enable mouse
+if has('mouse')           " enable mouse
   set mouse=a
 endif
 
@@ -89,18 +87,18 @@ set synmaxcol=2048      " don't syntax highlight very long lines
 set fillchars+=vert:\   " get rid of vertical window separator characters
 
 set colorcolumn=78      " display max width marker
-set lazyredraw          " don't update the display while executing macros
+set lazyredraw          " don't update the display while executing macetos
 
 set ruler               " show the cursor position all the time
 set laststatus=2        " always display status line
 set showcmd	            " display incomplete commands
 set cmdheight=2         " 2 line high command prompt
 
+" use the dark 'lucius' theme if the terminal supports 256 colors
 if $TERM == 'xterm-256color'
-  set background=dark   " use the dark 'lucius' theme if the terminal
-  colorscheme lucius    " supports 256 colors
-"  colorscheme mustang
-"  let g:airline_theme='powerlineish'
+  let g:lucius_no_term_bg = 1   " make background transparent
+  colorscheme lucius
+  LuciusDark
 endif
 
 " Navigation
@@ -184,7 +182,7 @@ let g:airline_symbols.branch = ''
 let g:airline_symbols.readonly = ''
 let g:airline_symbols.linenr = ''
 
-" Nerdtree
+" NERDTree
 "-----------------------------------------------------------------------------
 let g:NERDTreeIgnore=['\~$', '\.pyc']
 
@@ -224,12 +222,12 @@ endif
 let g:neocomplete#keyword_patterns['default'] = '\h\w*'
 
 " enable heavy omni completion
-if !exists('g:neocomplete#sources#omni#input_patterns')
-  let g:neocomplete#sources#omni#input_patterns = {}
-endif
-if !exists('g:neocomplete#force_omni_input_patterns')
-  let g:neocomplete#force_omni_input_patterns = {}
-endif
+"if !exists('g:neocomplete#sources#omni#input_patterns')
+"  let g:neocomplete#sources#omni#input_patterns = {}
+"endif
+"if !exists('g:neocomplete#force_omni_input_patterns')
+"  let g:neocomplete#force_omni_input_patterns = {}
+"endif
 
 
 "=============================================================================
@@ -251,10 +249,10 @@ if has('win32') || has('win64') || has('win32unix')
 endif
 
 " window navigation
-map <C-H> <C-W>h
-map <C-J> <C-W>j
-map <C-K> <C-W>k
-map <C-L> <C-W>l
+"map <C-H> <C-W>h
+"map <C-J> <C-W>j
+"map <C-K> <C-W>k
+"map <C-L> <C-W>l
 
 " shrink/expand Windows
 map _ <C-W>_
@@ -284,6 +282,24 @@ nmap <silent> ,qq :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name")
   \ . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name")
   \ . ">"<CR>
 
+" tmux aware navigation shortcuts
+"-----------------------------------------------------------------------------
+let g:tmux_navigator_no_mappings = 1
+
+nnoremap <silent> <C-H> :TmuxNavigateLeft<CR>
+""nnoremap <silent> <C-J> :TmuxNavigateDown<CR>
+nnoremap <silent> <C-K> :TmuxNavigateUp<CR>
+nnoremap <silent> <C-L> :TmuxNavigateRight<CR>
+"nnoremap <silent> <C-;> :TmuxNavigatePrevious<CR>
+
+" NERDTree
+"-----------------------------------------------------------------------------
+nnoremap <C-N> :NERDTreeToggle<CR>
+
+" NERDCommenter
+"-----------------------------------------------------------------------------
+map <C-_> ,c<Space>
+
 " fugitive shortcuts
 "-----------------------------------------------------------------------------
 nmap <leader>gs :Gstatus<CR>
@@ -311,8 +327,8 @@ endfunction
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 
 " <C-h>, <BS>: close popup and delete backword char
-inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
-inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+inoremap <expr><C-h>  neocomplete#smart_close_popup()."\<C-h>"
+inoremap <expr><BS>   neocomplete#smart_close_popup()."\<C-h>"
 inoremap <expr><C-y>  neocomplete#close_popup()
 inoremap <expr><C-e>  neocomplete#cancel_popup()
 
@@ -375,4 +391,3 @@ function! VirtualEditToggle()
   endif
 endfunction
 
-nmap <F5> :execute s:textEdit()<CR>

@@ -1,0 +1,37 @@
+! Remove unused modifier keysyms
+keycode 204 = NoSymbol
+keycode 205 = NoSymbol
+keycode 206 = NoSymbol
+keycode 207 = NoSymbol
+
+! Map Left Control to Meta_L (Left Control is mapped to Right Windows in
+! Windows)
+keycode 134 = Meta_L NoSymbol Meta_L
+
+! Remove existing Meta_L keysyms
+keycode 64 = Alt_L NoSymbol Alt_L
+
+! Map Right Alt to Hyper_L & Shift-Right Alt to Mode_switch
+keycode 108 = Hyper_R NoSymbol Hyper_R
+
+! Map special symbols using Mode_switch & Shift-Mode_switch
+!keycode 20 = minus underscore endash emdash
+!keycode 60 = period greater ellipsis periodcentered
+
+clear Shift
+clear Lock
+clear Control
+clear Mod1
+clear Mod2
+clear Mod3
+clear Mod4
+clear Mod5
+
+add Shift = Shift_L Shift_R
+add Control = Control_L Control_R
+add Mod1 = Alt_L
+add Mod2 = Num_Lock
+add Mod3 = Hyper_R
+add Mod4 = Super_L
+add Mod5 = ISO_Level3_Shift
+
