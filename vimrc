@@ -432,4 +432,7 @@ function! VirtualEditToggle()
   endif
 endfunction
 
-" cmap w!! w !sudo tee % >/dev/null
+" sudo write
+cmap w!! w !sudo tee % >/dev/null
+
+" review: https://raw.githubusercontent.com/nvie/vimrc/master/vimrc
