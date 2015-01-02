@@ -40,6 +40,8 @@ Plugin 'plasticboy/vim-markdown'
 Plugin 'pangloss/vim-javascript'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'nvie/vim-togglemouse'
+Plugin 'vim-scripts/SQLUtilities'
+Plugin 'vim-scripts/Align'
 
 "Plugin 'mbbill/undotree'
 "Plugin 'spf13/vim-autoclose'
@@ -374,11 +376,15 @@ inoremap <expr><C-e>  neocomplete#cancel_popup()
 
 " Tabularize
 "-----------------------------------------------------------------------------
-noremap <silent> <leader>a=  :Tabularize /=<CR>
-noremap <silent> <leader>a:  :Tabularize /:<CR>
-noremap <silent> <leader>a:: :Tabularize /:\zs<CR>
-noremap <silent> <leader>a,  :Tabularize /,<CR>
-noremap <silent> <leader>as  :Tabularize / /l0<CR>
+noremap <silent> <leader>r=  :Tabularize /=<CR>
+noremap <silent> <leader>r:  :Tabularize /:<CR>
+noremap <silent> <leader>r:: :Tabularize /:\zs<CR>
+noremap <silent> <leader>r,  :Tabularize /,<CR>
+noremap <silent> <leader>rs  :Tabularize / /l0<CR>
+
+" SQLutilities
+"-----------------------------------------------------------------------------
+let g:sqlutil_align_comma = 1
 
 "=============================================================================
 " Filetype settings
