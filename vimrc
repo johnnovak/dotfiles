@@ -15,46 +15,51 @@ else
 endif
 
 " let Vundle manage Vundle, required
-Bundle 'gmarik/vundle'
+Plugin 'gmarik/vundle'
 
 " colorschemes
-Bundle 'altercation/vim-colors-solarized'
-Bundle 'jonathanfilip/vim-lucius'
-Bundle 'cschlueter/vim-wombat'
-Bundle 'dsolstad/vim-wombat256i'
-Bundle 'croaker/mustang-vim'
-Bundle 'jnurmine/Zenburn'
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'johnnovak/vim-lucius'
+Plugin 'cschlueter/vim-wombat'
+Plugin 'dsolstad/vim-wombat256i'
+Plugin 'croaker/mustang-vim'
+Plugin 'jnurmine/Zenburn'
 
 " plugins
-Bundle 'tpope/vim-repeat'
-Bundle 'tpope/vim-unimpaired'
-Bundle 'tpope/vim-fugitive'
-Bundle 'tpope/vim-surround'
-Bundle 'bling/vim-airline'
-Bundle 'scrooloose/nerdtree'
-Bundle 'kien/ctrlp.vim'
-Bundle 'scrooloose/nerdcommenter'
-Bundle 'Shougo/neocomplete.vim'
-Bundle 'godlygeek/tabular'
-Bundle 'plasticboy/vim-markdown'
-Bundle 'pangloss/vim-javascript'
-Bundle 'christoomey/vim-tmux-navigator'
+Plugin 'tpope/vim-repeat'
+Plugin 'tpope/vim-unimpaired'
+Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-surround'
+Plugin 'bling/vim-airline'
+Plugin 'scrooloose/nerdtree'
+Plugin 'kien/ctrlp.vim'
+Plugin 'scrooloose/nerdcommenter'
+Plugin 'Shougo/neocomplete.vim'
+Plugin 'godlygeek/tabular'
+Plugin 'plasticboy/vim-markdown'
+Plugin 'pangloss/vim-javascript'
+Plugin 'christoomey/vim-tmux-navigator'
+Plugin 'nvie/vim-togglemouse'
+Plugin 'vim-scripts/SQLUtilities'
+Plugin 'vim-scripts/Align'
 
-"Bundle 'mbbill/undotree'
-"Bundle 'spf13/vim-autoclose'
-"Bundle 'majutsushi/tagbar'
+"Plugin 'mbbill/undotree'
+"Plugin 'spf13/vim-autoclose'
+"Plugin 'majutsushi/tagbar'
 
 call vundle#end()           " required
 filetype plugin indent on   " required
-
 
 "=============================================================================
 " General settings
 "=============================================================================
 
-set history=100	          " keep 100 lines of command line history
+set shortmess+=I          " hide intro message when starting vim
 
-let mapleader=","         " set leader
+set history=1000          " keep this many lines of command line history
+set undolevels=1000       " keep this many undo steps
+
+let mapleader = ","       " set leader
 
 "set t_ti=7[r[?47h   " restore contents of terminal window on exit
 "set t_te=[?47l8
@@ -67,10 +72,11 @@ endif
 "-----------------------------------------------------------------------------
 set backup              " keep a backup file
 set undofile            " create undo files
-set autoread            " automatically read a file that has changed on disk
+set autoread            " automatically read files changed outside of vim
 
-set backupdir^=$HOME/.vim/_backup//    " where to put backup files
-set directory^=$HOME/.vim/_temp//      " where to put swap files
+set undodir^=$HOME/.vim/_undo/        " where to put undo files
+set backupdir^=$HOME/.vim/_backup/    " where to put backup files
+set directory^=$HOME/.vim/_temp//     " where to put swap files
 
 " Encoding
 "-----------------------------------------------------------------------------
@@ -132,6 +138,7 @@ set expandtab               " use 4 spaces for tabs
 set softtabstop=4
 set shiftwidth=4
 set tabstop=4
+set smarttab
 
 set wrap                    " wrap lines by default
 
@@ -149,7 +156,7 @@ set backspace=indent,eol,start  " backspace through everything in insert mode
 
 set autoindent          " always set autoindenting on
 
-set timeoutlen=2000     " timeout on mappings after 1 second
+set timeoutlen=500      " set timeout on mappings
 set ttimeoutlen=0       " avoid the need to press ESC twice when in terminal
 
 set foldmethod=syntax   " default folding is one level, by syntax
@@ -158,11 +165,12 @@ set foldlevel=1
 
 set textwidth=78
 
+set formatoptions+=1    " don't end lines with 1-letter word when wrapping
+
 " Diff
 "-----------------------------------------------------------------------------
 set diffopt+=iwhite     " add ignorance of whitespace to diff
 set diffopt+=vertical   " open diff windows as a vertical split
-
 
 "=============================================================================
 " Plugin settings
@@ -171,29 +179,27 @@ set diffopt+=vertical   " open diff windows as a vertical split
 " Airline
 "-----------------------------------------------------------------------------
 if !exists('g:airline_symbols')
-  let g:airline_symbols={}
+  let g:airline_symbols = {}
 endif
 
-let g:airline_left_sep = ''
-let g:airline_left_alt_sep = ''
-let g:airline_right_sep = ''
-let g:airline_right_alt_sep = ''
-let g:airline_symbols.branch = ''
+let g:airline_left_sep         = ''
+let g:airline_left_alt_sep     = ''
+let g:airline_right_sep        = ''
+let g:airline_right_alt_sep    = ''
+let g:airline_symbols.branch   = ''
 let g:airline_symbols.readonly = ''
-let g:airline_symbols.linenr = ''
+let g:airline_symbols.linenr   = ''
 
 " NERDTree
 "-----------------------------------------------------------------------------
-let g:NERDTreeIgnore=['\~$', '\.pyc']
+let g:NERDTreeIgnore = ['\~$', '\.pyc']
 
 " NERDCommenter
 "-----------------------------------------------------------------------------
-let NERDCommentWholeLinesInVMode=1
+let NERDCommentWholeLinesInVMode = 1
 
 " Ctrl-P
 "-----------------------------------------------------------------------------
-map <C-K> :CtrlPBuffer<CR>
-
 let g:ctrlp_custom_ignore = {
   \ 'dir':  '\v[\/]\.(git|hg|svn)$',
   \ 'file': '\.pyc$\|\.pyo$\|\.rbc$|\.rbo$\|\.class$\|\.o$\|\~$\',
@@ -229,72 +235,104 @@ let g:neocomplete#keyword_patterns['default'] = '\h\w*'
 "  let g:neocomplete#force_omni_input_patterns = {}
 "endif
 
-
 "=============================================================================
 " Shortcuts & macros
 "=============================================================================
 
 " General
 "-----------------------------------------------------------------------------
-" copy to clipboard on Windows
-if has('win32') || has('win64') || has('win32unix')
-  " remap cut, copy & paste to windows shortcuts
-  vnoremap <C-X> "+x
-  vnoremap <C-C> "+y
-  map <C-V> "+gP
-  cmap <C-V> <C-R>+
+inoremap jk <Esc>
 
-  " remap block mode from CTRL-V to CTRL-Q
-  noremap <C-Q> <C-V>
+" enter command mode with one keystroke
+nnoremap ; :
+
+" quickly edit/reload the vimrc file
+nnoremap <silent> <leader>ev :e $MYVIMRC<CR>
+nnoremap <silent> <leader>sv :so $MYVIMRC<CR>
+
+" map Ctrl-x/c/v to use the system clipboard on Linux and Windows
+if (has('unix') && !has('macunix'))
+      \ || (has('win32') || has('win64') || has('win32unix'))
+
+  vnoremap <C-x> "+x
+  vnoremap <C-c> "+y
+  noremap <C-v> "+gP
+  inoremap <C-v> <C-r>+
+
+  " remap block mode from Ctrl-v to Ctrl-q
+  noremap <C-q> <C-v>
 endif
 
-" window navigation
-"map <C-H> <C-W>h
-"map <C-J> <C-W>j
-"map <C-K> <C-W>k
-"map <C-L> <C-W>l
+" use ,d to delete a line without yanking it
+vnoremap <silent> <leader>d "_d
+
+" jump to matching pairs easily, with Tab
+nnoremap <Tab> %
+vnoremap <Tab> %
+
+" folding
+nnoremap <Space> za
+vnoremap <Space> za
+
+" strip all trailing whitespace from a file, using ,W
+nnoremap <leader>W :%s/\s\+$//<CR>:let @/=''<CR>
+
+" window navigation (now handled by TmuxNavigate*)
+"noremap <C-w> <C-w>h
+"noremap <C-w> <C-w>j
+"noremap <C-w> <C-w>k
+"noremap <C-w> <C-w>l
+
+" buffer handling
+nnoremap <leader>q :bd<CR>
+nnoremap <leader>n :bn<CR>
+nnoremap <leader>p :bn<CR>
 
 " shrink/expand Windows
-map _ <C-W>_
-map + <C-W>=<CR>
-"map <C-N> <C-W>>
-"map <C-M> <C-W><
+noremap _ <C-w>_
+noremap + <C-w>=<CR>
+"noremap <C-n> <C-w>>
+"noremap <C-m> <C-w><
 
 " turn off highlight search
-nmap <silent> ,n :nohls<CR>
+nnoremap <silent> ,/ :nohls<CR>
 
 " upper/lower word
-nmap <leader>u mQviwU`Q
-nmap <leader>l mQviwu`Q
+nnoremap <leader>U mQviwU`Q
+nnoremap <leader>u mQviwu`Q
 
 " underline the current line
-nmap <silent> <leader>ul- :t.<CR>Vr-
-nmap <silent> <leader>ul= :t.<CR>Vr=
-nmap <silent> <leader>ul* :t.<CR>Vr*
-nmap <silent> <leader>ul^ :t.<CR>Vr^
+nnoremap <silent> <leader>l- :t.<CR>Vr-
+nnoremap <silent> <leader>l= :t.<CR>Vr=
+nnoremap <silent> <leader>l8 :t.<CR>Vr*
+nnoremap <silent> <leader>l6 :t.<CR>Vr^
 
 " set text wrapping toggles
-nmap <silent> <leader>tw :set invwrap<CR>:set wrap?<CR>
+nnoremap <silent> <leader>tw :set invwrap<CR>:set wrap?<CR>
 
 " display the syntax highlighting group of the element under the cursor
-nmap <silent> ,qq :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name")
+nnoremap <silent> ,qq :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name")
   \ . '> trans<' . synIDattr(synID(line("."),col("."),0),"name")
   \ . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name")
   \ . ">"<CR>
+
+" format current paragraph
+vnoremap ,f gq
+nnoremap ,f gqap
 
 " tmux aware navigation shortcuts
 "-----------------------------------------------------------------------------
 let g:tmux_navigator_no_mappings = 1
 
-nnoremap <silent> <C-H> :TmuxNavigateLeft<CR>
-""nnoremap <silent> <C-J> :TmuxNavigateDown<CR>
-nnoremap <silent> <C-K> :TmuxNavigateUp<CR>
-nnoremap <silent> <C-L> :TmuxNavigateRight<CR>
-"nnoremap <silent> <C-;> :TmuxNavigatePrevious<CR>
+nnoremap <silent> <C-h> :TmuxNavigateLeft<CR>
+nnoremap <silent> <C-j> :TmuxNavigateDown<CR>
+nnoremap <silent> <C-k> :TmuxNavigateUp<CR>
+nnoremap <silent> <C-l> :TmuxNavigateRight<CR>
+nnoremap <silent> <C-\> :TmuxNavigatePrevious<CR>
 
 " NERDTree
 "-----------------------------------------------------------------------------
-nnoremap <C-N> :NERDTreeToggle<CR>
+nnoremap <silent> <C-n> :NERDTreeToggle<CR>
 
 " NERDCommenter
 "-----------------------------------------------------------------------------
@@ -302,18 +340,22 @@ map <C-_> ,c<Space>
 
 " fugitive shortcuts
 "-----------------------------------------------------------------------------
-nmap <leader>gs :Gstatus<CR>
-nmap <leader>gd :Gdiff<CR>
-nmap <leader>gc :Gcommit<CR>
-nmap <leader>gb :Gblame<CR>
-nmap <leader>gl :Glog<CR>
-nmap <leader>gp :Git push<CR>
+nnoremap <leader>gs :Gstatus<CR>
+nnoremap <leader>gd :Gdiff<CR>
+nnoremap <leader>gc :Gcommit<CR>
+nnoremap <leader>gb :Gblame<CR>
+nnoremap <leader>gl :Glog<CR>
+nnoremap <leader>gp :Git push<CR>
+
+" Ctrl-P
+"-----------------------------------------------------------------------------
+noremap <C-p> :CtrlPBuffer<CR>
 
 " neocomplete
 "-----------------------------------------------------------------------------
 " plugin key-mappings
-inoremap <expr><C-g>     neocomplete#undo_completion()
-inoremap <expr><C-l>     neocomplete#complete_common_string()
+inoremap <expr><C-g>  neocomplete#undo_completion()
+inoremap <expr><C-l>  neocomplete#complete_common_string()
 
 " <CR>: close popup and save indent
 inoremap <silent> <CR> <C-r>=<SID>neocomplete_cr_func()<CR>
@@ -334,22 +376,26 @@ inoremap <expr><C-e>  neocomplete#cancel_popup()
 
 " Tabularize
 "-----------------------------------------------------------------------------
-map <leader>a=  :Tabularize /=<CR>
-map <leader>a:  :Tabularize /:<CR>
-map <leader>a:: :Tabularize /:\zs<CR>
-map <leader>a,  :Tabularize /,<CR>
+noremap <silent> <leader>r=  :Tabularize /=<CR>
+noremap <silent> <leader>r:  :Tabularize /:<CR>
+noremap <silent> <leader>r:: :Tabularize /:\zs<CR>
+noremap <silent> <leader>r,  :Tabularize /,<CR>
+noremap <silent> <leader>rs  :Tabularize / /l0<CR>
 
+" SQLutilities
+"-----------------------------------------------------------------------------
+let g:sqlutil_align_comma = 1
 
 "=============================================================================
 " Filetype settings
 "=============================================================================
 
 " enable omni completion
-autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType css           setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+autocmd FileType javascript    setlocal omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType python        setlocal omnifunc=pythoncomplete#Complete
+autocmd FileType xml           setlocal omnifunc=xmlcomplete#CompleteTags
 
 " filetypes with tabwidth of 2
 autocmd FileType css,scss,html,xhtml,htmldjango,vim,markdown,python,javascript
@@ -358,10 +404,11 @@ autocmd FileType css,scss,html,xhtml,htmldjango,vim,markdown,python,javascript
 " wrap python comments at 72 chars
 autocmd FileType python setlocal textwidth=72
 
+"=============================================================================
+" Custom toggles
+"=============================================================================
 
-"=============================================================================
-" Custom toggles 
-"=============================================================================
+set pastetoggle=<F2>      " toggle paste mode
 
 nnoremap <leader>te :call VirtualEditToggle()<CR>
 
@@ -369,21 +416,21 @@ let g:virtualedit_is_on = 0
 
 function! VirtualEditToggle()
   if g:virtualedit_is_on
-    nmap <silent> j j
-    nmap <silent> k k
-    nmap <silent> 0 0
-    nmap <silent> $ $
-    nmap <silent> ^ ^
+    nnoremap <silent> j j
+    nnoremap <silent> k k
+    nnoremap <silent> 0 0
+    nnoremap <silent> $ $
+    nnoremap <silent> ^ ^
     set list
     set nolinebreak
     set virtualedit=""
     let g:virtualedit_is_on = 0
   else
-    nmap <silent> j gj
-    nmap <silent> k gk
-    nmap <silent> 0 g0
-    nmap <silent> $ g$
-    nmap <silent> ^ g^
+    nnoremap <silent> j gj
+    nnoremap <silent> k gk
+    nnoremap <silent> 0 g0
+    nnoremap <silent> $ g$
+    nnoremap <silent> ^ g^
     set nolist
     set linebreak
     set virtualedit=all
@@ -391,3 +438,7 @@ function! VirtualEditToggle()
   endif
 endfunction
 
+" sudo write
+cmap w!! w !sudo tee % >/dev/null
+
+" review: https://raw.githubusercontent.com/nvie/vimrc/master/vimrc
