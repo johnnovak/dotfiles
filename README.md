@@ -1,9 +1,10 @@
 Notes
 -----
 
-This is a collection of my current set of dotfiles. Most of them are configured in a
-way that they retain their
-functionality across different platforms (Linux, Cygwin, OS X) without any changes (e.g. copy/pasting using the system clipboard in Vim, mouse support in terminal etc.).
+This is a collection of my current set of dotfiles. Most of them are
+configured in a way that they retain their functionality across different
+platforms (Linux, Cygwin, OS X) without any changes (e.g. copy/pasting using
+the system clipboard in Vim, mouse support in terminal etc.).
 
 Vim
 ---
