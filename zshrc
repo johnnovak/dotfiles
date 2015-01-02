@@ -5,6 +5,10 @@
 autoload -U colors
 colors
 
+# enable bash-style word boundaries
+autoload -U select-word-style
+select-word-style bash
+
 # autocomplete
 autoload -U compinit
 compinit
