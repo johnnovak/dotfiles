@@ -9,7 +9,7 @@ stty stop undef
 stty start undef
 
 #export PATH=$PATH:$HOME/bin
-export EDITOR=vim
+export EDITOR=/usr/bin/editor
 export LESS='-R'
 
 # History settings
