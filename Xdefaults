@@ -29,7 +29,7 @@ URxvt*background: #303030
 
 ! fonts
 ! run "fc-list" for a list of available fonts
-URxvt*font: xft:Literation Mono Powerline:pixelsize=14
+URxvt*font: xft:Literation Mono Powerline:pixelsize=13
 URxvt*boldFont:
 URxvt*letterSpace: -2
 
