@@ -11,6 +11,7 @@ stty start undef
 #export PATH=$PATH:$HOME/bin
 export EDITOR=/usr/bin/editor
 export LESS='-R'
+eval `lesspipe`
 
 # History settings
 export HISTCONTROL=ignoredups
