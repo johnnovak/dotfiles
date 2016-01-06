@@ -42,6 +42,7 @@ Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'nvie/vim-togglemouse'
 Plugin 'vim-scripts/SQLUtilities'
 Plugin 'vim-scripts/Align'
+Plugin 'derekwyatt/vim-scala'
 
 "Plugin 'mbbill/undotree'
 "Plugin 'spf13/vim-autoclose'
@@ -261,6 +262,10 @@ if (has('unix') && !has('macunix'))
 
   " remap block mode from Ctrl-v to Ctrl-q
   noremap <C-q> <C-v>
+endif
+
+if (has('unix') && has('macunix'))
+  set clipboard=unnamed
 endif
 
 " use ,d to delete a line without yanking it
