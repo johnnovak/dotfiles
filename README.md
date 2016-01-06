@@ -24,3 +24,14 @@ your status line, you will need to install a powerline patched font (for
 example, from [here](https://github.com/Lokaltog/powerline-fonts)). The config
 assumes you have such a font installed.
 
+OS X
+----
+
+Tested on OS X El Capitan (10.11).
+
+tmux 2.1 and GNU grep are required.
+
+
+```
+$ sudo port install tmux tmux-pasteboard grep
+```
