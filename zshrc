@@ -141,7 +141,9 @@ RPROMPT='${vim_mode}'
 
 # use 16 colors in OS X Terminal.app, 256 colors on other platforms
 if [[ "$OSTYPE" == 'darwin'* ]]; then
-  export TERM=xterm
+  #TODO
+  #export TERM=xterm
+  export TERM=xterm-256color
 else
   export TERM=xterm-256color
 fi
@@ -305,3 +307,4 @@ function extract {
 
 # Source machine-specific settings
 . ~/.bashrc.user
+
