@@ -43,6 +43,7 @@ Plugin 'nvie/vim-togglemouse'
 Plugin 'vim-scripts/SQLUtilities'
 Plugin 'vim-scripts/Align'
 Plugin 'derekwyatt/vim-scala'
+Plugin 'john2x/flatui.vim'
 
 "Plugin 'mbbill/undotree'
 "Plugin 'spf13/vim-autoclose'
