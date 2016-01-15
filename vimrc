@@ -68,6 +68,7 @@ let mapleader = ","       " set leader
 
 if has('mouse')           " enable mouse
   set mouse=a
+  set ttymouse=xterm2
 endif
 
 " File handling
