@@ -31,6 +31,9 @@ KEYTIMEOUT=1
 # default editor
 export EDITOR=vim
 
+# set readline to vi mode
+set -o vi
+
 # history settings
 export HISTFILE=~/.zsh_history
 export HISTSIZE=100000
@@ -138,17 +141,21 @@ RPROMPT='${vim_mode}'
 
 # use 16 colors in OS X Terminal.app, 256 colors on other platforms
 if [[ "$OSTYPE" == 'darwin'* ]]; then
-    export TERM=xterm
+  #TODO
+  #export TERM=xterm
+  export TERM=xterm-256color
 else
-    export TERM=xterm-256color
+  export TERM=xterm-256color
 fi
 
 # enable terminal colors
 export CLICOLOR=1
 
 # ls colors
-alias ls='ls --color=auto -CF'
-eval "`dircolors`"
+if [[ "$OSTYPE" == 'linux'* ]]; then
+  alias ls='ls --color=auto -CF'
+  eval "`dircolors`"
+fi
 
 # grep colors
 alias grep='grep --color=auto'
@@ -300,3 +307,4 @@ function extract {
 
 # Source machine-specific settings
 . ~/.bashrc.user
+
