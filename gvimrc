@@ -15,7 +15,7 @@ set guioptions-=L
 
 "set vb
 
-"set guifont=Menlo_For_Powerline:h12
+set guifont=Menlo_For_Powerline:h12
 "set guifont="Liberation Mono"
 "
 set antialias

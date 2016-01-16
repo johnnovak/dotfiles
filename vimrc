@@ -24,6 +24,7 @@ Plugin 'cschlueter/vim-wombat'
 Plugin 'dsolstad/vim-wombat256i'
 Plugin 'croaker/mustang-vim'
 Plugin 'jnurmine/Zenburn'
+Plugin 'john2x/flatui.vim'
 
 " plugins
 Plugin 'tpope/vim-repeat'
@@ -67,6 +68,7 @@ let mapleader = ","       " set leader
 
 if has('mouse')           " enable mouse
   set mouse=a
+  set ttymouse=xterm2
 endif
 
 " File handling
@@ -262,6 +264,10 @@ if (has('unix') && !has('macunix'))
 
   " remap block mode from Ctrl-v to Ctrl-q
   noremap <C-q> <C-v>
+endif
+
+if (has('unix') && has('macunix'))
+  set clipboard=unnamed
 endif
 
 " use ,d to delete a line without yanking it
