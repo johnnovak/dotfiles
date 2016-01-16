@@ -184,42 +184,52 @@
     <keybind key="W-F5">
       <action name="Reconfigure"/>
     </keybind>
-    <keybind key="H-1">
+    <keybind key="H-j">
       <action name="GoToDesktop">
         <to>1</to>
       </action>
     </keybind>
-    <keybind key="H-2">
+    <keybind key="H-k">
       <action name="GoToDesktop">
         <to>2</to>
       </action>
     </keybind>
-    <keybind key="H-3">
+    <keybind key="H-l">
       <action name="GoToDesktop">
         <to>3</to>
       </action>
     </keybind>
-    <keybind key="H-4">
+    <keybind key="H-0x2f">
       <action name="GoToDesktop">
         <to>4</to>
       </action>
     </keybind>
-    <keybind key="A-H-1">
+    <keybind key="H-n">
+      <action name="GoToDesktop">
+        <to>east</to>
+      </action>
+    </keybind>
+    <keybind key="H-p">
+      <action name="GoToDesktop">
+        <to>west</to>
+      </action>
+    </keybind>
+    <keybind key="A-H-j">
       <action name="SendToDesktop">
         <to>1</to>
       </action>
     </keybind>
-    <keybind key="A-H-2">
+    <keybind key="A-H-k">
       <action name="SendToDesktop">
         <to>2</to>
       </action>
     </keybind>
-    <keybind key="A-H-3">
+    <keybind key="A-H-l">
       <action name="SendToDesktop">
         <to>3</to>
       </action>
     </keybind>
-    <keybind key="A-H-4">
+    <keybind key="A-H-0x2f">
       <action name="SendToDesktop">
         <to>4</to>
       </action>
