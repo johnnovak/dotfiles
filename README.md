@@ -17,6 +17,11 @@ tweaks and configurations for each platform.
 - zsh 5.1.1
 
 
+# Installation
+
+TODO
+
+
 # Features
 
 ## Common
@@ -83,11 +88,6 @@ TODO
 ## Misc
 
 ### Vrapper
-
-TODO
-
-
-# Installation
 
 TODO
 
