@@ -19,8 +19,10 @@ set guifont=Menlo_For_Powerline:h12
 "set guifont="Liberation Mono"
 "
 set antialias
-set background=dark
-set columns=100
-set lines=50
+set background=light
+set columns=120
+set lines=60
 
 hi MatchParen gui=underline
+
+colo solarized
