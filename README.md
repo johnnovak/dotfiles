@@ -1,13 +1,35 @@
-Notes
------
+# Overview
 
-This is a collection of my current set of dotfiles. Most of them are
-configured in a way that they retain their functionality across different
-platforms (Linux, Cygwin, OS X) without any changes (e.g. copy/pasting using
-the system clipboard in Vim, mouse support in terminal etc.).
+This repo contains my universal dotfiles for OS X, Linux and Cygwin.
+The general idea is that a core set functionality should be available on all
+platforms (e.g. shell behaviour, system clipboard and mouse support in Vim and
+tmux, unified colourscheme etc.) and there are also platform specific
+tweaks and configurations for each platform.
 
-Vim
----
+
+# Requirements
+
+- bash 3.2.57
+- git 2.6.4
+- GNU grep 2.22
+- tmux 2.1
+- vim 7.3.855 (Lua support is required for neocomplete)
+- zsh 5.1.1
+
+
+# Features
+
+## Common
+
+### bash
+
+TODO
+
+### tmux
+
+TODO
+
+### vim
 
 The Vim config is [Vundle](https://github.com/gmarik/Vundle.vim) based.
 Install Vundle as described on the project page, then start Vim and do a
@@ -24,14 +46,48 @@ your status line, you will need to install a powerline patched font (for
 example, from [here](https://github.com/Lokaltog/powerline-fonts)). The config
 assumes you have such a font installed.
 
-OS X
-----
+### zsh
+
+TODO
+
+
+## OS X
 
 Tested on OS X El Capitan (10.11).
 
-tmux 2.1 and GNU grep are required.
+
+## Linux
+
+### OpenBox
+
+TODO
+
+### Terminator
+
+TODO
+
+### urxvt (Xdefaults)
+
+TODO
+
+### Xmodmap
 
 
-```
-$ sudo port install tmux tmux-pasteboard grep
-```
+## Cygwin
+
+### minttyrc
+
+TODO
+
+
+## Misc
+
+### Vrapper
+
+TODO
+
+
+# Installation
+
+TODO
+
