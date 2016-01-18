@@ -78,7 +78,7 @@ if ls --color -d . >/dev/null 2>&1; then
   GNU_LS=1
 fi
 
-if $GNU_LS; then
+if [ $GNU_LS -eq 1 ]; then
   alias ls='ls --color=auto -CF'
   eval "`dircolors ~/.dircolors`"
 fi
