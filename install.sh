@@ -1,40 +1,20 @@
 #/usr/bin/env bash
 
-DOTFILES=~/dotfiles
+PWD=`pwd`
 
-# Common
+create_symlinks() {
+  find $1 -name _\* -maxdepth 2 | sed 's#\(.*/\)_\(.*\)#'$PWD/'\1_\2 '$HOME'/.\2#' | xargs -n 2 ln -s -f
+}
 
-ln $DOTFILES/config ~/.config
-
-ln $DOTFILES/bashrc ~/.bashrc
-ln $DOTFILES/zshrc ~/.zshrc
-ln $DOTFILES/tmux.conf ~/.tmux.conf
-
-ln $DOTFILES/vimrc ~/.vimrc
-ln $DOTFILES/gvimrc ~/.gvimrc
-
-ln $DOTFILES/gitignore ~/.gitignore
-
-ln $DOTFILES/vrapperrc ~/.vrapperrc
-
-
-# OS X
+create_symlinks common
 
 if [[ "$OSTYPE" == 'darwin'* ]]; then
-    #TODO
-fi
+  create_symlinks osx
 
+elif [[ "$OSTYPE" == 'linux'* ]]; then
+  create_symlinks linux
 
-# Linux
-
-if [[ "$OSTYPE" == 'linux'* ]]; then
-    #TODO
-fi
-
-
-# Cygwin
-
-if [[ "$OSTYPE" == 'cygwin'* ]]; then
-    #TODO
+elif [[ "$OSTYPE" == 'cygwin'* ]]; then
+  create_symlinks cygwin
 fi
 
