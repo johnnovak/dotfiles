@@ -1,0 +1,6 @@
+*~
+.*.swp
+.cache-main
+.cache-tests
+.classpath
+.eclipse-project-deps
