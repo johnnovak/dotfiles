@@ -1,4 +1,4 @@
-BoldAsFont=no
+BoldAsFont=yes
 Columns=120
 Rows=60
 CursorType=block
@@ -34,3 +34,5 @@ ScrollbackLines=999999
 Term=xterm-256color
 FontIsBold=no
 OpaqueWhenFocused=no
+BoldAsColour=yes
+AllowBlinking=yes
