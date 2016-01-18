@@ -21,6 +21,16 @@ tweaks and configurations for each platform.
 
 TODO
 
+## OS X
+
+TODO
+
+```
+sudo port install grep
+sudo port install coreutils +with_default_names
+```
+
+
 
 # Features
 
