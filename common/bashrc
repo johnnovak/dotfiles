@@ -74,10 +74,14 @@ fi
 export CLICOLOR=1
 
 # ls colors
-export LS_OPTIONS='--color=auto -CF'
-#export LSCOLORS='Bxgxfxfxcxdxdxhbadbxbx'
-eval "`dircolors`"
-alias ls='ls $LS_OPTIONS'
+if ls --color -d . >/dev/null 2>&1; then
+  GNU_LS=1
+fi
+
+if $GNU_LS; then
+  alias ls='ls --color=auto -CF'
+  eval "`dircolors ~/.dircolors`"
+fi
 
 # grep colors
 export GREP_OPTIONS='--color=auto'

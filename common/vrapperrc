@@ -1,24 +1,23 @@
-"*****************************************************************************
-" GENERAL
-"*****************************************************************************
+" exit to command mode by quickly typing 'jk'
+inoremap jk <esc>
 
+" enter command mode with one keystroke
+nnoremap ; :
+
+" jump to matching pairs easily, with Tab
+nnoremap <Tab> %
+vnoremap <Tab> %
+
+" folding
+nnoremap <Space> za
+vnoremap <Space> za
+
+" split navigation
+noremap <C-h> <C-w>h
+noremap <C-j> <C-w>j
+noremap <C-k> <C-w>k
+noremap <C-l> <C-w>l
+
+set gvimpath=~/bin/mvim
 set contentassistmode
-
-set tabstop=4
-set shiftwidth=4
-set softtabstop=4
-set expandtab
-
-set gvimpath="C:\Program Files\Vim\vim74\gvim.exe"
-
-"*****************************************************************************
-" KEY MAPPINGS
-"*****************************************************************************
-
-" unmap Ctrl+U and Ctrl+D keys in Eclipse to pass them through to vrapper
-
-" go to previous/next tab
-" unmap Ctrl+P and Ctrl+N keys in Eclipse to make this work
-map <C-p> gT
-map <C-n> gt
 

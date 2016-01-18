@@ -1,6 +1,9 @@
 ##############################################################################
 # GENERAL
 ##############################################################################
+
+. ~/.zshrc-user-pre
+
 # load color definitions
 autoload -U colors
 colors
@@ -152,9 +155,13 @@ fi
 export CLICOLOR=1
 
 # ls colors
-if [[ "$OSTYPE" == 'linux'* ]]; then
+if ls --color -d . >/dev/null 2>&1; then
+  GNU_LS=1
+fi
+
+if [ $GNU_LS -eq 1 ]; then
   alias ls='ls --color=auto -CF'
-  eval "`dircolors`"
+  eval "`dircolors ~/.dircolors`"
 fi
 
 # grep colors
@@ -303,8 +310,6 @@ function extract {
   fi
 }
 
-##############################################################################
+. ~/.zshrc-user-post
 
-# Source machine-specific settings
-. ~/.bashrc.user
 
