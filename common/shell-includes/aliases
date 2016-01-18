@@ -1,0 +1,53 @@
+# clear terminal
+alias c='clear'
+
+# ls variations
+alias l='ls -hl'
+alias la='ls -Ahl'
+alias lsl='la --color=always | less'
+
+# jump to n-th parent directory
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+
+# always ask before deleting/overwriting stuff
+alias rm='rm -i'
+alias mv='mv -i'
+alias cp='cp -i'
+
+# create nested paths
+alias mkdir='mkdir -pv'
+
+# find from current dir
+alias fhere='find . -name'
+
+# enable vi mode in info
+alias info='info --vi-keys'
+
+# disk usage
+alias df='df -Tha --total'
+alias du='du -ach | sort -h'
+alias free='free -mt'
+
+# git shortcuts
+alias gaa='git add -u .'
+alias gcom='git commit'
+alias gst='git status'
+alias gdi='git diff'
+alias gdic='git diff --cached'
+alias gps='git pull --summary'
+alias gch='git show --pretty="format:" --name-only'
+alias gco='git checkout'
+alias gbr='git branch'
+alias ghst='git log --pretty=format:"%h %ad | %s%d [%an]" --graph --date=short'
+
+# used on OS X
+alias oo='open .'
+
+# history support for sqlplus
+alias sqp='rlwrap sqlplus'
+
+alias wget='wget -c'
+
+#vim:syn=bash
