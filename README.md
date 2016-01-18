@@ -19,7 +19,10 @@ tweaks and configurations for each platform.
 
 # Installation
 
-TODO
+```
+cd dotfiles
+./install.sh
+```
 
 ## OS X
 
