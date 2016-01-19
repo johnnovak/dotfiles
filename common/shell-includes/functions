@@ -63,3 +63,4 @@ function extract {
   fi
 }
 
+# vim: sw=2 ft=sh

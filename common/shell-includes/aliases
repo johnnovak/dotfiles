@@ -50,4 +50,4 @@ alias sqp='rlwrap sqlplus'
 
 alias wget='wget -c'
 
-#vim:syn=bash
+# vim: sw=2 ft=sh

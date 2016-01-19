@@ -21,3 +21,4 @@ noremap <C-l> <C-w>l
 set gvimpath=~/bin/mvim
 set contentassistmode
 
+" vim: ft=vim

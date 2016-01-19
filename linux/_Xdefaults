@@ -42,3 +42,5 @@ URxvt*saveLines: 8000
 
 urxvt*depth: 32
 urxvt*background: rgba:3000/3000/3000/c800
+
+! vim: ft=xdefaults
