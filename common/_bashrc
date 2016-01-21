@@ -96,6 +96,10 @@ export LESS_TERMCAP_so=$CYAN        # begin standout-mode - info box
 export LESS_TERMCAP_ue=$RESET       # end underline
 export LESS_TERMCAP_us=$GREEN       # begin underline
 
+# cwrapper setting (not that the cwrapper path must be set in .bashrc-pre)
+export NOCOLOR_PIPE=1
+export CW_NORANDOM=1
+
 ##############################################################################
 
 . $DOTFILES/common/shell-includes/aliases
