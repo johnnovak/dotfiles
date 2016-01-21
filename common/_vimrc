@@ -327,6 +327,10 @@ nnoremap <silent> ,qq :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name"
 vnoremap ,f gq
 nnoremap ,f gqap
 
+" format JSON
+nnoremap <leader>jf :%!python -m json.tool<CR>
+vnoremap <leader>jf :%!python -m json.tool<CR>
+
 " tmux aware navigation shortcuts
 "-----------------------------------------------------------------------------
 let g:tmux_navigator_no_mappings = 1
