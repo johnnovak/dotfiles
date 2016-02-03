@@ -20,9 +20,12 @@ tweaks and configurations for each platform.
 # Installation
 
 ```
-cd dotfiles
+cd $DOTFILES
 ./install.sh
 ```
+
+This will create symlinks in your home folder to the config files in
+`$DOTFILES`. This defaults to `~/.dotfiles` if not set.
 
 ## OS X
 
