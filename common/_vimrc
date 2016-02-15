@@ -35,7 +35,6 @@ Plugin 'bling/vim-airline'
 Plugin 'scrooloose/nerdtree'
 Plugin 'kien/ctrlp.vim'
 Plugin 'scrooloose/nerdcommenter'
-Plugin 'Shougo/neocomplete.vim'
 Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
 Plugin 'pangloss/vim-javascript'
@@ -44,10 +43,16 @@ Plugin 'nvie/vim-togglemouse'
 Plugin 'vim-scripts/SQLUtilities'
 Plugin 'vim-scripts/Align'
 Plugin 'derekwyatt/vim-scala'
-
 "Plugin 'mbbill/undotree'
 "Plugin 'spf13/vim-autoclose'
 "Plugin 'majutsushi/tagbar'
+
+" use neocomplete only if Vim has been compiled with Lua support
+let g:use_neocomplete = 0
+if has('lua')
+  Plugin 'Shougo/neocomplete.vim'
+  let g:use_neocomplete = 1
+endif
 
 call vundle#end()           " required
 filetype plugin indent on   " required
@@ -210,33 +215,37 @@ let g:ctrlp_custom_ignore = {
 
 " neocomplete
 "-----------------------------------------------------------------------------
-let g:acp_enableAtStartup = 0               " disable AutoComplPop
-"let g:neocomplete#enable_at_startup = 1     " use neocomplete
-"let g:neocomplete#enable_smart_case = 1     " use smartcase
+if g:use_neocomplete == 1
 
-" set minimum syntax keyword length
-"let g:neocomplete#sources#syntax#min_keyword_length = 3
-"let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
+  let g:acp_enableAtStartup = 0               " disable AutoComplPop
+  let g:neocomplete#enable_at_startup = 1     " use neocomplete
+  let g:neocomplete#enable_smart_case = 1     " use smartcase
 
-" define dictionary
-"let g:neocomplete#sources#dictionary#dictionaries = {
-    "\ 'default' : '',
-    "\ 'vimshell' : $HOME.'/.vimshell_hist'
-    "\ }
+  " set minimum syntax keyword length
+  let g:neocomplete#sources#syntax#min_keyword_length = 3
+  let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
 
-" define keyword
-"if !exists('g:neocomplete#keyword_patterns')
-    "let g:neocomplete#keyword_patterns = {}
-"endif
-"let g:neocomplete#keyword_patterns['default'] = '\h\w*'
+  " define dictionary
+  "let g:neocomplete#sources#dictionary#dictionaries = {
+  "    "\ 'default' : '',
+  "    "\ 'vimshell' : $HOME.'/.vimshell_hist'
+  "    "\ }
 
-" enable heavy omni completion
-"if !exists('g:neocomplete#sources#omni#input_patterns')
-"  let g:neocomplete#sources#omni#input_patterns = {}
-"endif
-"if !exists('g:neocomplete#force_omni_input_patterns')
-"  let g:neocomplete#force_omni_input_patterns = {}
-"endif
+  " define keyword
+  if !exists('g:neocomplete#keyword_patterns')
+      "let g:neocomplete#keyword_patterns = {}
+  endif
+  "let g:neocomplete#keyword_patterns['default'] = '\h\w*'
+
+  " enable heavy omni completion
+  if !exists('g:neocomplete#sources#omni#input_patterns')
+    let g:neocomplete#sources#omni#input_patterns = {}
+  endif
+  if !exists('g:neocomplete#force_omni_input_patterns')
+    let g:neocomplete#force_omni_input_patterns = {}
+  endif
+
+endif
 
 "=============================================================================
 " Shortcuts & macros
@@ -364,26 +373,29 @@ noremap <C-p> :CtrlPBuffer<CR>
 
 " neocomplete
 "-----------------------------------------------------------------------------
-" plugin key-mappings
-inoremap <expr><C-g>  neocomplete#undo_completion()
-inoremap <expr><C-l>  neocomplete#complete_common_string()
+if g:use_neocomplete == 1
 
-" <CR>: close popup and save indent
-inoremap <silent> <CR> <C-r>=<SID>neocomplete_cr_func()<CR>
-function! s:neocomplete_cr_func()
-  "return neocomplete#close_popup() . "\<CR>"
-  " for no inserting <CR> key
-  return pumvisible() ? neocomplete#close_popup() : "\<CR>"
-endfunction
+  " plugin key-mappings
+  inoremap <expr><C-g>  neocomplete#undo_completion()
+  inoremap <expr><C-l>  neocomplete#complete_common_string()
 
-" <TAB>: completion
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+  " <CR>: close popup and save indent
+  inoremap <silent> <CR> <C-r>=<SID>neocomplete_cr_func()<CR>
+  function! s:neocomplete_cr_func()
+    "return neocomplete#close_popup() . "\<CR>"
+    " for no inserting <CR> key
+    return pumvisible() ? neocomplete#close_popup() : "\<CR>"
+  endfunction
 
-" <C-h>, <BS>: close popup and delete backword char
-"inoremap <expr><C-h>  neocomplete#smart_close_popup()."\<C-h>"
-"inoremap <expr><BS>   neocomplete#smart_close_popup()."\<C-h>"
-"inoremap <expr><C-y>  neocomplete#close_popup()
-"inoremap <expr><C-e>  neocomplete#cancel_popup()
+  " <TAB>: completion
+  inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+
+  " <C-h>, <BS>: close popup and delete backword char
+  "inoremap <expr><C-h>  neocomplete#smart_close_popup()."\<C-h>"
+  "inoremap <expr><BS>   neocomplete#smart_close_popup()."\<C-h>"
+  "inoremap <expr><C-y>  neocomplete#close_popup()
+  "inoremap <expr><C-e>  neocomplete#cancel_popup()
+endif
 
 " Tabularize
 "-----------------------------------------------------------------------------
