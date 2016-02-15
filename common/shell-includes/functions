@@ -13,6 +13,14 @@ psgrep() {
   fi
 }
 
+scalagrep() {
+  if [ ! -z $1 ] ; then
+    grep -r --include="*.scala" $1
+  else
+    echo "ERROR: need pattern to grep for"
+  fi
+}
+
 rm-vimbackup() {
   echo -n "Recursively deleting vim backup files from "
   pwd
