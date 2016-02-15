@@ -27,6 +27,7 @@ cd $DOTFILES
 This will create symlinks in your home folder to the config files in
 `$DOTFILES`. This defaults to `~/.dotfiles` if not set.
 
+
 ## OS X
 
 TODO
@@ -66,6 +67,21 @@ If you want nice [airline](https://github.com/bling/vim-airline) symbols on
 your status line, you will need to install a powerline patched font (for
 example, from [here](https://github.com/Lokaltog/powerline-fonts)). The config
 assumes you have such a font installed.
+
+#### Using the same vimrc file for vim/Cygwin and native gVim under Windows
+
+The easiest way to do this to create an NTFS junction in your Windows user directory to
+point to the actual vimrc file (**not** the symlink, that won't work) in your Cygwin home directory.
+To do this, issue the following command from the Windows command line (you will probably need admin
+privileges):
+
+```
+mklink C:\Users\<user_name>\_vimrc C:\<cygwin_path>\home\<user_name>\.dotfiles\common\_vimrc
+```
+
+There's some logic in `vimrc` to make Vundle work with this kind setup, so
+doing it any other way is not guaranteed to work.
+
 
 ### zsh
 
