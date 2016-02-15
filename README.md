@@ -70,8 +70,9 @@ assumes you have such a font installed.
 
 #### Using the same vimrc file for vim/Cygwin and native gVim under Windows
 
-The easiest way to do this to create an NTFS junction in your Windows user directory to
-point to the actual vimrc file (**not** the symlink, that won't work) in your Cygwin home directory.
+The easiest way to do this to create an NTFS junction in your Windows user directory that points
+point to the actual vimrc file in your Cygwin home directory (pointing to
+a symlink won't work, e.g. `~/.vimrc`).
 To do this, issue the following command from the Windows command line (you will probably need admin
 privileges):
 
