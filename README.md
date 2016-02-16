@@ -58,14 +58,16 @@ TODO
 
 ### vim
 
-Feature highlights:
+**Feature highlights**
 
 * Seamless navigation between Vim and tmux splits with `Ctrl+jkl;`
 
 **Installing Vim**
 
-You'll need Vim compiled with Lua, Python and mouse support (among others) for all the features to
-work:
+You'll need Vim compiled with Lua, Python and mouse support (among others) for
+all the features to work.
+[neocomplete](https://github.com/Shougo/neocomplete.vim) requires **Vim
+7.3.885+** with **Lua enabled**.
 
 On Linux:
 
@@ -79,22 +81,20 @@ On OS X:
 sudo port install vim +huge+lua+python27
 ```
 
+**Installing Vundle**
+
 The Vim config is [Vundle](https://github.com/gmarik/Vundle.vim) based.
 Install Vundle as described on the project page, then start Vim and do a
 `:PluginInstall`.
 
-[neocomplete](https://github.com/Shougo/neocomplete.vim) requires **Vim
-7.3.885+** with **Lua enabled**.
-
-Alternatively, [neocomplcache](https://github.com/Shougo/neocomplcache.vim)
-can be used (much slower), or just disable neocomplete in `vimrc`.
+**Airline**
 
 If you want nice [airline](https://github.com/bling/vim-airline) symbols on
 your status line, you will need to install a powerline patched font (for
 example, from [here](https://github.com/Lokaltog/powerline-fonts)). The config
 assumes you have such a font installed.
 
-#### Using the same vimrc file for vim/Cygwin and native gVim under Windows
+**Using the same vimrc file for vim/Cygwin and native gVim under Windows**
 
 The easiest way to do this to create an NTFS junction in your Windows user
 directory that points point to the **actual** `.vimrc` file in your Cygwin
