@@ -62,6 +62,23 @@ Feature highlights:
 
 * Seamless navigation between Vim and tmux splits with `Ctrl+jkl;`
 
+**Installing Vim**
+
+You'll need Vim compiled with Lua, Python and mouse support (among others) for all the features to
+work:
+
+On Linux:
+
+```
+sudo apt-get install vim-nox
+```
+
+On OS X:
+
+```
+sudo port install vim +huge+lua+python27
+```
+
 The Vim config is [Vundle](https://github.com/gmarik/Vundle.vim) based.
 Install Vundle as described on the project page, then start Vim and do a
 `:PluginInstall`.
