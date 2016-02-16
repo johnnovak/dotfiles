@@ -70,17 +70,18 @@ assumes you have such a font installed.
 
 #### Using the same vimrc file for vim/Cygwin and native gVim under Windows
 
-The easiest way to do this to create an NTFS junction in your Windows user directory that points
-point to the actual vimrc file in your Cygwin home directory (pointing to
-a symlink won't work, e.g. `~/.vimrc`).
-To do this, issue the following command from the Windows command line (you will probably need admin
-privileges):
+The easiest way to do this to create an NTFS junction in your Windows user
+directory that points point to the **actual** `.vimrc` file in your Cygwin
+home directory (pointing to the symlink won't work, e.g. to `~/.vimrc`).
+
+To do this, issue the following command from the Windows command line (you
+will probably need admin privileges for this):
 
 ```
 mklink C:\Users\<user_name>\_vimrc C:\<cygwin_path>\home\<user_name>\.dotfiles\common\_vimrc
 ```
 
-There's some logic in `vimrc` to make Vundle work with this kind setup, so
+There's some logic in `vimrc` to make Vundle work with this kind of setup;
 doing it any other way is not guaranteed to work.
 
 
