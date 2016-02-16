@@ -6,6 +6,12 @@ platforms (e.g. shell behaviour, system clipboard and mouse support in Vim and
 tmux, unified colourscheme etc.) and there are also platform specific
 tweaks and configurations for each platform.
 
+Tested on:
+
+* Latest cygwin on Windows 7
+* OS X El Capitan (10.11)
+* Crunchbang 11 (Waldorf) (distupgraded to Debian Jessie)
+
 
 # Requirements
 
@@ -30,13 +36,12 @@ This will create symlinks in your home folder to the config files in
 
 ## OS X
 
-TODO
+Many of the configs require GNU coreutils. To install them with MacPorts:
 
 ```
 sudo port install grep
 sudo port install coreutils +with_default_names
 ```
-
 
 
 # Features
@@ -45,13 +50,17 @@ sudo port install coreutils +with_default_names
 
 ### bash
 
-TODO
+* Same colorscheme on all platforms
 
 ### tmux
 
 TODO
 
 ### vim
+
+Feature highlights:
+
+* Seamless navigation between Vim and tmux splits with `Ctrl+jkl;`
 
 The Vim config is [Vundle](https://github.com/gmarik/Vundle.vim) based.
 Install Vundle as described on the project page, then start Vim and do a
@@ -92,7 +101,6 @@ TODO
 
 ## OS X
 
-Tested on OS X El Capitan (10.11).
 
 
 ## Linux
