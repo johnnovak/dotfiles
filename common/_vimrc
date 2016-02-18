@@ -180,6 +180,26 @@ set formatoptions+=1    " don't end lines with 1-letter word when wrapping
 set diffopt+=iwhite     " add ignorance of whitespace to diff
 set diffopt+=vertical   " open diff windows as a vertical split
 
+" System clipboard integration
+"-----------------------------------------------------------------------------
+" always use the system clipboard on Linux
+let g:use_system_clipboard = 0
+if has('unix') && !has('macunix')
+  let g:use_system_clipboard = 1
+endif
+
+" using the system clipboard when running inside tmux on OS X doesn't work
+" in root mode, so only enable clipboard support on OS X for normal users
+" (unfortunately there doesn't seem to be a way to detect if we're running
+" inside a tmux session when vim is launched with sudo)
+if has('macunix') && system('id -u') > 0
+  let g:use_system_clipboard = 1
+endif
+
+if g:use_system_clipboard
+  set clipboard=unnamed
+endif
+
 "=============================================================================
 " Plugin settings
 "=============================================================================
@@ -262,36 +282,6 @@ nnoremap ; :
 nnoremap <silent> <leader>ev :e $MYVIMRC<CR>
 nnoremap <silent> <leader>sv :so $MYVIMRC<CR>
 
-" map Ctrl-x/c/v to use the system clipboard on Linux, Cygwin & Windows
-if (has('unix') && !has('macunix'))
-      \ || (has('win32') || has('win64') || has('win32unix'))
-
-  vnoremap <C-x> "+x
-  vnoremap <C-c> "+y
-  noremap <C-v> "+gP
-  inoremap <C-v> <C-r>+
-
-  " remap block mode from Ctrl-v to Ctrl-q
-  noremap <C-q> <C-v>
-endif
-
-let g:use_system_clipboard = 0
-if has('unix') && !has('macunix')
-  let g:use_system_clipboard = 1
-endif
-
-" using the system clipboard when running inside tmux on OS X doesn't work
-" in root mode, so only enable clipboard support on OS X for normal users
-" (unfortunately there doesn't seem to be a way to detect if we're running
-" inside a tmux session when vim is launched with sudo)
-if has('macunix') && system('id -u') > 0
-  let g:use_system_clipboard = 1
-endif
-
-if g:use_system_clipboard
-  set clipboard=unnamed
-endif
-
 " use ,d to delete a line without yanking it
 vnoremap <silent> <leader>d "_d
 
@@ -305,12 +295,6 @@ vnoremap <Space> za
 
 " strip all trailing whitespace from a file, using ,W
 nnoremap <leader>W :%s/\s\+$//<CR>:let @/=''<CR>
-
-" window navigation (now handled by TmuxNavigate*)
-"noremap <C-w> <C-w>h
-"noremap <C-w> <C-w>j
-"noremap <C-w> <C-w>k
-"noremap <C-w> <C-w>l
 
 " buffer handling
 nnoremap <leader>q :bd<CR>
@@ -353,7 +337,26 @@ nnoremap ,f gqap
 nnoremap <leader>jf :%!python -m json.tool<CR>
 vnoremap <leader>jf :%!python -m json.tool<CR>
 
-" tmux aware navigation shortcuts
+" map Ctrl-x/c/v to use the system clipboard on Linux, Cygwin & Windows
+if (has('unix') && !has('macunix'))
+      \ || (has('win32') || has('win64') || has('win32unix'))
+
+  vnoremap <C-x> "+x
+  vnoremap <C-c> "+y
+  noremap <C-v> "+gP
+  inoremap <C-v> <C-r>+
+
+  " remap block mode from Ctrl-v to Ctrl-q
+  noremap <C-q> <C-v>
+endif
+
+" window navigation (now handled by tmux-navigator, see below)
+"noremap <C-w> <C-w>h
+"noremap <C-w> <C-w>j
+"noremap <C-w> <C-w>k
+"noremap <C-w> <C-w>l
+
+" tmux aware navigation
 "-----------------------------------------------------------------------------
 let g:tmux_navigator_no_mappings = 1
 
