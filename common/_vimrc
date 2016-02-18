@@ -61,7 +61,6 @@ filetype plugin indent on   " required
 "=============================================================================
 " General settings
 "=============================================================================
-
 set shortmess+=I          " hide intro message when starting vim
 
 set history=1000          " keep this many lines of command line history
@@ -263,7 +262,7 @@ nnoremap ; :
 nnoremap <silent> <leader>ev :e $MYVIMRC<CR>
 nnoremap <silent> <leader>sv :so $MYVIMRC<CR>
 
-" map Ctrl-x/c/v to use the system clipboard on Linux and Windows
+" map Ctrl-x/c/v to use the system clipboard on Linux, Cygwin & Windows
 if (has('unix') && !has('macunix'))
       \ || (has('win32') || has('win64') || has('win32unix'))
 
@@ -276,7 +275,20 @@ if (has('unix') && !has('macunix'))
   noremap <C-q> <C-v>
 endif
 
-if (has('unix') && has('macunix'))
+let g:use_system_clipboard = 0
+if has('unix') && !has('macunix')
+  let g:use_system_clipboard = 1
+endif
+
+" using the system clipboard when running inside tmux on OS X doesn't work
+" in root mode, so only enable clipboard support on OS X for normal users
+" (unfortunately there doesn't seem to be a way to detect if we're running
+" inside a tmux session when vim is launched with sudo)
+if has('macunix') && system('id -u') > 0
+  let g:use_system_clipboard = 1
+endif
+
+if g:use_system_clipboard
   set clipboard=unnamed
 endif
 
