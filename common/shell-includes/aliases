@@ -37,10 +37,12 @@ alias gst='git status'
 alias gdi='git diff'
 alias gdic='git diff --cached'
 alias gps='git pull --summary'
+alias gpu='git push'
 alias gch='git show --pretty="format:" --name-only'
 alias gco='git checkout'
 alias gbr='git branch'
 alias ghst='git log --pretty=format:"%h %ad | %s%d [%an]" --graph --date=short'
+alias grbi='git rebase -i'
 
 # used on OS X
 alias oo='open .'
