@@ -27,26 +27,29 @@ Plugin 'jnurmine/Zenburn'
 Plugin 'john2x/flatui.vim'
 
 " plugins
+Plugin 'scrooloose/nerdtree'
+Plugin 'christoomey/vim-tmux-navigator'
+Plugin 'nvie/vim-togglemouse'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+Plugin 'kien/ctrlp.vim'
+
 Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-unimpaired'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-surround'
-Plugin 'bling/vim-airline'
-Plugin 'scrooloose/nerdtree'
-Plugin 'kien/ctrlp.vim'
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'godlygeek/tabular'
-Plugin 'plasticboy/vim-markdown'
-Plugin 'pangloss/vim-javascript'
-Plugin 'christoomey/vim-tmux-navigator'
-Plugin 'nvie/vim-togglemouse'
-Plugin 'vim-scripts/SQLUtilities'
 Plugin 'vim-scripts/Align'
+Plugin 'godlygeek/tabular'
+Plugin 'scrooloose/nerdcommenter'
+
+Plugin 'pangloss/vim-javascript'
+Plugin 'plasticboy/vim-markdown'
+Plugin 'jpalardy/vim-slime'
 Plugin 'derekwyatt/vim-scala'
 Plugin 'zah/nimrod.vim'
-"Plugin 'mbbill/undotree'
-"Plugin 'spf13/vim-autoclose'
-"Plugin 'majutsushi/tagbar'
+Plugin 'guns/vim-clojure-static'
+Plugin 'vim-scripts/paredit.vim'
+Plugin 'vim-scripts/SQLUtilities'
 
 " use neocomplete only if Vim has been compiled with Lua support
 let g:use_neocomplete = 0
@@ -266,6 +269,10 @@ if g:use_neocomplete == 1
   endif
 
 endif
+
+" slimv
+"-----------------------------------------------------------------------------
+let g:slime_target = "tmux"
 
 "=============================================================================
 " Shortcuts & macros
