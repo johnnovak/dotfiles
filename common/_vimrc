@@ -19,7 +19,8 @@ Plugin 'gmarik/vundle'
 
 " colorschemes
 Plugin 'altercation/vim-colors-solarized'
-Plugin 'johnnovak/vim-lucius'
+"Plugin 'johnnovak/vim-lucius'
+Plugin 'jonathanfilip/vim-lucius'
 Plugin 'cschlueter/vim-wombat'
 Plugin 'dsolstad/vim-wombat256i'
 Plugin 'croaker/mustang-vim'

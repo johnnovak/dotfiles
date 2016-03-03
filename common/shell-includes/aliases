@@ -52,4 +52,6 @@ alias sqp='rlwrap sqlplus'
 
 alias wget='wget -c'
 
+alias racket='racket -i -p neil/sicp -l xrepl'
+
 # vim: sw=2 ft=sh
