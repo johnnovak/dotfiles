@@ -15,11 +15,12 @@ else
 endif
 
 " let Vundle manage Vundle, required
-Plugin 'gmarik/vundle'
+Plugin 'VundleVim/Vundle.vim'
 
 " colorschemes
 Plugin 'altercation/vim-colors-solarized'
-Plugin 'johnnovak/vim-lucius'
+Plugin 'jonathanfilip/vim-lucius'
+"Plugin 'johnnovak/vim-lucius'
 Plugin 'cschlueter/vim-wombat'
 Plugin 'dsolstad/vim-wombat256i'
 Plugin 'croaker/mustang-vim'
