@@ -15,14 +15,14 @@ set guioptions-=L
 
 "set vb
 
-set guifont=Menlo_For_Powerline:h12
+set guifont=DroidSansMono\ 10
 "set guifont="Liberation Mono"
 "
 set antialias
-set background=light
+set background=dark
 set columns=120
 set lines=60
 
 hi MatchParen gui=underline
 
-colo solarized
+colo lucius
