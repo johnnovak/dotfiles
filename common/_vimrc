@@ -104,7 +104,7 @@ set synmaxcol=2048      " don't syntax highlight very long lines
 
 set fillchars+=vert:\   " get rid of vertical window separator characters
 
-set colorcolumn=78      " display max width marker
+set colorcolumn=7      " display max width marker
 set lazyredraw          " don't update the display while executing macetos
 
 set ruler               " show the cursor position all the time
@@ -445,7 +445,7 @@ autocmd FileType python        setlocal omnifunc=pythoncomplete#Complete
 autocmd FileType xml           setlocal omnifunc=xmlcomplete#CompleteTags
 
 " filetypes with tabwidth of 2
-autocmd FileType css,scss,html,xhtml,htmldjango,vim,markdown,python,javascript
+autocmd FileType css,html,htmldjango,javascript,markdown,nim,python,scss,vim,xhtml
   \ setlocal ts=2 sw=2 sts=2
 
 " wrap python comments at 72 chars
