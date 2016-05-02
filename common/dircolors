@@ -235,6 +235,7 @@ EXEC 01;35
 .sql 00;33
 .html 00;33
 .css 00;33
+.scss 00;33
 .js 00;33
 .sass 00;33
 .json 00;33
@@ -247,5 +248,7 @@ EXEC 01;35
 .cpp 00;33
 .xml 00;33
 .xsl 00;33
+.rb 00;33
+.nim 00;33
 
 # vim: ft=dircolors
