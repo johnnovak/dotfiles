@@ -27,14 +27,13 @@ Plugin 'croaker/mustang-vim'
 Plugin 'jnurmine/Zenburn'
 Plugin 'john2x/flatui.vim'
 
-" plugins
+" general plugins
 Plugin 'scrooloose/nerdtree'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'nvie/vim-togglemouse'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'kien/ctrlp.vim'
-
 "Plugin 'tpope/vim-repeat'
 "Plugin 'tpope/vim-unimpaired'
 Plugin 'tpope/vim-fugitive'
@@ -43,6 +42,7 @@ Plugin 'tpope/vim-fugitive'
 "Plugin 'godlygeek/tabular'
 Plugin 'scrooloose/nerdcommenter'
 
+" filetypes & language plugins
 Plugin 'pangloss/vim-javascript'
 Plugin 'plasticboy/vim-markdown'
 "Plugin 'jpalardy/vim-slime'
@@ -51,6 +51,7 @@ Plugin 'zah/nim.vim'
 "Plugin 'guns/vim-clojure-static'
 Plugin 'vim-scripts/paredit.vim'
 Plugin 'vim-scripts/SQLUtilities'
+Plugin 'keith/tmux.vim'
 
 " use neocomplete only if Vim has been compiled with Lua support
 let g:use_neocomplete = 0
@@ -114,6 +115,7 @@ set cmdheight=2         " 2 line high command prompt
 
 " use the dark 'lucius' theme if the terminal supports 256 colors
 if $TERM == 'xterm-256color'
+  set t_Co=256
   let g:lucius_no_term_bg = 1   " make background transparent
   colorscheme lucius
   LuciusDark
