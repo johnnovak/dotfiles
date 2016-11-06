@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <openbox_config xmlns="http://openbox.org/3.4/rc" xmlns:xi="http://www.w3.org/2001/XInclude">
   <resistance>
-    <strength>20</strength>
-    <screen_edge_strength>60</screen_edge_strength>
+    <strength>10</strength>
+    <screen_edge_strength>20</screen_edge_strength>
   </resistance>
   <focus>
     <focusNew>yes</focusNew>
@@ -40,7 +40,7 @@
                     'Active' - where the active window is -->
   </placement>
   <theme>
-    <name>waldorf</name>
+    <name>CBPP</name>
     <titleLayout>DSLIMC</titleLayout>
     <!--
       avaible characters are NDSLIMC, each can occur at most once.
@@ -51,7 +51,7 @@
       C: close
       S: shade (roll up/down)
       D: omnipresent (on all desktops).
-    -->
+  -->
     <keepBorder>yes</keepBorder>
     <animateIconify>no</animateIconify>
     <font place="ActiveWindow">
@@ -111,17 +111,17 @@
   </theme>
   <desktops>
     <!-- this stuff is only used at startup, pagers allow you to change them
-         during a session
+       during a session
 
-         these are default values to use when other ones are not already set by
-         other applications, or saved in your session
+       these are default values to use when other ones are not already set
+       by other applications, or saved in your session
 
-         use obconf if you want to change these without having to log out and
-         back in -->
+       use obconf if you want to change these without having to log out
+       and back in -->
     <number>4</number>
     <firstdesk>1</firstdesk>
     <names>
-      n<!-- set names up here if you want to, like this:
+      <!-- set names up here if you want to, like this:
       <name>desktop 1</name>
       <name>desktop 2</name>
       -->
@@ -130,7 +130,7 @@
       <name>3</name>
       <name>4</name>
     </names>
-    <popupTime>700</popupTime>
+    <popupTime>875</popupTime>
     <!-- The number of milliseconds to show the popup for when switching
          desktops.  Set this to 0 to disable the popup. -->
   </desktops>
@@ -184,36 +184,6 @@
     <keybind key="W-F5">
       <action name="Reconfigure"/>
     </keybind>
-    <keybind key="H-j">
-      <action name="GoToDesktop">
-        <to>1</to>
-      </action>
-    </keybind>
-    <keybind key="H-k">
-      <action name="GoToDesktop">
-        <to>2</to>
-      </action>
-    </keybind>
-    <keybind key="H-l">
-      <action name="GoToDesktop">
-        <to>3</to>
-      </action>
-    </keybind>
-    <keybind key="H-0x2f">
-      <action name="GoToDesktop">
-        <to>4</to>
-      </action>
-    </keybind>
-    <keybind key="H-n">
-      <action name="GoToDesktop">
-        <to>east</to>
-      </action>
-    </keybind>
-    <keybind key="H-p">
-      <action name="GoToDesktop">
-        <to>west</to>
-      </action>
-    </keybind>
     <keybind key="A-H-j">
       <action name="SendToDesktop">
         <to>1</to>
@@ -234,6 +204,26 @@
         <to>4</to>
       </action>
     </keybind>
+    <keybind key="H-j">
+      <action name="GoToDesktop">
+        <to>1</to>
+      </action>
+    </keybind>
+    <keybind key="H-k">
+      <action name="GoToDesktop">
+        <to>2</to>
+      </action>
+    </keybind>
+    <keybind key="H-l">
+      <action name="GoToDesktop">
+        <to>3</to>
+      </action>
+    </keybind>
+    <keybind key="H-0x2f">
+      <action name="GoToDesktop">
+        <to>4</to>
+      </action>
+    </keybind>
     <keybind key="W-d">
       <action name="ToggleShowDesktop"/>
     </keybind>
@@ -241,7 +231,7 @@
     <keybind key="A-F4">
       <action name="Close"/>
     </keybind>
-    <keybind key="W-Q">
+    <keybind key="W-q">
       <action name="Close"/>
     </keybind>
     <keybind key="A-Escape">
@@ -283,25 +273,15 @@
         </finalactions>
       </action>
     </keybind>
-    <!-- Keybindings for window switching with the arrow keys -->
-    <keybind key="W-h">
-      <action name="DirectionalCycleWindows">
-        <direction>left</direction>
-      </action>
-    </keybind>
-    <keybind key="W-l">
-      <action name="DirectionalCycleWindows">
-        <direction>right</direction>
-      </action>
-    </keybind>
-    <keybind key="W-j">
-      <action name="DirectionalCycleWindows">
-        <direction>up</direction>
-      </action>
-    </keybind>
-    <keybind key="W-k">
-      <action name="DirectionalCycleWindows">
-        <direction>down</direction>
+    <keybind key="C-A-Tab">
+      <action name="NextWindow">
+        <panels>yes</panels>
+        <desktop>yes</desktop>
+        <finalactions>
+          <action name="Focus"/>
+          <action name="Raise"/>
+          <action name="Unshade"/>
+        </finalactions>
       </action>
     </keybind>
     <!-- Keybindings for running applications -->
@@ -356,7 +336,16 @@
           <enabled>true</enabled>
           <name>Editor</name>
         </startupnotify>
-        <command>gvim</command>
+        <command>geany</command>
+      </action>
+    </keybind>
+    <keybind key="W-m">
+      <action name="Execute">
+        <startupnotify>
+          <enabled>true</enabled>
+          <name>Mediaplayer</name>
+        </startupnotify>
+        <command>vlc</command>
       </action>
     </keybind>
     <keybind key="W-s">
@@ -383,7 +372,7 @@
           <enabled>true</enabled>
           <name>Logout</name>
         </startupnotify>
-        <command>cb-exit</command>
+        <command>cbpp-exit</command>
       </action>
     </keybind>
     <keybind key="W-C-Tab">
@@ -401,36 +390,30 @@
         <menu>root-menu</menu>
       </action>
     </keybind>
-    <!-- A bit of tiling -->
-    <keybind key="W-S-h">
-      <action name="GrowToEdgeWest"/>
-    </keybind>
-    <keybind key="W-S-l">
-      <action name="GrowToEdgeEast"/>
-    </keybind>
-    <keybind key="W-S-k">
-      <action name="GrowToEdgeNorth"/>
-    </keybind>
-    <keybind key="W-S-j">
-      <action name="GrowToEdgeSouth"/>
-    </keybind>
-    <keybind key="W-A-h">
-      <action name="Execute">
-        <command>cb-aerosnap --left</command>
-      </action>
-    </keybind>
-    <keybind key="W-A-l">
-      <action name="Execute">
-        <command>cb-aerosnap --right</command>
-      </action>
-    </keybind>
+    <!-- Keybindings for window tiling -->
+    <keybind key="W-S-h">    	# HalfLeftScreen
+  	  <action name="UnmaximizeFull"/>
+  	    <action name="MoveResizeTo"><x>0</x><y>0</y><height>100%</height><width>50%</width></action>
+	  </keybind>
+    <keybind key="W-S-l">    	# HalfRightScreen
+  	  <action name="UnmaximizeFull"/>
+  	    <action name="MoveResizeTo"><x>-0</x><y>0</y><height>100%</height><width>50%</width></action>
+	</keybind>
+    <keybind key="W-S-k">    	# HalfUpperScreen
+  	  <action name="UnmaximizeFull"/>
+  	  <action name="MoveResizeTo"><x>0</x><y>0</y><width>100%</width><height>50%</height></action>
+	</keybind>
+    <keybind key="W-S-j">    	# HalfLowerScreen
+  	  <action name="UnmaximizeFull"/>
+  	  <action name="MoveResizeTo"><x>0</x><y>-0</y><width>100%</width><height>50%</height></action>
+	</keybind>
   </keyboard>
   <mouse>
     <dragThreshold>8</dragThreshold>
     <!-- number of pixels the mouse must move before a drag begins -->
     <doubleClickTime>200</doubleClickTime>
     <!-- in milliseconds (1000 = 1 second) -->
-    <screenEdgeWarpTime>0</screenEdgeWarpTime>
+    <screenEdgeWarpTime>100</screenEdgeWarpTime>
     <!-- Time before changing desktops when the pointer touches the edge of the
        screen while moving a window, in milliseconds (1000 = 1 second).
        Set this to 0 to disable warping -->
@@ -438,21 +421,21 @@
     <!-- Set this to TRUE to move the mouse pointer across the desktop when
        switching due to hitting the edge of the screen -->
     <context name="Frame">
-      <!--     <mousebind button="A-Left" action="Press">
+      <mousebind button="A-Left" action="Press">
         <action name="Focus"/>
         <action name="Raise"/>
       </mousebind>
       <mousebind button="A-Left" action="Click">
         <action name="Unshade"/>
-      </mousebind> -->
+      </mousebind>
       <mousebind button="A-Left" action="Drag">
         <action name="Move"/>
       </mousebind>
-      <!--    <mousebind button="A-Right" action="Press">
+      <mousebind button="A-Right" action="Press">
         <action name="Focus"/>
         <action name="Raise"/>
         <action name="Unshade"/>
-      </mousebind> -->
+      </mousebind>
       <mousebind button="A-Right" action="Drag">
         <action name="Resize"/>
       </mousebind>
@@ -722,24 +705,36 @@
       </mousebind>
     </context>
     <context name="Desktop">
-      <!--    <mousebind button="Up" action="Click">
-        <action name="GoToDesktop"><to>previous</to></action>
+      <mousebind button="Up" action="Click">
+        <action name="GoToDesktop">
+          <to>previous</to>
+        </action>
       </mousebind>
       <mousebind button="Down" action="Click">
-        <action name="GoToDesktop"><to>next</to></action>
+        <action name="GoToDesktop">
+          <to>next</to>
+        </action>
       </mousebind>
       <mousebind button="A-Up" action="Click">
-        <action name="GoToDesktop"><to>previous</to></action>
+        <action name="GoToDesktop">
+          <to>previous</to>
+        </action>
       </mousebind>
       <mousebind button="A-Down" action="Click">
-        <action name="GoToDesktop"><to>next</to></action>
+        <action name="GoToDesktop">
+          <to>next</to>
+        </action>
       </mousebind>
       <mousebind button="C-A-Up" action="Click">
-        <action name="GoToDesktop"><to>previous</to></action>
+        <action name="GoToDesktop">
+          <to>previous</to>
+        </action>
       </mousebind>
       <mousebind button="C-A-Down" action="Click">
-        <action name="GoToDesktop"><to>next</to></action>
-      </mousebind> -->
+        <action name="GoToDesktop">
+          <to>next</to>
+        </action>
+      </mousebind>
       <mousebind button="Left" action="Press">
         <action name="Focus"/>
         <action name="Raise"/>
@@ -791,19 +786,19 @@
     <file>menu.xml</file>
     <hideDelay>200</hideDelay>
     <!-- if a press-release lasts longer than this setting (in milliseconds), the
-         menu is hidden again -->
+       menu is hidden again -->
     <middle>no</middle>
     <!-- center submenus vertically about the parent entry -->
     <submenuShowDelay>100</submenuShowDelay>
     <!-- time to delay before showing a submenu after hovering over the parent
-         entry.
-         if this is a negative value, then the delay is infinite and the
-         submenu will not be shown until it is clicked on -->
+       entry.
+       if this is a negative value, then the delay is infinite and the
+       submenu will not be shown until it is clicked on -->
     <submenuHideDelay>400</submenuHideDelay>
     <!-- time to delay before hiding a submenu when selecting another
-         entry in parent menu
-         if this is a negative value, then the delay is infinite and the
-         submenu will not be hidden until a different submenu is opened -->
+       entry in parent menu
+       if this is a negative value, then the delay is infinite and the
+       submenu will not be hidden until a different submenu is opened -->
     <applicationIcons>yes</applicationIcons>
     <!-- controls if icons appear in the client-list-(combined-)menu -->
     <manageDesktops>yes</manageDesktops>
@@ -834,6 +829,7 @@
 
   # when multiple rules match a window, they will all be applied, in the
   # order that they appear in this list
+
 
     # each rule element can be left out or set to 'default' to specify to not
     # change that attribute of the window

@@ -216,6 +216,7 @@ if !exists('g:airline_symbols')
   let g:airline_symbols = {}
 endif
 
+let g:airline_powerline_fonts = 1
 let g:airline_left_sep         = ''
 let g:airline_left_alt_sep     = ''
 let g:airline_right_sep        = ''
@@ -369,16 +370,6 @@ endif
 " Insert current date and time in ISO format
 :nnoremap <F5> "=strftime("%Y-%m-%d %H:%M:%S")<CR>P
 :inoremap <F5> <C-R>=strftime("%Y-%m-%d %H:%M:%S")<CR>
-
-" tmux aware navigation
-"-----------------------------------------------------------------------------
-let g:tmux_navigator_no_mappings = 1
-
-nnoremap <silent> <C-h> :TmuxNavigateLeft<CR>
-nnoremap <silent> <C-j> :TmuxNavigateDown<CR>
-nnoremap <silent> <C-k> :TmuxNavigateUp<CR>
-nnoremap <silent> <C-l> :TmuxNavigateRight<CR>
-nnoremap <silent> <C-\> :TmuxNavigatePrevious<CR>
 
 " NERDTree
 "-----------------------------------------------------------------------------
