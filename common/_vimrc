@@ -202,9 +202,9 @@ if has('macunix') && system('id -u') > 0
   let g:use_system_clipboard = 1
 endif
 
-if g:use_system_clipboard
-  set clipboard=unnamed
-endif
+"if g:use_system_clipboard
+"  set clipboard=unnamed
+"endif
 
 "=============================================================================
 " Plugin settings
