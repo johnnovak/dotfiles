@@ -20,7 +20,6 @@ Plugin 'VundleVim/Vundle.vim'
 " colorschemes
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'jonathanfilip/vim-lucius'
-"Plugin 'johnnovak/vim-lucius'
 Plugin 'cschlueter/vim-wombat'
 Plugin 'dsolstad/vim-wombat256i'
 Plugin 'croaker/mustang-vim'
@@ -34,21 +33,21 @@ Plugin 'nvie/vim-togglemouse'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'kien/ctrlp.vim'
-"Plugin 'tpope/vim-repeat'
-"Plugin 'tpope/vim-unimpaired'
+Plugin 'tpope/vim-repeat'
+Plugin 'tpope/vim-unimpaired'
 Plugin 'tpope/vim-fugitive'
-"Plugin 'tpope/vim-surround'
-"Plugin 'vim-scripts/Align'
-"Plugin 'godlygeek/tabular'
+Plugin 'tpope/vim-surround'
+Plugin 'vim-scripts/Align'
+Plugin 'godlygeek/tabular'
 Plugin 'scrooloose/nerdcommenter'
 
 " filetypes & language plugins
 Plugin 'pangloss/vim-javascript'
 Plugin 'plasticboy/vim-markdown'
-"Plugin 'jpalardy/vim-slime'
+Plugin 'jpalardy/vim-slime'
 Plugin 'derekwyatt/vim-scala'
 Plugin 'zah/nim.vim'
-"Plugin 'guns/vim-clojure-static'
+Plugin 'guns/vim-clojure-static'
 Plugin 'vim-scripts/paredit.vim'
 Plugin 'vim-scripts/SQLUtilities'
 Plugin 'keith/tmux.vim'
@@ -115,7 +114,6 @@ set cmdheight=2         " 2 line high command prompt
 
 " use the dark 'lucius' theme if the terminal supports 256 colors
 if $TERM == 'xterm-256color'
-  set t_Co=256
   let g:lucius_no_term_bg = 1   " make background transparent
   colorscheme lucius
   LuciusDark
@@ -188,23 +186,27 @@ set diffopt+=vertical   " open diff windows as a vertical split
 
 " System clipboard integration
 "-----------------------------------------------------------------------------
-" always use the system clipboard on Linux
-let g:use_system_clipboard = 0
-if has('unix') && !has('macunix')
-  let g:use_system_clipboard = 1
+" map Ctrl-x/c/v to use the system clipboard on Linux, Cygwin & Windows
+if (has('unix') && !has('macunix'))
+      \ || (has('win32') || has('win64') || has('win32unix'))
+
+  vnoremap <C-x> "+x
+  vnoremap <C-c> "+y
+  noremap  <C-v> "+gP
+  inoremap <C-v> <C-r>+
+
+  " remap block mode from Ctrl-v to Ctrl-q
+  noremap <C-q> <C-v>
 endif
 
-" using the system clipboard when running inside tmux on OS X doesn't work
+" Using the system clipboard when running inside tmux on OS X doesn't work
 " in root mode, so only enable clipboard support on OS X for normal users
 " (unfortunately there doesn't seem to be a way to detect if we're running
 " inside a tmux session when vim is launched with sudo)
 if has('macunix') && system('id -u') > 0
-  let g:use_system_clipboard = 1
+  set clipboard=unnamed
 endif
 
-"if g:use_system_clipboard
-"  set clipboard=unnamed
-"endif
 
 "=============================================================================
 " Plugin settings
@@ -348,25 +350,6 @@ nnoremap ,f gqap
 nnoremap <leader>jf :%!python -m json.tool<CR>
 vnoremap <leader>jf :%!python -m json.tool<CR>
 
-" map Ctrl-x/c/v to use the system clipboard on Linux, Cygwin & Windows
-if (has('unix') && !has('macunix'))
-      \ || (has('win32') || has('win64') || has('win32unix'))
-
-  vnoremap <C-x> "+x
-  vnoremap <C-c> "+y
-  noremap <C-v> "+gP
-  inoremap <C-v> <C-r>+
-
-  " remap block mode from Ctrl-v to Ctrl-q
-  noremap <C-q> <C-v>
-endif
-
-" window navigation (now handled by tmux-navigator, see below)
-"noremap <C-w> <C-w>h
-"noremap <C-w> <C-w>j
-"noremap <C-w> <C-w>k
-"noremap <C-w> <C-w>l
-
 " Insert current date and time in ISO format
 :nnoremap <F5> "=strftime("%Y-%m-%d %H:%M:%S")<CR>P
 :inoremap <F5> <C-R>=strftime("%Y-%m-%d %H:%M:%S")<CR>
@@ -454,6 +437,7 @@ autocmd FileType python setlocal textwidth=72
 
 set pastetoggle=<F2>      " toggle paste mode
 
+" TODO this is buggy, fix it
 nnoremap <leader>te :call VirtualEditToggle()<CR>
 
 let g:virtualedit_is_on = 0
