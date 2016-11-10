@@ -52,10 +52,10 @@ setopt HIST_IGNORE_SPACE
 setopt HIST_REDUCE_BLANKS
 setopt HIST_VERIFY
 
-# disable Ctrl-S
+# reclaim Ctrl-S
 stty stop undef
 
-# disable Ctrl-Q
+# reclaim Ctrl-Q
 stty start undef
 
 unsetopt flowcontrol
