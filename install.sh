@@ -1,4 +1,4 @@
-#/usr/bin/env bash
+#!/usr/bin/env bash
 
 # ----------------------------------------------------------------------------
 # Script to install the dotfiles into the current users's home directory as
@@ -9,8 +9,8 @@
 # be tried until a non-existing filename is found.
 # ----------------------------------------------------------------------------
 
-YELLOW="\033[1;33m"
-NC="\033[0m"
+YELLOW=$'\e[01;35m'
+NC=$'\e[00m'
 
 # $1  - filename
 # OUT - unique filename with a number appended starting from 2 if the file
@@ -37,11 +37,11 @@ create_symlinks() {
 
     if [ -e "$LINK_NAME" ]; then
       BACKUP_NAME=$(unique_name "$LINK_NAME.bak")
-      mv "$LINK_NAME" "$BACKUP_NAME"
+#      mv "$LINK_NAME" "$BACKUP_NAME"
       echo "${YELLOW}Backed up $LINK_NAME as $BACKUP_NAME$NC"
     fi
 
-    ln -s "$TARGET" "$LINK_NAME"
+#    ln -s "$TARGET" "$LINK_NAME"
     echo "Created symlink: $LINK_NAME -> $TARGET"
   done
 }
