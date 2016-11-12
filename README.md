@@ -10,8 +10,7 @@ Tested on:
 
 * Latest cygwin on Windows 7
 * OS X El Capitan (10.11)
-* Crunchbang 11 (Waldorf) (distupgraded to Debian Jessie)
-
+* Crunchbang++ 1.0 (based on Debian Jessie)
 
 # Requirements
 
@@ -22,19 +21,17 @@ Tested on:
 - vim 7.3.855 (Lua support is required for neocomplete)
 - zsh 5.1.1
 
-
 # Installation
 
+## Installing the dependencies
+
+### Linux
+
 ```
-cd $DOTFILES
-./install.sh
+sudo apt-get install zsh tmux git rxvt-unicode-256color vim-nox
 ```
 
-This will create symlinks in your home folder to the config files in
-`$DOTFILES`. This defaults to `~/.dotfiles` if not set.
-
-
-## OS X
+### OS X
 
 Many of the configs require GNU coreutils. To install them with MacPorts:
 
@@ -43,24 +40,21 @@ sudo port install grep
 sudo port install coreutils +with_default_names
 ```
 
+## Installing the dotfiles
 
-# Features
+Clone this repo into somewhere (e.g. `~/.dotfiles`) and then do the following:
 
-## Common
+```
+cd ~/.dotfiles
+./install.sh
+```
 
-### bash
+The script is completely non-destructive and creates backup of any existing
+files. Just follow the instructions.
 
-* Same colorscheme on all platforms
-
-### tmux
-
-TODO
+## Notes
 
 ### vim
-
-**Feature highlights**
-
-* Seamless navigation between Vim and tmux splits with `Ctrl+jkl;`
 
 **Installing Vim**
 
@@ -109,44 +103,4 @@ mklink C:\Users\<user_name>\_vimrc C:\<cygwin_path>\home\<user_name>\.dotfiles\c
 
 There's some logic in `vimrc` to make Vundle work with this kind of setup;
 doing it any other way is not guaranteed to work.
-
-
-### zsh
-
-TODO
-
-
-## OS X
-
-
-
-## Linux
-
-### OpenBox
-
-TODO
-
-### Terminator
-
-TODO
-
-### urxvt (Xdefaults)
-
-TODO
-
-### Xmodmap
-
-
-## Cygwin
-
-### minttyrc
-
-TODO
-
-
-## Misc
-
-### Vrapper
-
-TODO
 
