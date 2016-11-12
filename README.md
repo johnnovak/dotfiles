@@ -69,7 +69,7 @@ set `DOTFILES` to point to your desired location in `~/.bashrc-pre` and
 
 ## vim
 
-#### Installing Vim
+### Installing Vim
 
 You'll need Vim compiled with Lua, Python and mouse support (among others) for
 all the features to work.
@@ -88,19 +88,19 @@ On OS X:
 sudo port install vim +huge+lua+python27
 ```
 
-#### Installing Vundle 
+### Installing Vundle 
 
 The Vim config is [Vundle](https://github.com/gmarik/Vundle.vim) based.
 Install Vundle as described on the project page, then start Vim and do a
 `:VundleInstall`.
 
-#### Airline
+### Airline
 
 If you want nice [airline](https://github.com/bling/vim-airline) symbols in
 your status line, you will need to install a [powerline patched
 font](https://github.com/Lokaltog/powerline-fonts).
 
-#### Using the same vimrc file for vim/Cygwin and native gVim under Windows
+### Using the same vimrc file for vim/Cygwin and native gVim under Windows
 
 The easiest way to do this to create an NTFS junction in your Windows user
 directory that points point to the **actual** `.vimrc` file in your Cygwin
