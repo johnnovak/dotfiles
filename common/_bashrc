@@ -1,8 +1,8 @@
+. ~/.bashrc-pre
+
 if [ -z $DOTFILES ]; then
   export DOTFILES=$HOME/.dotfiles
 fi
-
-. ~/.bashrc-pre
 
 ##############################################################################
 # GENERAL

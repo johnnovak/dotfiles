@@ -1,8 +1,8 @@
+. ~/.zshrc-pre
+
 if [ -z $DOTFILES ]; then
   export DOTFILES=$HOME/.dotfiles
 fi
-
-. ~/.zshrc-pre
 
 ##############################################################################
 # GENERAL

@@ -1,0 +1,5 @@
+[user]
+	email = john@johnnovak.net
+	name = John Novak
+[push]
+	default = simple

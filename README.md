@@ -59,7 +59,11 @@ cd ~/.dotfiles
 ```
 
 The script is completely non-destructive and creates backups of any existing
-files. Just follow the instructions.
+files. You can also start it with `-d` for a dry-run.
+
+If you are using a different location than `~/.dotfiles`, you must manually
+set `DOTFILES` to point to your desired location in `~/.bashrc-pre` and
+`~/.zshrc-pre` after the installation.
 
 ## Notes
 
