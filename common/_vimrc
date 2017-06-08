@@ -51,6 +51,8 @@ Plugin 'guns/vim-clojure-static'
 Plugin 'vim-scripts/paredit.vim'
 Plugin 'vim-scripts/SQLUtilities'
 Plugin 'keith/tmux.vim'
+Plugin 'tikhomirov/vim-glsl'
+Plugin 'leafgarland/typescript-vim'
 
 " use neocomplete only if Vim has been compiled with Lua support
 let g:use_neocomplete = 0
