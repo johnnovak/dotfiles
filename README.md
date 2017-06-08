@@ -1,17 +1,19 @@
 # Overview
 
 This repo contains my universal dotfiles for OS X, Linux and Cygwin.
-The general idea is that a core set functionality should be available on all
+The general idea is that a core set of functionality should be available on all
 platforms (e.g. shell behaviour, system clipboard and mouse support in Vim and
 tmux, unified colourscheme etc.) and there are also platform specific
 tweaks and configurations for each platform.
 
-Tested on:
+Supported platforms:
 
-* Latest cygwin on Windows 7
+* Crunchbang++ 1.0 (based on Debian Jessie)
 * OS X El Capitan (10.11)
-* Crunchbang 11 (Waldorf) (distupgraded to Debian Jessie)
+* Latest cygwin on Windows 7
 
+**NOTE:** I'm not using Cygwin too much nowadays, so expect breakages. Linux
+and OS X should be okay though as I'm using those on a daily basis.
 
 # Requirements
 
@@ -22,19 +24,21 @@ Tested on:
 - vim 7.3.855 (Lua support is required for neocomplete)
 - zsh 5.1.1
 
+For Linux there's also some additional configs that turn a vanilla
+Crunchbang++ 1.0 install into a Vim friendly desktop environment. See [this
+blog post] for details.
 
 # Installation
 
+## Installing the dependencies
+
+### Linux
+
 ```
-cd $DOTFILES
-./install.sh
+sudo apt-get install zsh tmux git rxvt-unicode-256color vim-nox
 ```
 
-This will create symlinks in your home folder to the config files in
-`$DOTFILES`. This defaults to `~/.dotfiles` if not set.
-
-
-## OS X
+### OS X
 
 Many of the configs require GNU coreutils. To install them with MacPorts:
 
@@ -43,26 +47,29 @@ sudo port install grep
 sudo port install coreutils +with_default_names
 ```
 
-
-# Features
-
-## Common
-
-### bash
-
-* Same colorscheme on all platforms
-
-### tmux
-
 TODO
 
-### vim
+## Installing the dotfiles
 
-**Feature highlights**
+Clone this somewhere (e.g. `~/.dotfiles`) and then do the following:
 
-* Seamless navigation between Vim and tmux splits with `Ctrl+jkl;`
+```
+cd ~/.dotfiles
+./install.sh
+```
 
-**Installing Vim**
+The script is completely non-destructive and creates backups of any existing
+files. You can also start it with `-d` for a dry-run.
+
+If you are using a different location than `~/.dotfiles`, you must manually
+set `DOTFILES` to point to your desired location in `~/.bashrc-pre` and
+`~/.zshrc-pre` after the installation.
+
+# Notes
+
+## vim
+
+### Installing Vim
 
 You'll need Vim compiled with Lua, Python and mouse support (among others) for
 all the features to work.
@@ -81,20 +88,19 @@ On OS X:
 sudo port install vim +huge+lua+python27
 ```
 
-**Installing Vundle**
+### Installing Vundle 
 
 The Vim config is [Vundle](https://github.com/gmarik/Vundle.vim) based.
 Install Vundle as described on the project page, then start Vim and do a
-`:PluginInstall`.
+`:VundleInstall`.
 
-**Airline**
+### Airline
 
-If you want nice [airline](https://github.com/bling/vim-airline) symbols on
-your status line, you will need to install a powerline patched font (for
-example, from [here](https://github.com/Lokaltog/powerline-fonts)). The config
-assumes you have such a font installed.
+If you want nice [airline](https://github.com/bling/vim-airline) symbols in
+your status line, you will need to install a [powerline patched
+font](https://github.com/Lokaltog/powerline-fonts).
 
-**Using the same vimrc file for vim/Cygwin and native gVim under Windows**
+### Using the same vimrc file for vim/Cygwin and native gVim under Windows
 
 The easiest way to do this to create an NTFS junction in your Windows user
 directory that points point to the **actual** `.vimrc` file in your Cygwin
@@ -107,46 +113,5 @@ will probably need admin privileges for this):
 mklink C:\Users\<user_name>\_vimrc C:\<cygwin_path>\home\<user_name>\.dotfiles\common\_vimrc
 ```
 
-There's some logic in `vimrc` to make Vundle work with this kind of setup;
-doing it any other way is not guaranteed to work.
-
-
-### zsh
-
-TODO
-
-
-## OS X
-
-
-
-## Linux
-
-### OpenBox
-
-TODO
-
-### Terminator
-
-TODO
-
-### urxvt (Xdefaults)
-
-TODO
-
-### Xmodmap
-
-
-## Cygwin
-
-### minttyrc
-
-TODO
-
-
-## Misc
-
-### Vrapper
-
-TODO
+There's some logic in `vimrc` to make Vundle work with this setup.
 

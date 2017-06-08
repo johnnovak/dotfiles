@@ -64,9 +64,9 @@ ${font sans-serif:bold:size=8}MEMORY ${hr 2}
 ${font sans-serif:normal:size=8}RAM $alignc $mem / $memmax $alignr $memperc%
 $membar
 
-${font sans-serif:bold:size=8}BATTERY ${hr 2}
-${font sans-serif:normal:size=8}ACPI Battery: $alignr $battery 
-${battery_bar 11,0}
+#${font sans-serif:bold:size=8}BATTERY ${hr 2}
+#${font sans-serif:normal:size=8}ACPI Battery: $alignr $battery 
+#${battery_bar 11,0}
 
 ${font sans-serif:bold:size=8}DISKS ${hr 2}
 ${font sans-serif:normal:size=8}/ $alignc ${fs_used /} / ${fs_size /} $alignr

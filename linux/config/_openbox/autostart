@@ -45,7 +45,7 @@ nm-applet &
 xfce4-volumed &
 
 ## Enable power management
-mate-power-manager &
+#mate-power-manager &
 
 ## Start Thunar Daemon
 thunar --daemon &
@@ -59,7 +59,7 @@ fi
 #xscreensaver -no-splash &
 
 ## Start Clipboard manager
-#(sleep 3s && clipit) &
+(sleep 3s && clipit) &
 
 ## Set keyboard settings - 250 ms delay and 25 cps (characters per second) repeat rate.
 ## Adjust the values according to your preferances.
@@ -77,3 +77,4 @@ xmodmap ~/.Xmodmap &
 
 ## Run the conky
 conky -q &
+

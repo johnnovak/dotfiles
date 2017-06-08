@@ -1,4 +1,4 @@
-#/usr/bin/env bash
+#!/usr/bin/env bash
 
 # ----------------------------------------------------------------------------
 # Script to install the dotfiles into the current users's home directory as
@@ -9,8 +9,8 @@
 # be tried until a non-existing filename is found.
 # ----------------------------------------------------------------------------
 
-YELLOW="\033[1;33m"
-NC="\033[0m"
+YELLOW=$'\e[01;35m'
+NC=$'\e[00m'
 
 # $1  - filename
 # OUT - unique filename with a number appended starting from 2 if the file
@@ -37,11 +37,15 @@ create_symlinks() {
 
     if [ -e "$LINK_NAME" ]; then
       BACKUP_NAME=$(unique_name "$LINK_NAME.bak")
-      mv "$LINK_NAME" "$BACKUP_NAME"
+      if [ ! $DRY_RUN ]; then
+        mv "$LINK_NAME" "$BACKUP_NAME"
+      fi
       echo "${YELLOW}Backed up $LINK_NAME as $BACKUP_NAME$NC"
     fi
 
-    ln -s "$TARGET" "$LINK_NAME"
+    if [ ! $DRY_RUN ]; then
+      ln -s "$TARGET" "$LINK_NAME"
+    fi
     echo "Created symlink: $LINK_NAME -> $TARGET"
   done
 }
@@ -51,6 +55,15 @@ create_platform_symlinks() {
 
   mkdir -p "$HOME/.config"
   create_symlinks "$1/config" 1 "$HOME/.config/"
+}
+
+create_if_not_exist() {
+  if [ ! -e "$1" ]; then
+    if [ ! $DRY_RUN ]; then
+      touch $1
+    fi
+    echo "Created empty file: $1"
+  fi
 }
 
 run() {
@@ -65,16 +78,28 @@ run() {
   esac
 
   create_symlinks common 2 "$HOME/."
+
+  create_if_not_exist "$HOME/.bashrc-pre"
+  create_if_not_exist "$HOME/.bashrc-post"
+  create_if_not_exist "$HOME/.zshrc-pre"
+  create_if_not_exist "$HOME/.zshrc-post"
 }
 
 #=== START ===================================================================
 
+if [ "$1" == "-d" ]; then
+  DRY_RUN=1
+fi
+
 cat << EOF
+
 This script will install the dotfiles into your home directory.
 Only symlinks will be created that will point the config files in this
 directory. If a destination file already exists, a backup will be created
 first with the .bak extension. If the backup file exists too, *.bak2, *.bak3
 etc. will be tried until a non-existing filename is found.
+
+Start with -d for a dry-run.
 
 EOF
 
