@@ -39,6 +39,18 @@ rm-pyc() {
   find ./ -name '*.pyc' -exec rm -rf '{}' \; -print
 }
 
+rm-exe-noext() {
+  echo -n "Recursively deleting executable files with no extension files from "
+  pwd
+  find . -type f -perm +111 -regex './[^.]*' -exec rm '{}' \; -print
+}
+
+rm-nimcache() {
+  echo -n "Recursively deleting nimcache directories from "
+  pwd
+  find . -type d -name 'nimcache' -print -exec rm -rf '{}' \;
+}
+
 function extract {
   if [ -z "$1" ]; then
     # display usage if no parameters given
