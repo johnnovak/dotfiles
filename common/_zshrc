@@ -146,7 +146,7 @@ RPROMPT='${vim_mode}'
 # COLORS
 ##############################################################################
 
-export TERM=xterm-256color
+export TERM=xterm-color
 
 # enable terminal colors
 export CLICOLOR=1

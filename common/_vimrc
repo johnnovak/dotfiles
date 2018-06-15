@@ -34,6 +34,7 @@ Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'kien/ctrlp.vim'
 Plugin 'tpope/vim-repeat'
+Plugin 'tpope/vim-abolish'
 Plugin 'tpope/vim-unimpaired'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-surround'
@@ -355,6 +356,9 @@ vnoremap <leader>jf :%!python -m json.tool<CR>
 " Insert current date and time in ISO format
 :nnoremap <F5> "=strftime("%Y-%m-%d %H:%M:%S")<CR>P
 :inoremap <F5> <C-R>=strftime("%Y-%m-%d %H:%M:%S")<CR>
+
+" Retab from 4 to 2 spaces
+nnoremap <leader>t2 :%s;^\(\s\+\);\=repeat(' ', len(submatch(0))/2);g<CR>
 
 " NERDTree
 "-----------------------------------------------------------------------------

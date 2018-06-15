@@ -69,7 +69,7 @@ PS1="\n\[$DARKCYAN\]\u@\h \[$YELLOW\]\w \[$GREEN\]\$(parse_git_branch)\n"\
 # COLORS
 ##############################################################################
 
-export TERM=xterm-256color
+export TERM=xterm-color
 
 # enable terminal colors
 export CLICOLOR=1
