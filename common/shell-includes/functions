@@ -84,7 +84,7 @@ function extract {
 }
 
 function perf {
-  curl -L --output /dev/null --silent --show-error --write-out 'lookup:        %{time_namelookup}s\nconnect:       %{time_connect}s\nappconnect:    %{time_appconnect}s\npretransfer:   %{time_pretransfer}s\nredirect:      %{time_redirect}s\nstarttransfer: %{time_starttransfer}s\ntotal:         %{time_total}s\n' "$1"
+  curl -L --show-error --write-out 'lookup:        %{time_namelookup}s\nconnect:       %{time_connect}s\nappconnect:    %{time_appconnect}s\npretransfer:   %{time_pretransfer}s\nredirect:      %{time_redirect}s\nstarttransfer: %{time_starttransfer}s\ntotal:         %{time_total}s\n' "$1"
 }
 
 # vim: sw=2 ft=sh
