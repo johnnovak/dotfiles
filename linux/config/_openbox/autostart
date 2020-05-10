@@ -17,8 +17,8 @@
 ##
 ## Have fun & happy CrunchBangin'! :)
 
-## GNOME PolicyKit and Keyring
-eval $(gnome-keyring-daemon -s --components=pkcs11,secrets,ssh,gpg) &
+## LX PolicyKit
+lxpolkit &
 
 ## Set root window colour
 hsetroot -solid "#2E3436" &
@@ -28,32 +28,21 @@ hsetroot -solid "#2E3436" &
 ## 2. compositor - start
 ## 3. sleep - give compositor time to start
 ## 4. tint2 panel
-(\
-nitrogen --restore && \
-cbpp-compositor --start && \
-sleep 2s && \
-tint2 \
-) &
-
-## Volume control for systray
-(sleep 2s && pnmixer) &
+nitrogen --restore &
+cbpp-compositor --start &
+tint2 &
 
 ## Start nm-applet for systray
 nm-applet &
 
 ## Volume keys daemon
-xfce4-volumed &
+mate-volume-control-applet &
 
 ## Enable power management
-#mate-power-manager &
+# xfce4-power-manager &
 
 ## Start Thunar Daemon
 thunar --daemon &
-
-## Detect and configure touchpad. See 'man synclient' for more info.
-if egrep -iq 'touchpad' /proc/bus/input/devices; then
-    synclient VertEdgeScroll=1 TapButton1=1 &
-fi
 
 ## Start xscreensaver
 #xscreensaver -no-splash &
@@ -75,10 +64,9 @@ xmodmap ~/.Xmodmap &
 ## creates symlink in images to wallpaper folder only runs once. Safe to remove.
 ##~/.cbpp-user-setup &
 
-xrandr --newmode 1920x1080 173.00 1920 2048 2248 2576 1080 1083 1088 1120 -hsync +vsync
-xrandr --addmode Virtual1 1920x1080
-xrandr --output Virtual1 --mode 1920x1080
+## cbpp-welcome - post-installation script, will not run in a live session and
+## only runs once. Safe to remove.
+# (sleep 10s && cbpp-welcome --firstrun) &
 
 ## Run the conky
 conky -q &
-

@@ -30,8 +30,9 @@ URxvt*background: #303030
 ! fonts
 ! run "fc-list" for a list of available fonts
 !
+!URxvt*font: xft:Liberation Mono-10
 URxvt*font: xft:Literation Mono Powerline-10
-URxvt*letterSpace: -2
+URxvt*letterSpace: -1
 
 URxvt*borderLess: True
 URxvt*scrollBar: False
