@@ -29,10 +29,8 @@ URxvt*background: #303030
 
 ! fonts
 ! run "fc-list" for a list of available fonts
+!
 URxvt*font: xft:Literation Mono Powerline-10
-
-!URxvt*font: xft:DejaVu Sans:pixelsize=13
-URxvt*boldFont:
 URxvt*letterSpace: -2
 
 URxvt*borderLess: True
