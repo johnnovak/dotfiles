@@ -184,22 +184,22 @@
     <keybind key="W-F5">
       <action name="Reconfigure"/>
     </keybind>
-    <keybind key="A-H-j">
+    <keybind key="A-j">
       <action name="SendToDesktop">
         <to>1</to>
       </action>
     </keybind>
-    <keybind key="A-H-k">
+    <keybind key="A-k">
       <action name="SendToDesktop">
         <to>2</to>
       </action>
     </keybind>
-    <keybind key="A-H-l">
+    <keybind key="A-l">
       <action name="SendToDesktop">
         <to>3</to>
       </action>
     </keybind>
-    <keybind key="A-H-0x2f">
+    <keybind key="A-0x2f">
       <action name="SendToDesktop">
         <to>4</to>
       </action>

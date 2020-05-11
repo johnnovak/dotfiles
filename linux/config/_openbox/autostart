@@ -69,4 +69,4 @@ xmodmap ~/.Xmodmap &
 # (sleep 10s && cbpp-welcome --firstrun) &
 
 ## Run the conky
-conky -q &
+#conky -q &
