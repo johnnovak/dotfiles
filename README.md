@@ -1,25 +1,24 @@
 # Overview
 
-This repo contains my universal dotfiles for OS X, Linux and Cygwin.
-The general idea is that a core set of functionality should be available on all
-platforms (e.g. shell behaviour, system clipboard and mouse support in Vim and
-tmux, unified colourscheme etc.) and there are also platform specific
-tweaks and configurations for each platform.
+This repo contains my universal dotfiles for OS X, Linux (native and WSL2) and
+Cygwin.  The general idea is that a core set of functionality should be
+available on all platforms (e.g. shell behaviour, system clipboard, mouse
+support in Vim and tmux, unified colourscheme etc.), and there are also
+platform specific tweaks and configurations for each platform.
 
-Supported platforms:
+Tested with:
 
-* Crunchbang++ 1.0 (based on Debian Jessie)
+* Crunchbang++ 10 (based on Debian 10 Buster)
 * OS X El Capitan (10.11)
-* Latest cygwin on Windows 7
+* Debian 10 with WSL2 on Windows 10
+* Latest cygwin on Windows 7 (I'm not using Cygwin nowadays, so expect breakages)
 
-**NOTE:** I'm not using Cygwin too much nowadays, so expect breakages. Linux
-and OS X should be okay though as I'm using those on a daily basis.
 
 # Requirements
 
-- bash 3.2.57
-- git 2.6.4
-- GNU grep 2.22
+- bash
+- git 2.6+
+- GNU grep 2+
 - tmux 2.1
 - vim 7.3.855 (Lua support is required for neocomplete)
 - zsh 5.1.1
@@ -28,6 +27,7 @@ For Linux there's also some additional configs that turn a vanilla
 Crunchbang++ 1.0 install into a Vim friendly desktop environment. See [this
 blog post] for details.
 
+
 # Installation
 
 ## Installing the dependencies
@@ -35,8 +35,15 @@ blog post] for details.
 ### Linux
 
 ```
-sudo apt-get install zsh tmux git rxvt-unicode-256color vim-nox
+sudo apt install zsh tmux git curl vim-nox
 ```
+
+Optionally, if you want to use rxvt in X:
+
+```
+sudo apt install rxvt-unicode-256color
+```
+
 
 ### OS X
 
@@ -47,23 +54,30 @@ sudo port install grep
 sudo port install coreutils +with_default_names
 ```
 
-TODO
+Then proceed to install the rest:
+
+```
+sudo port install zsh tmux git curl
+sudo port install vim +huge+lua+python27
+```
+
 
 ## Installing the dotfiles
 
-Clone this somewhere (e.g. `~/.dotfiles`) and then do the following:
+Clone this repo somewhere (e.g. `~/.dotfiles`) and then do the following:
 
 ```
 cd ~/.dotfiles
 ./install.sh
 ```
 
-The script is completely non-destructive and creates backups of any existing
-files. You can also start it with `-d` for a dry-run.
+The script only creates symlinks and is completely non-destructive; it creates
+backups of any existing files. You can also start it with `-d` for a dry-run.
 
 If you are using a different location than `~/.dotfiles`, you must manually
 set `DOTFILES` to point to your desired location in `~/.bashrc-pre` and
 `~/.zshrc-pre` after the installation.
+
 
 # Notes
 
@@ -71,8 +85,9 @@ set `DOTFILES` to point to your desired location in `~/.bashrc-pre` and
 
 ### Installing Vim
 
-You'll need Vim compiled with Lua, Python and mouse support (among others) for
-all the features to work.
+You'll need Vim compiled with Lua, Python, and mouse support for all the
+features to work.
+
 [neocomplete](https://github.com/Shougo/neocomplete.vim) requires **Vim
 7.3.885+** with **Lua enabled**.
 
@@ -88,17 +103,20 @@ On OS X:
 sudo port install vim +huge+lua+python27
 ```
 
-### Installing Vundle 
 
-The Vim config is [Vundle](https://github.com/gmarik/Vundle.vim) based.
+### Installing Vundle
+
+The Vim config is [Vundle](https://github.com/VundleVim/Vundle.vim) based.
 Install Vundle as described on the project page, then start Vim and do a
 `:VundleInstall`.
+
 
 ### Airline
 
 If you want nice [airline](https://github.com/bling/vim-airline) symbols in
 your status line, you will need to install a [powerline patched
 font](https://github.com/Lokaltog/powerline-fonts).
+
 
 ### Using the same vimrc file for vim/Cygwin and native gVim under Windows
 
