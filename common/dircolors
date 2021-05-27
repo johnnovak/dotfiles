@@ -93,8 +93,12 @@ STICKY_OTHER_WRITABLE 30;42 # dir that is sticky and other-writable (+t,o+w)
 OTHER_WRITABLE 30;43 # dir that is other-writable (o+w) and not sticky
 STICKY 30;44     # dir with the sticky bit set (+t) and not other-writable
 
+# WSL overrides - TODO override for WSL only
+STICKY_OTHER_WRITABLE 01;34 # dir that is sticky and other-writable (+t,o+w)
+OTHER_WRITABLE 01;34 # dir that is other-writable (o+w) and not sticky
+
 # This is for files with execute permission:
-EXEC 01;35
+EXEC 01;32
 
 # List any file extensions like '.gz' or '.tar' that you would like ls
 # to colorize below. Put the extension, a space, and the color init string.
@@ -250,5 +254,6 @@ EXEC 01;35
 .xsl 00;33
 .rb 00;33
 .nim 00;33
+.lua 00;33
 
 # vim: ft=dircolors
