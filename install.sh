@@ -66,15 +66,30 @@ create_if_not_exist() {
   fi
 }
 
+detect_os() {
+  if [ $WSL_DISTRO_NAME ]; then
+    echo "wsl"
+  else
+    case "$OSTYPE" in
+      darwin*) echo "osx"     ;;
+      linux*)  echo "linux"   ;;
+      cygwin*) echo "cygwin"  ;;
+      *)       echo "unknown" ;;
+    esac
+  fi
+}
+
 run() {
   PWD=`pwd`
 
-  case "$OSTYPE" in
-    darwin*) create_platform_symlinks osx    ;;
-    linux*)  create_platform_symlinks linux  ;;
-    cygwin*) create_platform_symlinks cygwin ;;
-    *)       echo "ERROR: unsupported platform: $OSTYPE"
-             exit 1 ;;
+  OS=$(detect_os)
+  case $OS in
+    osx)    create_platform_symlinks osx    ;;
+    linux)  create_platform_symlinks linux  ;;
+    wsl)    create_platform_symlinks wsl    ;;
+    cygwin) create_platform_symlinks cygwin ;;
+    *)      echo "ERROR: unsupported platform"
+            exit 1 ;;
   esac
 
   create_symlinks common 2 "$HOME/."
