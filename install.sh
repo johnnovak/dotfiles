@@ -28,12 +28,11 @@ unique_name() {
 }
 
 # $1 - OS type (osx|linux|cygwin)
-# $2 - max search depth
-# $3 - dest path prefix
+# $2 - dest path prefix
 create_symlinks() {
-  for FNAME in $(find $1 -maxdepth $2 -name _\*); do
+  for FNAME in $(find $1 -name _\*); do
     TARGET=$(echo "$FNAME" | sed 's#\(.*/\)_\(.*\)#'$PWD/'\1_\2#')
-    LINK_NAME=$(echo "$FNAME" | sed 's#\(.*/\)_\(.*\)#'$3'\2#')
+    LINK_NAME=$(echo "$FNAME" | sed 's#\(.*/\)_\(.*\)#'$2'\2#')
 
     if [ -e "$LINK_NAME" ]; then
       BACKUP_NAME=$(unique_name "$LINK_NAME.bak")
@@ -51,10 +50,12 @@ create_symlinks() {
 }
 
 create_platform_symlinks() {
-  create_symlinks "$1" 1 "$HOME/."
+  create_symlinks "$1" "$HOME/."
 
-  mkdir -p "$HOME/.config"
-  create_symlinks "$1/config" 1 "$HOME/.config/"
+  if [ ! $dry_run ]; then
+    mkdir -p "$HOME/.config"
+  fi
+  create_symlinks "$1/config" "$HOME/.config/"
 }
 
 create_if_not_exist() {
@@ -92,7 +93,7 @@ run() {
             exit 1 ;;
   esac
 
-  create_symlinks common 2 "$HOME/."
+  create_platform_symlinks common
 
   create_if_not_exist "$HOME/.bashrc-pre"
   create_if_not_exist "$HOME/.bashrc-post"
