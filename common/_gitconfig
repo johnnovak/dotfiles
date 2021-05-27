@@ -1,5 +1,12 @@
 [user]
-	email = john@johnnovak.net
+	email = jnovak@skedulo.com
 	name = John Novak
 [push]
 	default = simple
+[core]
+	excludesfile = /Users/johnnovak/.gitignore_global
+	autocrlf = false
+[tag]
+	sort = version:refname
+[pull]
+	rebase = false

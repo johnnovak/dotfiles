@@ -16,7 +16,7 @@ set guioptions-=L
 "set vb
 
 "set guifont=DroidSansMono\ 10
-set guifont="Liberation Mono"
+set guifont=Menlo\ Regular:h14
 "
 set antialias
 set background=dark

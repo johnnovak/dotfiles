@@ -156,10 +156,10 @@ if ls --color -d . >/dev/null 2>&1; then
   GNU_LS=1
 fi
 
-if [ $GNU_LS -eq 1 ]; then
-  alias ls='ls --color=auto -CF'
-  eval "`dircolors $DOTFILES/common/dircolors`"
-fi
+#if [ $GNU_LS -eq 1 ]; then
+#  alias ls='ls --color=auto -CF'
+#  eval "`dircolors $DOTFILES/common/dircolors`"
+#fi
 
 # grep colors
 alias grep='grep --color=auto'
@@ -185,3 +185,6 @@ export CW_NORANDOM=1
 . ~/.zshrc-post
 
 # vim: sw=2 ft=zsh
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"
