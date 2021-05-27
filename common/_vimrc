@@ -1,12 +1,34 @@
 "=============================================================================
+" Detect OS
+"=============================================================================
+if !exists("g:os")
+
+  if system('uname -r') =~ "Microsoft"
+    let g:os = "wsl"
+
+  elseif has("win64") || has("win32")
+    let g:os = "windows"
+
+  elseif has("win32unix")
+    let g:os = "cygwin"
+
+  elseif has("macunix")
+    let g:os = "osx"
+
+  elseif has("unix")
+    let g:os = "linux"
+
+  endif
+endif
+
+"=============================================================================
 " Vundle
 "=============================================================================
-
-set nocompatible              " be iMproved, required
+set nocompatible              " be iMproved (required for Vundle)
 filetype off                  " required
 
 " set the runtime path to include Vundle and initialize
-if has('win32') || has('win64')
+if g:os == 'windows'
   set rtp+=~/vimfiles/bundle/Vundle.vim
   call vundle#begin('$HOME/vimfiles/bundle/')
 else
@@ -54,6 +76,8 @@ Plugin 'vim-scripts/SQLUtilities'
 Plugin 'keith/tmux.vim'
 Plugin 'tikhomirov/vim-glsl'
 Plugin 'leafgarland/typescript-vim'
+Plugin 'cespare/vim-toml'
+Plugin 'fatih/vim-go'
 
 " use neocomplete only if Vim has been compiled with Lua support
 let g:use_neocomplete = 0
@@ -80,7 +104,7 @@ let mapleader = ","       " set leader
 
 if has('mouse')           " enable mouse
   set mouse=a
-"  set ttymouse=xterm2
+  set ttymouse=xterm2
 endif
 
 " File handling
@@ -190,9 +214,7 @@ set diffopt+=vertical   " open diff windows as a vertical split
 " System clipboard integration
 "-----------------------------------------------------------------------------
 " map Ctrl-x/c/v to use the system clipboard on Linux, Cygwin & Windows
-if (has('unix') && !has('macunix'))
-      \ || (has('win32') || has('win64') || has('win32unix'))
-
+if g:os == 'linux' || g:os == 'windows' || g:os == 'cygwin'
   vnoremap <C-x> "+x
   vnoremap <C-c> "+y
   noremap  <C-v> "+gP
@@ -200,16 +222,21 @@ if (has('unix') && !has('macunix'))
 
   " remap block mode from Ctrl-v to Ctrl-q
   noremap <C-q> <C-v>
-endif
+
+elseif g:os == 'wsl'
+  augroup Yank
+    autocmd!
+    autocmd TextYankPost * :call system('clip.exe ',@")
+    augroup END
 
 " Using the system clipboard when running inside tmux on OS X doesn't work
 " in root mode, so only enable clipboard support on OS X for normal users
 " (unfortunately there doesn't seem to be a way to detect if we're running
 " inside a tmux session when vim is launched with sudo)
-if has('macunix') && system('id -u') > 0
+elseif g:os == 'osx' && system('id -u') > 0
   set clipboard=unnamed
-endif
 
+endif
 
 "=============================================================================
 " Plugin settings
@@ -289,7 +316,7 @@ endif
 
 " General
 "-----------------------------------------------------------------------------
-inoremap jk <Esc>
+noremap! jk <Esc>
 
 " enter command mode with one keystroke
 nnoremap ; :
@@ -298,19 +325,12 @@ nnoremap ; :
 nnoremap <silent> <leader>ev :e $MYVIMRC<CR>
 nnoremap <silent> <leader>sv :so $MYVIMRC<CR>
 
-" use ,d to delete a line without yanking it
-vnoremap <silent> <leader>d "_d
-
 " jump to matching pairs easily, with Tab
 nnoremap <Tab> %
 vnoremap <Tab> %
 
-" folding
-nnoremap <Space> za
+" toggle fold
 vnoremap <Space> za
-
-" strip all trailing whitespace from a file, using ,W
-nnoremap <leader>W :%s/\s\+$//<CR>:let @/=''<CR>
 
 " buffer handling
 nnoremap <leader>q :bd<CR>
@@ -326,7 +346,7 @@ noremap + <C-w>=<CR>
 " turn off highlight search
 nnoremap <silent> ,/ :nohls<CR>
 
-" upper/lower word
+" uppercase/lowercase word
 nnoremap <leader>U mQviwU`Q
 nnoremap <leader>u mQviwu`Q
 
@@ -462,11 +482,22 @@ autocmd FileType python        setlocal omnifunc=pythoncomplete#Complete
 autocmd FileType xml           setlocal omnifunc=xmlcomplete#CompleteTags
 
 " filetypes with tabwidth of 2
-autocmd FileType css,html,htmldjango,javascript,markdown,nim,python,scss,vim,xhtml
+autocmd FileType css,scss,html,xhtml,htmldjango,markdown,javascript,vim,nim,python
   \ setlocal ts=2 sw=2 sts=2
 
 " wrap python comments at 72 chars
 autocmd FileType python setlocal textwidth=72
+
+" autodetect Go templates
+function DetectGoHtmlTmpl()
+    if expand('%:e') == "html" && search("{{") != 0
+        set filetype=gohtmltmpl
+    endif
+endfunction
+
+augroup filetypedetect
+    au! BufRead,BufNewFile * call DetectGoHtmlTmpl()
+augroup END
 
 "=============================================================================
 " Custom toggles
@@ -506,4 +537,3 @@ endfunction
 " sudo write
 cmap w!! w !sudo tee % >/dev/null
 
-" review: https://raw.githubusercontent.com/nvie/vimrc/master/vimrc
