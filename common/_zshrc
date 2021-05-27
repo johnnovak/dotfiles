@@ -5,6 +5,35 @@ if [ -z $DOTFILES ]; then
 fi
 
 ##############################################################################
+# COLORS
+##############################################################################
+
+# enable terminal colors
+export CLICOLOR=1
+
+# ls colors
+if ls --color -d . >/dev/null 2>&1; then
+  GNU_LS=1
+fi
+
+if [ $GNU_LS -eq 1 ]; then
+  alias ls='ls --color=auto -CF'
+  eval "`dircolors $DOTFILES/common/dircolors`"
+fi
+
+# grep colors
+alias grep='grep --color=auto'
+
+# less colors
+export LESS_TERMCAP_mb=$'\e[1;36m'         # begin blinking
+export LESS_TERMCAP_md=$'\e[1;36m'         # begin bold
+export LESS_TERMCAP_me=$'\e[0m'            # end mode
+export LESS_TERMCAP_se=$'\e[0m'            # end standout-mode
+export LESS_TERMCAP_so=$'\e[30;43m'        # begin standout-mode - info box
+export LESS_TERMCAP_ue=$'\e[0m'            # end underline
+export LESS_TERMCAP_us=$'\e[34m'           # begin underline
+
+##############################################################################
 # GENERAL
 ##############################################################################
 
@@ -110,8 +139,8 @@ parse_git_branch() {
 # 2-line prompt displaying user@host, current dir and the git branch name:
 # john@stark ~/.dotfiles [master]
 # %
-PROMPT="%{$fg[cyan]%}%n@%m %{$fg_bold[yellow]%}%~ %{$fg_bold[green]%}\$(parse_git_branch)%{$reset_color%}
-%{$fg_bold[magenta]%}%% %{$reset_color%}"
+NEWLINE=$'\n'
+PROMPT="%{$fg[cyan]%}%n@%m %{$fg_bold[yellow]%}%~ %{$fg_bold[green]%}\$(parse_git_branch)%{$reset_color%}${NEWLINE}%{$fg_bold[magenta]%}%% %{$reset_color%}"
 
 # print empty line before the prompt
 precmd() { print "" }
@@ -141,41 +170,6 @@ function TRAPINT() {
 }
 
 RPROMPT='${vim_mode}'
-
-##############################################################################
-# COLORS
-##############################################################################
-
-export TERM=xterm-color
-
-# enable terminal colors
-export CLICOLOR=1
-
-# ls colors
-if ls --color -d . >/dev/null 2>&1; then
-  GNU_LS=1
-fi
-
-if [ $GNU_LS -eq 1 ]; then
-  alias ls='ls --color=auto -CF'
-  eval "`dircolors $DOTFILES/common/dircolors`"
-fi
-
-# grep colors
-alias grep='grep --color=auto'
-
-# less colors
-export LESS_TERMCAP_mb=${fg_bold[red]}      # begin blinking
-export LESS_TERMCAP_md=${fg[blue]}          # begin bold
-export LESS_TERMCAP_me=${reset_color}       # end mode
-export LESS_TERMCAP_se=${reset_color}       # end standout-mode
-export LESS_TERMCAP_so=${fg_bold[cyan]}     # begin standout-mode - info box
-export LESS_TERMCAP_ue=${reset_color}       # end underline
-export LESS_TERMCAP_us=${fg_bold[green]}    # begin underline
-
-# cwrapper setting (not that the cwrapper path must be set in .zshrc-pre)
-export NOCOLOR_PIPE=1
-export CW_NORANDOM=1
 
 ##############################################################################
 
