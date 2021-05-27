@@ -108,3 +108,6 @@ export CW_NORANDOM=1
 . ~/.bashrc-post
 
 # vim: sw=2 ft=sh
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"

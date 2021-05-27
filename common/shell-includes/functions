@@ -15,7 +15,7 @@ psgrep() {
 
 scalagrep() {
   if [ ! -z $1 ] ; then
-    grep -r --include="*.scala" $1
+    grep -r --include="*.scala" $1 .
   else
     echo "ERROR: need pattern to grep for"
   fi

@@ -78,6 +78,9 @@ Plugin 'tikhomirov/vim-glsl'
 Plugin 'leafgarland/typescript-vim'
 Plugin 'cespare/vim-toml'
 Plugin 'fatih/vim-go'
+Plugin 'jparise/vim-graphql'
+Plugin 'udalov/kotlin-vim'
+Plugin 'mtdl9/vim-log-highlighting'
 
 " use neocomplete only if Vim has been compiled with Lua support
 let g:use_neocomplete = 0

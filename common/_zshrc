@@ -178,4 +178,3 @@ RPROMPT='${vim_mode}'
 
 . ~/.zshrc-post
 
-# vim: sw=2 ft=zsh
