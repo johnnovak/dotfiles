@@ -16,10 +16,10 @@ if ls --color -d . >/dev/null 2>&1; then
   GNU_LS=1
 fi
 
-if [ $GNU_LS -eq 1 ]; then
-  alias ls='ls --color=auto -CF'
-  eval "`dircolors $DOTFILES/common/dircolors`"
-fi
+#if [ $GNU_LS -eq 1 ]; then
+#  alias ls='ls --color=auto -CF'
+#  eval "`dircolors $DOTFILES/common/dircolors`"
+#fi
 
 # grep colors
 alias grep='grep --color=auto'
@@ -140,7 +140,7 @@ parse_git_branch() {
 # john@stark ~/.dotfiles [master]
 # %
 NEWLINE=$'\n'
-PROMPT="%{$fg[cyan]%}%n@%m %{$fg_bold[yellow]%}%~ %{$fg_bold[green]%}\$(parse_git_branch)%{$reset_color%}${NEWLINE}%{$fg_bold[magenta]%}%% %{$reset_color%}"
+PROMPT="%{$fg_bold[yellow]%}%~ %{$fg_bold[green]%}\$(parse_git_branch)%{$reset_color%}${NEWLINE}%{$fg_bold[magenta]%}%% %{$reset_color%}"
 
 # print empty line before the prompt
 precmd() { print "" }

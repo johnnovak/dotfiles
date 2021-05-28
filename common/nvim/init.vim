@@ -19,7 +19,6 @@ if !exists("g:os")
   endif
 endif
 
-
 "=============================================================================
 " Disable Default Plugins:
 "=============================================================================
@@ -39,7 +38,7 @@ let g:loaded_zip         = 1
 " General Settings:
 "=============================================================================
 
-let mapleader=","       " set leader
+let mapleader=","       " set Leader
 
 set shortmess+=I        " hide intro message when starting vim
 
@@ -69,16 +68,11 @@ set textwidth=78
 
 set ignorecase              " searches are case insensitive...
 set smartcase               " ...unless they contain capitals
+set inccommand=nosplit      " live substitution
 
-set list                    " show invisible characters
-set listchars=""            " reset the listchars
-set listchars=tab:\ \       " show tabs as two spaces
-set listchars+=trail:·      " show trailing spaces as dots
-set listchars+=extends:»    " display '»' if the line continues to the right
-set listchars+=precedes:«   " display '«' if the line continues to the left
-"set listchars+=eol:↩        " show newline characters a '¶'
+set hidden                  " no more nagging on buffer changes
 
-set timeoutlen=500          " set timeout on mappings
+set timeoutlen=300          " set timeout on mappings
 
 
 "=============================================================================
@@ -102,23 +96,38 @@ set wildignore+=*.swp,*~,._*,.DS_Store
 " Appearance:
 "=============================================================================
 
-set termguicolors       " enable true color
-set synmaxcol=500       " don't syntax highlight very long lines
-set colorcolumn=+0      " display margin at 'textwidth'
-set lazyredraw          " don't update the display while executing macetos
+set termguicolors           " enable true color
+set synmaxcol=500           " don't syntax highlight very long lines
+set colorcolumn=+0          " display margin at 'textwidth'
+set lazyredraw              " don't update the display while executing macros
+
+set noshowmode              " don't show mode indicator in status line
+
+" show invisible characters
+set list
+set listchars=""            " reset the listchars
+set listchars=tab:\ \       " show tabs as two spaces
+set listchars+=trail:·      " show trailing spaces as dots
+set listchars+=extends:»    " display '»' if the line continues to the right
+set listchars+=precedes:«   " display '«' if the line continues to the left
+"set listchars+=eol:↩        " show newline characters a '¶'
+
+" statusline
+set statusline=
+set statusline+=\ %<%.99f   " filename
+set statusline+=\ %h        " help buffer flag
+set statusline+=%w          " preview window flag
+set statusline+=%m          " modified flag
+set statusline+=%r          " readonly flag
+set statusline+=%=          " right align
+set statusline+=%-12(\ %10l:%-7(%c%V%)\ %)  " line:column-virtualcolumn
+set statusline+=%P\         " percentage
+
+hi StatusLine   guifg=bg      guibg=#aaaaaa gui=bold
+hi StatusLineNC guifg=#dddddd guibg=#404040
+"hi User4 guibg=#884488
 
 colorscheme lux
-
-set noshowmode          " don't show mode indicator in status line
-
-set statusline=[%n]                   " buffer number
-set statusline+=\ %<%.99f             " filename
-set statusline+=\ %h                  " help buffer flag
-set statusline+=%w                    " preview window flag
-set statusline+=%m                    " modified flag
-set statusline+=%r                    " readonly flag
-set statusline+=%=%-12(\ %l:%c%V\ %)  " line:column
-set statusline+=%P\                   " percentage
 
 "=============================================================================
 " Plugin settings
@@ -153,8 +162,8 @@ cnoremap jk <C-c>
 nnoremap ; :
 
 " quickly edit/reload the vimrc file
-nnoremap <silent> <leader>ev :e  $MYVIMRC<CR>
-nnoremap <silent> <leader>sv :so $MYVIMRC<CR>
+nnoremap <silent> <Leader>ev :e  $MYVIMRC<CR>
+nnoremap <silent> <Leader>sv :so $MYVIMRC<CR>
 
 " jump to matching pairs easily, with Tab
 nnoremap <Tab> %
@@ -164,22 +173,22 @@ vnoremap <Tab> %
 vnoremap <space> za
 
 " buffer handling
-nnoremap <leader>n :bn<CR>
-nnoremap <leader>p :bp<CR>
-nnoremap <leader>d :bd<CR>
+nnoremap <Leader>n :bn<CR>
+nnoremap <Leader>p :bp<CR>
+nnoremap <Leader>d :bd<CR>
 
 " write file
-nnoremap <leader>w :w<CR>
+nnoremap <Leader>w :w<CR>
 
 " turn off highlight search
 nnoremap <silent> ,/ :nohls<CR>
 
 " uppercase/lowercase word
-nnoremap <leader>U mQviwU`Q
-nnoremap <leader>u mQviwu`Q
+nnoremap <Leader>U mQviwU`Q
+nnoremap <Leader>u mQviwu`Q
 
 " set text wrapping toggles
-nnoremap <silent> <leader>tw :set invwrap<CR>:set wrap?<CR>
+nnoremap <silent> <Leader>tw :set invwrap<CR>:set wrap?<CR>
 
 " display the syntax highlighting group of the element under the cursor
 nnoremap <silent> ,hh :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name")
@@ -192,15 +201,20 @@ vnoremap ,f gq
 nnoremap ,f gqap
 
 " format JSON
-nnoremap <leader>jf :%!python -m json.tool<CR>
-vnoremap <leader>jf :%!python -m json.tool<CR>
+nnoremap <Leader>jf :%!python -m json.tool<CR>
+vnoremap <Leader>jf :%!python -m json.tool<CR>
 
 " Insert current date and time in ISO format
 :nnoremap <silent> <F5> "=strftime("%Y-%m-%d %H:%M:%S")<CR>P
 :inoremap <silent> <F5> <C-R>=strftime("%Y-%m-%d %H:%M:%S")<CR>
 
-nnoremap <silent> <leader>t2 :%s;^\(\s\+\);\=repeat(' ', len(submatch(0))/2);g<CR>
+nnoremap <silent> <Leader>t2 :%s;^\(\s\+\);\=repeat(' ', len(submatch(0))/2);g<CR>
       \ :nohlsearch<CR>
+
+" 
+nnoremap <C-p>     :e **/*
+nnoremap <Leader>v :vsplit **/*
+nnoremap <Leader>s :split **/*
 
 
 "=============================================================================
@@ -239,7 +253,7 @@ augroup END
 set pastetoggle=<F2>      " toggle paste mode
 
 " TODO this is buggy, fix it
-nnoremap <leader>te :call VirtualEditToggle()<CR>
+nnoremap <Leader>te :call VirtualEditToggle()<CR>
 
 let g:virtualedit_is_on = 0
 
