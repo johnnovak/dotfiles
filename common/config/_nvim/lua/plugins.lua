@@ -2,19 +2,16 @@ return require('packer').startup(
   function()
     use {'wbthomason/packer.nvim'}
 
---    use {'scrooloose/nerdtree', opt = true, cmd = {'NERDTreeToggle'}}
---    use 'vwxyutarooo/nerdtree-devicons-syntax'
-    --use 'kyazdani42/nvim-tree.lua'
-    use 'lambdalisue/fern.vim'
-    use 'lambdalisue/fern-renderer-nerdfont.vim'
---    use 'kyazdani42/nvim-web-devicons'
-    use 'lambdalisue/nerdfont.vim'
-    use 'lambdalisue/glyph-palette.vim'
-
-    use 'godlygeek/tabular'
+    use 'kyazdani42/nvim-tree.lua'
+    use 'kyazdani42/nvim-web-devicons'
 
     use 'christoomey/vim-tmux-navigator'
     use 'troydm/zoomwintab.vim'
+
+    use 'junegunn/fzf'
+    use 'junegunn/fzf.vim'
+
+    use 'godlygeek/tabular'
 
     -- filetype plugins
     use 'plasticboy/vim-markdown'
@@ -22,8 +19,6 @@ return require('packer').startup(
     use 'zah/nim.vim'
     use 'fatih/vim-go'
 
-    use 'junegunn/fzf'
-    use 'junegunn/fzf.vim'
 --    use 'ackyshake/VimCompletesMe'
 
     -- TO TRIAL

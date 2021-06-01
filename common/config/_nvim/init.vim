@@ -1,5 +1,4 @@
 lua require('plugins')
-"lua require('lualine').setup()
 
 "=============================================================================
 " OS Detection:
@@ -33,7 +32,8 @@ let g:loaded_tar         = 1
 let g:loaded_zipPlugin   = 1
 let g:loaded_zip         = 1
 
-
+" {{{ Settings
+"
 "=============================================================================
 " General Settings:
 "=============================================================================
@@ -129,29 +129,70 @@ hi StatusLineNC guifg=#dddddd guibg=#404040
 
 colorscheme lux
 
+" }}}
+
+" " {{{ Plugin settings
+"
 "=============================================================================
-" Plugin settings
+" Plugin Settings:
 "=============================================================================
 
-" vim-tmux-navigator
+" tmux-navigator
 "-----------------------------------------------------------------------------
-" disable tmux navigator when zooming the Vim pane
 let g:tmux_navigator_disable_when_zoomed = 1
 
-" fern
+" nvim-tree
 "-----------------------------------------------------------------------------
-let g:fern#renderer = "nerdfont"
+let g:nvim_tree_ignore = [ '.git', 'node_modules' ]
+let g:nvim_tree_gitignore = 1
 
-augroup my-glyph-palette
-  autocmd! *
-  autocmd FileType fern call glyph_palette#apply()
-  autocmd FileType nerdtree,startify call glyph_palette#apply()
-augroup END
+let g:nvim_tree_indent_markers = 1
+let g:nvim_tree_hide_dotfiles = 1
 
-let g:fern#renderer#nerdfont#leading = "  "
+let g:nvim_tree_show_icons = {
+	\ 'git': 0,
+	\ 'folders': 1,
+	\ 'files': 1
+	\}
 
+let g:nvim_tree_icons = {
+    \ 'default':        '',
+    \ 'symlink':        '',
+    \ 'git': {
+    \   'unstaged':     "✗",
+    \   'staged':       "✓",
+    \   'unmerged':     "",
+    \   'renamed':      "➜",
+    \   'untracked':    "★",
+    \   'deleted':      "",
+    \  },
+    \ 'folder': {
+    \   'default':      "",
+    \   'open':         "",
+    \   'empty':        "",
+    \   'empty_open':   "",
+    \   'symlink':      "",
+    \   'symlink_open': "",
+    \  },
+    \  'lsp': {
+    \    'hint': "",
+    \    'info': "",
+    \    'warning': "",
+    \    'error': "",
+    \  }
+    \}
+
+" vim-markdown
+"-----------------------------------------------------------------------------
+let g:vim_markdown_folding_level = 6
+let g:vim_markdown_override_foldtext = 1
+
+" }}}
+
+" {{{ Mappings
+"
 "=============================================================================
-" Shortcuts & macros
+" Mappings
 "=============================================================================
 
 " fast escape
@@ -175,7 +216,6 @@ vnoremap <space> za
 " buffer handling
 nnoremap <Leader>n :bn<CR>
 nnoremap <Leader>p :bp<CR>
-nnoremap <Leader>d :bd<CR>
 
 " write file
 nnoremap <Leader>w :w<CR>
@@ -211,11 +251,16 @@ vnoremap <Leader>jf :%!python -m json.tool<CR>
 nnoremap <silent> <Leader>t2 :%s;^\(\s\+\);\=repeat(' ', len(submatch(0))/2);g<CR>
       \ :nohlsearch<CR>
 
-" 
+" built-in fuzzy open file
 nnoremap <C-p>     :e **/*
 nnoremap <Leader>v :vsplit **/*
 nnoremap <Leader>s :split **/*
 
+" nvim-tree
+nnoremap <C-n> :NvimTreeToggle<CR>
+nnoremap <C-f> :NvimTreeFindFile<CR>
+
+" }}}
 
 "=============================================================================
 " Filetype settings
@@ -282,13 +327,6 @@ function! VirtualEditToggle()
 endfunction
 
 
-
-
-
-
-
-
-
 " System clipboard integration
 "-----------------------------------------------------------------------------
 " map Ctrl-x/c/v to use the system clipboard on Linux, Cygwin & Windows
@@ -316,3 +354,4 @@ elseif g:os == 'osx' && system('id -u') > 0
 
 endif
 
+" vim: fdm=marker

@@ -124,17 +124,17 @@ let g:colors_name="lux"
 " ----------------------------------------------------------------------------
 
 hi NonText      guifg=#555580
-hi SpecialKey   guifg=#5f875f
-hi Comment      guifg=#808080
+hi SpecialKey   guifg=#5f875f   " darkgreen
+hi Comment      guifg=#808080   " gray
 hi Conceal      guifg=#808080
-hi Constant     guifg=#d7d7af
-hi Directory    guifg=#afd7af
-hi Identifier   guifg=#afd787
-hi PreProc      guifg=#87d7af
-hi Special      guifg=#d7afd7
-hi Statement    guifg=#87d7ff
-hi Title        guifg=#5fafd7
-hi Type         guifg=#87d7d7
+hi Constant     guifg=#d7d7af   " yellow
+hi Directory    guifg=#afd7af   " palegreen
+hi Identifier   guifg=#afd787   " green
+hi PreProc      guifg=#87d7af   " cyan
+hi Special      guifg=#d7afd7   " purple
+hi Statement    guifg=#87d7ff   " blue
+hi Title        guifg=#5fafd7   " blue2
+hi Type         guifg=#87d7d7   " lightblue
 
 
 " ----------------------------------------------------------------------------
@@ -153,7 +153,7 @@ hi CursorLine                   guibg=#383838
 hi IncSearch    guifg=bg
 hi MatchParen   guifg=fg        guibg=#87af00
 hi Search       guifg=bg
-hi Visual                       guibg=#005f87
+hi Visual                       guibg=#005880
 hi Cursor                       guibg=#87afd7
 hi CursorIM                     guibg=#87afd7
 hi Error        guifg=#ff8787   guibg=#870000
@@ -178,10 +178,6 @@ hi WarningMsg   guifg=#d7875f
 " ----------------------------------------------------------------------------
 
 hi ColorColumn  guifg=none
-hi Pmenu        guifg=bg
-hi PmenuSel     guifg=fg
-hi PmenuThumb   guifg=fg
-hi StatusLine   guifg=bg
 hi TabLine      guifg=bg
 hi TabLineSel   guifg=fg
 hi WildMenu     guifg=fg
@@ -190,25 +186,23 @@ hi CursorLineNr guifg=#9e9e9e   guibg=#383838
 hi FoldColumn                   guibg=#4e4e4e
 hi Folded                       guibg=#4e4e4e
 hi LineNr       guifg=#626262   guibg=none
-hi PmenuSel                     guibg=#005f87
 hi SignColumn                   guibg=#4e4e4e
-hi StatusLineNC guifg=#4e4e4e
 hi TabLineFill  guifg=#4e4e4e
 hi VertSplit    guifg=#626262
 hi WildMenu                     guibg=#005f87
 hi FoldColumn   guifg=#bcbcbc
 hi Folded       guifg=#bcbcbc
-hi Pmenu                        guibg=#b2b2b2
-hi PmenuSbar    guifg=#b2b2b2   guibg=#d0d0d0
-hi PmenuThumb                   guibg=#808080
+hi Pmenu        guifg=#c0c0c0   guibg=#3a3a3a
+hi PmenuSel     guifg=bg        guibg=#d7d7af gui=bold
+hi PmenuSbar    guifg=bg        guibg=#505050
+hi PmenuThumb   guifg=#606060   guibg=#939393
 hi SignColumn   guifg=#b2b2b2
-hi StatusLine                   guibg=#b2b2b2
-hi StatusLineNC                 guibg=#b2b2b2
+hi StatusLine   guifg=bg        guibg=#b2b2b2
+hi StatusLineNC guifg=#c8c8c8   guibg=#484848 gui=bold
 hi TabLine                      guibg=#b2b2b2
 hi TabLineFill                  guibg=#b2b2b2
 hi TabLineSel                   guibg=#005f87
 hi VertSplit                    guibg=#b2b2b2
-
 
 " ----------------------------------------------------------------------------
 " Diff:
@@ -284,7 +278,63 @@ for s:item in s:alternative_bold_items
 endfor
 
 
-hi VertSplit guifg=#aaaaaa guibg=none
-hi SignColumn guibg=#333333
+hi VertSplit    guifg=#aaaaaa guibg=none
+hi SignColumn   guibg=#333333
 hi FernRootText guifg=#87d7d7 gui=bold
+
+" #555580
+" #5f875f   darkgreen
+" #808080   gray
+" #808080
+" #d7d7af   yellow
+" #afd7af   palegreen
+" #afd787   green
+" #87d7af   cyan
+" #d7afd7   purple
+" #87d7ff   blue
+" #5fafd7   blue2
+" #87d7d7   lightblue
+
+
+hi NvimTreeSymlink            guifg=#87d7af
+hi NvimTreeFolderName         guifg=#87d7ff
+hi NvimTreeRootFolder         guifg=#d7afd7
+hi NvimTreeFolderIcon         guifg=#8090a0
+hi NvimTreeEmptyFolderName    guifg=#5797bf
+hi NvimTreeOpenedFolderName   guifg=#87d7ff
+hi NvimTreeExecFile           guifg=#afd787
+hi NvimTreeOpenedFile         guifg=fg
+hi NvimTreeSpecialFile        guifg=#d7d7af gui=underline
+hi NvimTreeImageFile          guifg=fg
+hi NvimTreeMarkdownFile       guifg=fg
+hi NvimTreeIndentMarker       guifg=#555555
+
+hi LspDiagnosticsError        guifg=fg
+hi LspDiagnosticsWarning      guifg=fg
+hi LspDiagnosticsInformation  guifg=fg
+hi LspDiagnosticsHint         guifg=fg
+
+hi NvimTreeLicenseIcon        guifg=fg
+hi NvimTreeYamlIcon           guifg=fg
+hi NvimTreeTomlIcon           guifg=fg
+hi NvimTreeGitignoreIcon      guifg=fg
+hi NvimTreeJsonIcon           guifg=fg
+
+hi NvimTreeLuaIcon            guifg=fg
+hi NvimTreePythonIcon         guifg=fg
+hi NvimTreeShellIcon          guifg=fg
+hi NvimTreeJavascriptIcon     guifg=fg
+hi NvimTreeCIcon              guifg=fg
+hi NvimTreeReactIcon          guifg=fg
+hi NvimTreeHtmlIcon           guifg=fg
+hi NvimTreeRustIcon           guifg=fg
+hi NvimTreeVimIcon            guifg=fg
+hi NvimTreeTypescriptIcon     guifg=fg
+
+hi NvimTreeGitDirty           guifg=#ff8888
+hi NvimTreeGitStaged          guifg=fg
+hi NvimTreeGitMerge           guifg=fg
+hi NvimTreeGitRenamed         guifg=fg
+hi NvimTreeGitNew             guifg=fg
+hi NvimTreeGitDeleted         guifg=fg
 
