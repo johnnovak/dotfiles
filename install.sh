@@ -29,8 +29,9 @@ unique_name() {
 
 # $1 - OS type (osx|linux|cygwin)
 # $2 - dest path prefix
+# $3 - max depth
 create_symlinks() {
-  for FNAME in $(find $1 -name _\*); do
+  for FNAME in $(find $1 -maxdepth $3 -name _\*); do
     TARGET=$(echo "$FNAME" | sed 's#\(.*/\)_\(.*\)#'$PWD/'\1_\2#')
     LINK_NAME=$(echo "$FNAME" | sed 's#\(.*/\)_\(.*\)#'$2'\2#')
 
@@ -50,12 +51,12 @@ create_symlinks() {
 }
 
 create_platform_symlinks() {
-  create_symlinks "$1" "$HOME/."
+  create_symlinks "$1" "$HOME/." 1
 
   if [ ! $dry_run ]; then
     mkdir -p "$HOME/.config"
   fi
-  create_symlinks "$1/config" "$HOME/.config/"
+  create_symlinks "$1/config" "$HOME/.config/" 1
 }
 
 create_if_not_exist() {
@@ -110,17 +111,14 @@ fi
 cat << EOF
 
 This script will install the dotfiles into your home directory.
-Only symlinks will be created that will point the config files in this
-directory. If a destination file already exists, a backup will be created
-first with the .bak extension. If the backup file exists too, *.bak2, *.bak3
-etc. will be tried until a non-existing filename is found.
+Only symlinks will be created; existing files will be backed up.
 
 Start with -d for a dry-run.
 
 EOF
 
-read -p "Do you wish to proceed? (yes/no) " CHOICE
-if [ "$CHOICE" == "yes" ]; then
+read -p "Proceed? (y/n) " CHOICE
+if [ "$CHOICE" == "y" ]; then
   echo
   run
 fi
