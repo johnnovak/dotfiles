@@ -205,6 +205,7 @@ nnoremap ; :
 " quickly edit/reload the vimrc file
 nnoremap <silent> <Leader>ev :e  $MYVIMRC<CR>
 nnoremap <silent> <Leader>sv :so $MYVIMRC<CR>
+nnoremap <silent> <Leader>ep :e  ~/.config/nvim/lua/plugins.lua<CR>
 
 " jump to matching pairs easily, with Tab
 nnoremap <Tab> %

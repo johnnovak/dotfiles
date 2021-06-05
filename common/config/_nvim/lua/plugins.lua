@@ -2,6 +2,9 @@ return require('packer').startup(
   function()
     use {'wbthomason/packer.nvim'}
 
+--    use 'neovim/nvim-lspconfig'
+    use 'alaviss/nim.nvim'
+
     use 'kyazdani42/nvim-tree.lua'
     use 'kyazdani42/nvim-web-devicons'
 
