@@ -10,8 +10,7 @@ if !exists("g:os")
   elseif has("win64") || has("win32")
     let g:os = "windows"
   elseif has("win32unix")
-    let g:os = "cygwin"
-  elseif has("macunix")
+    let g:os = "cygwin" elseif has("macunix")
     let g:os = "osx"
   elseif has("unix")
     let g:os = "linux"
@@ -20,12 +19,11 @@ endif
 
 "=============================================================================
 " Disable Default Plugins:
-"=============================================================================
+"=============================================================================i
 
 let g:loaded_netrw       = 1
 let g:loaded_netrwPlugin = 1
-let g:loaded_matchit     = 1
-let g:loaded_matchparen  = 1
+" let g:loaded_matchparen  = 1
 let g:loaded_gzip        = 1
 let g:loaded_tarPlugin   = 1
 let g:loaded_tar         = 1
@@ -91,7 +89,6 @@ set wildignore+=*/.bundle/*,*/.sass-cache/*
 " disable temp and backup files
 set wildignore+=*.swp,*~,._*,.DS_Store
 
-
 "=============================================================================
 " Appearance:
 "=============================================================================
@@ -102,6 +99,8 @@ set colorcolumn=+0          " display margin at 'textwidth'
 set lazyredraw              " don't update the display while executing macros
 
 set noshowmode              " don't show mode indicator in status line
+
+set foldlevel=999           " open all folds by default
 
 " show invisible characters
 set list
@@ -125,7 +124,6 @@ set statusline+=%P\         " percentage
 
 hi StatusLine   guifg=bg      guibg=#aaaaaa gui=bold
 hi StatusLineNC guifg=#dddddd guibg=#404040
-"hi User4 guibg=#884488
 
 colorscheme lux
 
@@ -187,6 +185,43 @@ let g:nvim_tree_icons = {
 let g:vim_markdown_folding_level = 6
 let g:vim_markdown_override_foldtext = 1
 
+" vim-yoink
+"-----------------------------------------------------------------------------
+" persist yank history across sessions
+let g:yoinkSavePersistently = 1
+let g:yoinkIncludeDeleteOperations = 1
+
+" matchit
+"-----------------------------------------------------------------------------
+runtime macros/matchit.vim
+
+" nvim-compe
+"-----------------------------------------------------------------------------
+set completeopt=menuone,noselect
+
+let g:compe = {}
+let g:compe.enabled          = v:true
+let g:compe.autocomplete     = v:true
+let g:compe.debug            = v:false
+let g:compe.min_length       = 1
+let g:compe.preselect        = 'always'
+let g:compe.throttle_time    = 80
+let g:compe.source_timeout   = 200
+let g:compe.incomplete_delay = 400
+let g:compe.max_abbr_width   = 100
+let g:compe.max_kind_width   = 100
+let g:compe.max_menu_width   = 100
+let g:compe.documentation    = v:true
+
+let g:compe.source = {}
+let g:compe.source.path      = v:true
+let g:compe.source.buffer    = v:true
+let g:compe.source.calc      = v:true
+let g:compe.source.nvim_lsp  = v:true
+let g:compe.source.nvim_lua  = v:true
+let g:compe.source.vsnip     = v:true
+let g:compe.source.ultisnips = v:true
+
 " }}}
 
 " {{{ Mappings
@@ -195,6 +230,8 @@ let g:vim_markdown_override_foldtext = 1
 " Mappings
 "=============================================================================
 
+" built-ins
+"-----------------------------------------------------------------------------
 " fast escape
 inoremap jk <Esc>
 cnoremap jk <C-c>
@@ -208,15 +245,18 @@ nnoremap <silent> <Leader>sv :so $MYVIMRC<CR>
 nnoremap <silent> <Leader>ep :e  ~/.config/nvim/lua/plugins.lua<CR>
 
 " jump to matching pairs easily, with Tab
-nnoremap <Tab> %
-vnoremap <Tab> %
+map    <Tab> %
+map  <S-Tab> g%
+vmap   <Tab> %
+vmap <S-Tab> g%
 
 " toggle fold
-vnoremap <space> za
+nnoremap <Space> za
 
 " buffer handling
-nnoremap <Leader>n :bn<CR>
-nnoremap <Leader>p :bp<CR>
+nnoremap <Leader>n :bnext<CR>
+nnoremap <Leader>p :bprevious<CR>
+nnoremap <Leader>d :Bdelete<CR>
 
 " write file
 nnoremap <Leader>w :w<CR>
@@ -242,37 +282,72 @@ vnoremap ,f gq
 nnoremap ,f gqap
 
 " format JSON
-nnoremap <Leader>jf :%!python -m json.tool<CR>
+nnoremap <Leader>jf gqad<CR>
 vnoremap <Leader>jf :%!python -m json.tool<CR>
 
 " Insert current date and time in ISO format
-:nnoremap <silent> <F5> "=strftime("%Y-%m-%d %H:%M:%S")<CR>P
-:inoremap <silent> <F5> <C-R>=strftime("%Y-%m-%d %H:%M:%S")<CR>
+nnoremap <silent> <F5> "=strftime("%Y-%m-%d %H:%M:%S")<CR>P
+inoremap <silent> <F5> <C-R>=strftime("%Y-%m-%d %H:%M:%S")<CR>
 
 nnoremap <silent> <Leader>t2 :%s;^\(\s\+\);\=repeat(' ', len(submatch(0))/2);g<CR>
       \ :nohlsearch<CR>
 
 " built-in fuzzy open file
-nnoremap <C-p>     :e **/*
-nnoremap <Leader>v :vsplit **/*
-nnoremap <Leader>s :split **/*
+"nnoremap <C-p>     :e **/*
+"nnoremap <Leader>v :vsplit **/*
+"nnoremap <Leader>s :split **/*
+
+" CtrlP
+"-----------------------------------------------------------------------------
+let g:ctrlp_cmd = 'CtrlPMixed'
+let g:ctrlp_user_command = 'fd --type f --color=never "" %s'
+let g:ctrlp_use_caching = 0
 
 " nvim-tree
+"-----------------------------------------------------------------------------
 nnoremap <C-n> :NvimTreeToggle<CR>
 nnoremap <C-f> :NvimTreeFindFile<CR>
+
+" vim-cutlass
+"-----------------------------------------------------------------------------
+" move to clipboard ('d' uses the 'black hole' register)
+nnoremap m d
+xnoremap m d
+
+nnoremap mm dd
+nnoremap M D
+
+" get add mark back
+nnoremap ma m
+
+" vim-yoink
+"-----------------------------------------------------------------------------
+" persist yank history across sessions
+nmap p <plug>(YoinkPaste_p)
+nmap P <plug>(YoinkPaste_P)
+
+" Also replace the default gp with yoink paste so we can toggle paste in this
+" case too
+nmap gp <plug>(YoinkPaste_gp)
+nmap gP <plug>(YoinkPaste_gP)
+
+nmap y <plug>(YoinkYankPreserveCursorPosition)
+xmap y <plug>(YoinkYankPreserveCursorPosition)
+
+" nvim-compe
+"-----------------------------------------------------------------------------
+inoremap <silent><expr> <C-Space> compe#complete()
+inoremap <silent><expr> <CR>      compe#confirm('<CR>')
+inoremap <silent><expr> <Tab>     compe#confirm('<Tab>')
+inoremap <silent><expr> <C-e>     compe#close('<C-e>')
+inoremap <silent><expr> <C-f>     compe#scroll({ 'delta': +4 })
+inoremap <silent><expr> <C-d>     compe#scroll({ 'delta': -4 })
 
 " }}}
 
 "=============================================================================
 " Filetype settings
 "=============================================================================
-
-" enable omni completion
-autocmd FileType css           setlocal omnifunc=csscomplete#CompleteCSS
-autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-autocmd FileType javascript    setlocal omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType python        setlocal omnifunc=pythoncomplete#Complete
-autocmd FileType xml           setlocal omnifunc=xmlcomplete#CompleteTags
 
 " filetypes with tabwidth of 2
 autocmd FileType css,scss,html,xhtml,htmldjango,markdown,javascript,vim,nim,python
@@ -288,7 +363,7 @@ function DetectGoHtmlTmpl()
   endif
 endfunction
 
-augroup filetypedetect
+augroup GoFileTypeDetect
   au! BufRead,BufNewFile * call DetectGoHtmlTmpl()
 augroup END
 
@@ -328,6 +403,7 @@ function! VirtualEditToggle()
 endfunction
 
 
+" TODO revisit for each platform (is it working? is it needed?)
 " System clipboard integration
 "-----------------------------------------------------------------------------
 " map Ctrl-x/c/v to use the system clipboard on Linux, Cygwin & Windows

@@ -192,7 +192,7 @@ hi VertSplit    guifg=#626262
 hi WildMenu                     guibg=#005f87
 hi FoldColumn   guifg=#bcbcbc
 hi Folded       guifg=#bcbcbc
-hi Pmenu        guifg=#c0c0c0   guibg=#3a3a3a
+hi Pmenu        guifg=#cacaca   guibg=#474747
 hi PmenuSel     guifg=bg        guibg=#d7d7af gui=bold
 hi PmenuSbar    guifg=bg        guibg=#505050
 hi PmenuThumb   guifg=#606060   guibg=#939393
@@ -280,7 +280,6 @@ endfor
 
 hi VertSplit    guifg=#aaaaaa guibg=none
 hi SignColumn   guibg=#333333
-hi FernRootText guifg=#87d7d7 gui=bold
 
 " #555580
 " #5f875f   darkgreen
@@ -308,33 +307,4 @@ hi NvimTreeSpecialFile        guifg=#d7d7af gui=underline
 hi NvimTreeImageFile          guifg=fg
 hi NvimTreeMarkdownFile       guifg=fg
 hi NvimTreeIndentMarker       guifg=#555555
-
-hi LspDiagnosticsError        guifg=fg
-hi LspDiagnosticsWarning      guifg=fg
-hi LspDiagnosticsInformation  guifg=fg
-hi LspDiagnosticsHint         guifg=fg
-
-hi NvimTreeLicenseIcon        guifg=fg
-hi NvimTreeYamlIcon           guifg=fg
-hi NvimTreeTomlIcon           guifg=fg
-hi NvimTreeGitignoreIcon      guifg=fg
-hi NvimTreeJsonIcon           guifg=fg
-
-hi NvimTreeLuaIcon            guifg=fg
-hi NvimTreePythonIcon         guifg=fg
-hi NvimTreeShellIcon          guifg=fg
-hi NvimTreeJavascriptIcon     guifg=fg
-hi NvimTreeCIcon              guifg=fg
-hi NvimTreeReactIcon          guifg=fg
-hi NvimTreeHtmlIcon           guifg=fg
-hi NvimTreeRustIcon           guifg=fg
-hi NvimTreeVimIcon            guifg=fg
-hi NvimTreeTypescriptIcon     guifg=fg
-
-hi NvimTreeGitDirty           guifg=#ff8888
-hi NvimTreeGitStaged          guifg=fg
-hi NvimTreeGitMerge           guifg=fg
-hi NvimTreeGitRenamed         guifg=fg
-hi NvimTreeGitNew             guifg=fg
-hi NvimTreeGitDeleted         guifg=fg
 
