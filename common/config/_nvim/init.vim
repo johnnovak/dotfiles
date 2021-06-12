@@ -188,8 +188,8 @@ let g:vim_markdown_override_foldtext = 1
 " vim-yoink
 "-----------------------------------------------------------------------------
 " persist yank history across sessions
-let g:yoinkSavePersistently = 1
-let g:yoinkIncludeDeleteOperations = 1
+"let g:yoinkSavePersistently = 1
+"let g:yoinkIncludeDeleteOperations = 1
 
 " matchit
 "-----------------------------------------------------------------------------
@@ -300,8 +300,12 @@ nnoremap <silent> <Leader>t2 :%s;^\(\s\+\);\=repeat(' ', len(submatch(0))/2);g<C
 " CtrlP
 "-----------------------------------------------------------------------------
 let g:ctrlp_cmd = 'CtrlPMixed'
-let g:ctrlp_user_command = 'fd --type f --color=never "" %s'
-let g:ctrlp_use_caching = 0
+
+" use fd to speed up ctrlp if available
+if executable('fd')
+  let g:ctrlp_user_command = 'fd --type f --color=never "" %s'
+  let g:ctrlp_use_caching = 0
+endif
 
 " nvim-tree
 "-----------------------------------------------------------------------------
@@ -311,28 +315,28 @@ nnoremap <C-f> :NvimTreeFindFile<CR>
 " vim-cutlass
 "-----------------------------------------------------------------------------
 " move to clipboard ('d' uses the 'black hole' register)
-nnoremap m d
-xnoremap m d
+"nnoremap m d
+"xnoremap m d
 
-nnoremap mm dd
-nnoremap M D
+"nnoremap mm dd
+"nnoremap M D
 
 " get add mark back
-nnoremap ma m
+"nnoremap ma m
 
 " vim-yoink
 "-----------------------------------------------------------------------------
 " persist yank history across sessions
-nmap p <plug>(YoinkPaste_p)
-nmap P <plug>(YoinkPaste_P)
+"nmap p <plug>(YoinkPaste_p)
+"nmap P <plug>(YoinkPaste_P)
 
 " Also replace the default gp with yoink paste so we can toggle paste in this
 " case too
-nmap gp <plug>(YoinkPaste_gp)
-nmap gP <plug>(YoinkPaste_gP)
+"nmap gp <plug>(YoinkPaste_gp)
+"nmap gP <plug>(YoinkPaste_gP)
 
-nmap y <plug>(YoinkYankPreserveCursorPosition)
-xmap y <plug>(YoinkYankPreserveCursorPosition)
+"nmap y <plug>(YoinkYankPreserveCursorPosition)
+"xmap y <plug>(YoinkYankPreserveCursorPosition)
 
 " nvim-compe
 "-----------------------------------------------------------------------------

@@ -14,15 +14,15 @@ return require('packer').startup(
 
     use 'hrsh7th/nvim-compe'
 
---    use 'alaviss/nim.nvim'
+    use 'alaviss/nim.nvim'
 
     use 'kyazdani42/nvim-tree.lua'
     use 'kyazdani42/nvim-web-devicons'
 
     use 'famiu/feline.nvim'
 
-    use 'svermeulen/vim-cutlass'
-    use 'svermeulen/vim-yoink'
+--    use 'svermeulen/vim-cutlass'
+--    use 'svermeulen/vim-yoink'
     use 'tpope/vim-commentary'
     use 'tpope/vim-speeddating'
     use 'tpope/vim-repeat'
