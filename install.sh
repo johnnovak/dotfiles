@@ -34,19 +34,25 @@ create_symlinks() {
   for FNAME in $(find $1 -maxdepth $3 -name _\*); do
     TARGET=$(echo "$FNAME" | sed 's#\(.*/\)_\(.*\)#'$PWD/'\1_\2#')
     LINK_NAME=$(echo "$FNAME" | sed 's#\(.*/\)_\(.*\)#'$2'\2#')
+    BACKED_UP=
 
-    if [ -e "$LINK_NAME" ]; then
+    if [ -L ${LINK_NAME} ] || [ -e ${LINK_NAME} ]; then
       BACKUP_NAME=$(unique_name "$LINK_NAME.bak")
       if [ ! $DRY_RUN ]; then
         mv "$LINK_NAME" "$BACKUP_NAME"
       fi
       echo "${YELLOW}Backed up $LINK_NAME as $BACKUP_NAME$NC"
+      BACKED_UP=1
     fi
 
     if [ ! $DRY_RUN ]; then
       ln -s "$TARGET" "$LINK_NAME"
     fi
     echo "Created symlink: $LINK_NAME -> $TARGET"
+
+    if [ $BACKED_UP ]; then
+      echo ""
+    fi
   done
 }
 
