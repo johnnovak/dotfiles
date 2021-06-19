@@ -1,10 +1,13 @@
 return require('packer').startup(
   function()
+    -- plugin management
     use {'wbthomason/packer.nvim'}
 
+    -- window management
     use 'christoomey/vim-tmux-navigator'
     use 'troydm/zoomwintab.vim'
 
+    -- file management
     use 'kyazdani42/nvim-tree.lua'
     use 'kyazdani42/nvim-web-devicons'
 
@@ -13,13 +16,20 @@ return require('packer').startup(
 
     use 'ctrlpvim/ctrlp.vim'
 
+    -- autocomplete
     use 'hrsh7th/nvim-compe'
 
+    -- LSP
     use 'neovim/nvim-lspconfig'
     use 'alaviss/nim.nvim'
 
---    use 'svermeulen/vim-cutlass'
---    use 'svermeulen/vim-yoink'
+    -- filetype plugins
+    use 'plasticboy/vim-markdown'
+    use 'cespare/vim-toml'
+--    use 'zah/nim.vim'
+    use 'fatih/vim-go'
+
+    -- misc stuff
     use 'tpope/vim-commentary'
     use 'tpope/vim-speeddating'
     use 'tpope/vim-repeat'
@@ -28,10 +38,5 @@ return require('packer').startup(
     use {'glts/vim-radical', requires='glts/vim-magnum'}
     use 'godlygeek/tabular'
 
-    -- filetype plugins
-    use 'plasticboy/vim-markdown'
-    use 'cespare/vim-toml'
---    use 'zah/nim.vim'
-    use 'fatih/vim-go'
   end
 )
