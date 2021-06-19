@@ -1,7 +1,7 @@
 # Overview
 
-This repo contains my universal dotfiles for OS X, Debian on WSL2/Window 10,
-Linux, and Cygwin.
+This repo contains my universal dotfiles for OS X, Linux (native and WSL2),
+and Cygwin.
 
 Tested on:
 
@@ -12,6 +12,8 @@ Tested on:
 
 # Requirements
 
+## Common
+
 - bash 5.0+
 - zsh 5.7+
 - git 2.20+
@@ -19,9 +21,17 @@ Tested on:
 - tmux 2.8+
 - neovim 0.5.0-dev (latest)
 
-For Linux, there's also some additional configs that turn a vanilla
-Crunchbang++ 1.0 install into a Vim friendly desktop environment. See [this
-blog post] for details.
+## Platform specific
+
+### OS X
+
+- [kitty](https://sw.kovidgoyal.net/kitty/)
+
+### WSL2
+
+- [wsltty](https://github.com/mintty/wsltty)
+- [win32yank](https://github.com/equalsraf/win32yank) for clipboard
+support in Neovim
 
 
 # Installation
@@ -40,10 +50,14 @@ Optionally, if you want to use rxvt on X:
 sudo apt install rxvt-unicode-256color
 ```
 
+See [this blog post](https://blog.johnnovak.net/2016/11/13/a-minimalist-openbox-desktop-for-vim-freaks/)
+for instructions on setting up a Vim-friendly desktop environment on
+Crunchbang++.
+
 
 ### OS X
 
-Many of the configs require GNU coreutils. To install them on MacPorts:
+GNU coreutils are required. To install them on MacPorts:
 
 ```
 sudo port install grep
