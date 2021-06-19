@@ -20,14 +20,7 @@
 " Setting this will cause the color scheme to use underlined fonts for some
 " items.
 "
-" g:lux_no_term_bg (default: 0)
-"
-" Setting this will cause the color scheme to not set a background color in
-" the terminal (useful for transparency or terminals with different background
-" colors).
-"
 " ============================================================================
-
 
 
 " ============================================================================
@@ -50,12 +43,6 @@ if exists("g:lux_use_underline")
   let s:use_underline = g:lux_use_underline
 else
   let s:use_underline = 1
-endif
-
-if exists("g:lux_no_term_bg")
-  let s:no_term_bg = g:lux_no_term_bg
-else
-  let s:no_term_bg = 0
 endif
 
 
@@ -141,24 +128,17 @@ hi Type         guifg=#87d7d7   " lightblue
 " Highlighting:
 " ----------------------------------------------------------------------------
 
-hi Cursor       guifg=bg
-hi CursorColumn guifg=none
-hi CursorIM     guifg=bg
-hi CursorLine   guifg=none
-hi Visual       guifg=none
+hi Cursor       guifg=bg        guibg=#87afd7
+hi CursorColumn guifg=none      guibg=#383838
+hi CursorIM     guifg=bg        guibg=#87afd7
+hi CursorLine   guifg=none      guibg=#383838
+hi Visual       guifg=none      guibg=#005880
 hi VisualNOS    guifg=fg        guibg=none
 
-hi CursorColumn                 guibg=#383838
-hi CursorLine                   guibg=#383838
-hi IncSearch    guifg=bg
+hi IncSearch    guifg=bg        guibg=#5fd7d7
 hi MatchParen   guifg=fg        guibg=#87af00
-hi Search       guifg=bg
-hi Visual                       guibg=#005880
-hi Cursor                       guibg=#87afd7
-hi CursorIM                     guibg=#87afd7
+hi Search       guifg=bg        guibg=#d78700
 hi Error        guifg=#ff8787   guibg=#870000
-hi IncSearch                    guibg=#5fd7d7
-hi Search                       guibg=#d78700
 hi Todo         guifg=#d7d75f   guibg=#5f5f00
 
 
@@ -177,46 +157,32 @@ hi WarningMsg   guifg=#d7875f
 " UI:
 " ----------------------------------------------------------------------------
 
-hi ColorColumn  guifg=none
-hi TabLine      guifg=bg
-hi TabLineSel   guifg=fg
-hi WildMenu     guifg=fg
-hi ColorColumn                  guibg=#3a3a3a
+hi ColorColumn  guifg=none      guibg=#3a3a3a
+hi TabLine      guifg=bg        guibg=#b2b2b2
+hi TabLineSel   guifg=fg        guibg=#005f87
+hi WildMenu     guifg=fg        guibg=#005f87
 hi CursorLineNr guifg=#9e9e9e   guibg=#383838
-hi FoldColumn                   guibg=#4e4e4e
-hi Folded                       guibg=#4e4e4e
+hi FoldColumn   guifg=#bcbcbc   guibg=#4e4e4e
+hi Folded       guifg=#bcbcbc   guibg=#4e4e4e
 hi LineNr       guifg=#626262   guibg=none
-hi SignColumn                   guibg=#4e4e4e
-hi TabLineFill  guifg=#4e4e4e
-hi VertSplit    guifg=#626262
-hi WildMenu                     guibg=#005f87
-hi FoldColumn   guifg=#bcbcbc
-hi Folded       guifg=#bcbcbc
+hi SignColumn   guifg=#b2b2b2   guibg=#4e4e4e
+hi TabLineFill  guifg=#4e4e4e   guibg=#b2b2b2
+hi VertSplit    guifg=#626262   guibg=#b2b2b2
 hi Pmenu        guifg=#cacaca   guibg=#474747
 hi PmenuSel     guifg=bg        guibg=#d7d7af gui=bold
 hi PmenuSbar    guifg=bg        guibg=#505050
 hi PmenuThumb   guifg=#606060   guibg=#939393
-hi SignColumn   guifg=#b2b2b2
-hi StatusLine   guifg=bg        guibg=#b2b2b2
-hi StatusLineNC guifg=#c8c8c8   guibg=#484848 gui=bold
-hi TabLine                      guibg=#b2b2b2
-hi TabLineFill                  guibg=#b2b2b2
-hi TabLineSel                   guibg=#005f87
-hi VertSplit                    guibg=#b2b2b2
+hi StatusLine   guifg=bg        guibg=#aaaaaa gui=bold
+hi StatusLineNC guifg=#dddddd   guibg=#404040
 
 " ----------------------------------------------------------------------------
 " Diff:
 " ----------------------------------------------------------------------------
 
-hi DiffAdd      guifg=fg
-hi DiffChange   guifg=fg
-hi DiffDelete   guifg=fg
-
-hi DiffAdd                      guibg=#5f875f
-hi DiffChange                   guibg=#87875f
-hi DiffDelete                   guibg=#875f5f
-hi DiffText                     guibg=#87875f
-hi DiffText     guifg=#ffff87
+hi DiffAdd      guifg=fg        guibg=#5f875f
+hi DiffChange   guifg=fg        guibg=#87875f
+hi DiffDelete   guifg=fg        guibg=#875f5f
+hi DiffText     guifg=#ffff87   guibg=#87875f
 
 
 " ----------------------------------------------------------------------------
@@ -293,7 +259,6 @@ hi SignColumn   guibg=#333333
 " #87d7ff   blue
 " #5fafd7   blue2
 " #87d7d7   lightblue
-
 
 hi NvimTreeSymlink            guifg=#87d7af
 hi NvimTreeFolderName         guifg=#87d7ff
