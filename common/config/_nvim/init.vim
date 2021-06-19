@@ -1,24 +1,6 @@
 lua require('plugins')
 
 "=============================================================================
-" OS Detection:
-"=============================================================================
-
-if !exists("g:os")
-  if system('uname -r') =~ "Microsoft"
-    let g:os = "wsl"
-  elseif has("win64") || has("win32")
-    let g:os = "windows"
-  elseif has("win32unix")
-    let g:os = "cygwin" elseif has("macunix")
-  elseif has("osx")
-    let g:os = "osx"
-  elseif has("unix")
-    let g:os = "linux"
-  endif
-endif
-
-"=============================================================================
 " Disable Default Plugins:
 "=============================================================================
 
@@ -48,7 +30,6 @@ set undolevels=1000     " keep this many undo steps
 
 if has('mouse')         " enable mouse
   set mouse=a
-"  set ttymouse=xterm2
 endif
 
 
@@ -72,6 +53,8 @@ set inccommand=nosplit      " live substitution
 set hidden                  " no more nagging on buffer changes
 
 set timeoutlen=500          " set timeout on mappings
+
+set clipboard+=unnamedplus  " enable system clipboard integration
 
 "=============================================================================
 " Completion:
@@ -181,12 +164,6 @@ let g:nvim_tree_icons = {
 "-----------------------------------------------------------------------------
 let g:vim_markdown_folding_level = 6
 let g:vim_markdown_override_foldtext = 1
-
-" vim-yoink
-"-----------------------------------------------------------------------------
-" persist yank history across sessions
-"let g:yoinkSavePersistently = 1
-"let g:yoinkIncludeDeleteOperations = 1
 
 " matchit
 "-----------------------------------------------------------------------------
@@ -346,32 +323,5 @@ augroup GoFileTypeDetect
   au! BufRead,BufNewFile * call DetectGoHtmlTmpl()
 augroup END
 
-
-" TODO revisit for each platform (can't we just use unnamedplus everywhere?)
-" System clipboard integration
-"-----------------------------------------------------------------------------
-" map Ctrl-x/c/v to use the system clipboard on Linux, Cygwin & Windows
-if g:os == 'linux' || g:os == 'windows' || g:os == 'cygwin'
-  vnoremap <C-x> "+x
-  vnoremap <C-c> "+y
-  noremap  <C-v> "+gP
-  inoremap <C-v> <C-r>+
-
-  " remap block mode from Ctrl-v to Ctrl-q
-  noremap <C-q> <C-v>
-
-elseif g:os == 'wsl'
-  augroup Yank
-    autocmd!
-    autocmd TextYankPost * :call system('clip.exe ',@")
-    augroup END
-
-" Using the system clipboard when running inside tmux on OS X doesn't work
-" in root mode, so only enable clipboard support on OS X for normal users
-" (unfortunately there doesn't seem to be a way to detect if we're running
-" inside a tmux session when vim is launched with sudo)
-elseif g:os == 'osx' && system('id -u') > 0
-  set clipboard+=unnamedplus
-endif
 
 " vim: fdm=marker
