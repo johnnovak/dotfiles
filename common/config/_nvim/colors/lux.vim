@@ -110,18 +110,51 @@ let g:colors_name="lux"
 " Text Markup:
 " ----------------------------------------------------------------------------
 
+hi Comment      guifg=#808080   " gray
+
+hi Constant     guifg=#d7d7af   " yellow
+" String		a string constant: "this is a string"
+" Character	a character constant: 'c', '\n'
+" Number		a number constant: 234, 0xff
+" Boolean	a boolean constant: TRUE, false
+" Float		a floating point constant: 2.3e10
+
+hi Identifier   guifg=#afd787   " green
+" hi Function
+
 hi NonText      guifg=#555580
 hi SpecialKey   guifg=#5f875f   " darkgreen
-hi Comment      guifg=#808080   " gray
 hi Conceal      guifg=#808080
-hi Constant     guifg=#d7d7af   " yellow
 hi Directory    guifg=#afd7af   " palegreen
-hi Identifier   guifg=#afd787   " green
+
 hi PreProc      guifg=#87d7af   " cyan
+" Include	preprocessor #include
+" Define		preprocessor #define
+" Macro		same as Define
+" PreCondit	preprocessor #if, #else, #endif, etc.
+
 hi Special      guifg=#d7afd7   " purple
+" SpecialChar	special character in a constant
+" Tag		you can use CTRL-] on this
+" Delimiter	characte that needs attention
+" SpecialComment	special things inside a comment
+" Debug		debugging statements
+
+
 hi Statement    guifg=#87d7ff   " blue
+" Conditional	if, then, else, endif, switch, etc.
+" Repeat		for, do, while, etc.
+" Label		case, default, etc.
+" Operator	"sizeof", "+", "*", etc.
+" Keyword	any other keyword
+" Exception	try, catch, throw
+
 hi Title        guifg=#5fafd7   " blue2
+
 hi Type         guifg=#87d7d7   " lightblue
+" StorageClass	static, register, volatile, etc.
+" Structure	struct, union, enum, etc.
+" Typedef	A typedef
 
 
 " ----------------------------------------------------------------------------
@@ -138,6 +171,7 @@ hi VisualNOS    guifg=fg        guibg=none
 hi IncSearch    guifg=bg        guibg=#5fd7d7
 hi MatchParen   guifg=fg        guibg=#87af00
 hi Search       guifg=bg        guibg=#d78700
+
 hi Error        guifg=#ff8787   guibg=#870000
 hi Todo         guifg=#d7d75f   guibg=#5f5f00
 

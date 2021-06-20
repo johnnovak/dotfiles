@@ -22,7 +22,7 @@ return require('packer').startup(
 
     -- LSP
     use 'neovim/nvim-lspconfig'
-    use 'alaviss/nim.nvim'
+--    use 'alaviss/nim.nvim'
 
     -- filetype plugins
     use 'plasticboy/vim-markdown'
