@@ -19,19 +19,15 @@ fun! s:IsBottomEdgeWindow()
 endfun
 
 
-let s:commands = {
-      \   'h': '<',
-      \   'l': '>',
-      \   'k': '-',
-      \   'j': '+'
-      \ }
+let s:commands = { 'h': '<',
+                 \ 'l': '>',
+                 \ 'k': '-',
+                 \ 'j': '+' }
 
-let s:inverted_commands = {
-      \   'h': 'l',
-      \   'l': 'h',
-      \   'k': 'j',
-      \   'j': 'k'
-      \ }
+let s:inverted_commands = { 'h': 'l',
+                          \ 'l': 'h',
+                          \ 'k': 'j',
+                          \ 'j': 'k' }
 
 fun! s:ResizeWindow(dir, count = 1)
   let cmd = a:dir

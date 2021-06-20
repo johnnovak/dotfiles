@@ -1,25 +1,8 @@
 lua require('plugins')
 
 "=============================================================================
-" OS Detection:
-"=============================================================================
-
-if !exists("g:os")
-  if system('uname -r') =~ "Microsoft"
-    let g:os = "wsl"
-  elseif has("win64") || has("win32")
-    let g:os = "windows"
-  elseif has("win32unix")
-    let g:os = "cygwin" elseif has("macunix")
-    let g:os = "osx"
-  elseif has("unix")
-    let g:os = "linux"
-  endif
-endif
-
-"=============================================================================
 " Disable Default Plugins:
-"=============================================================================i
+"=============================================================================
 
 let g:loaded_netrw       = 1
 let g:loaded_netrwPlugin = 1
@@ -47,7 +30,6 @@ set undolevels=1000     " keep this many undo steps
 
 if has('mouse')         " enable mouse
   set mouse=a
-"  set ttymouse=xterm2
 endif
 
 
@@ -70,8 +52,9 @@ set inccommand=nosplit      " live substitution
 
 set hidden                  " no more nagging on buffer changes
 
-set timeoutlen=300          " set timeout on mappings
+set timeoutlen=500          " set timeout on mappings
 
+set clipboard+=unnamedplus  " enable system clipboard integration
 
 "=============================================================================
 " Completion:
@@ -113,7 +96,7 @@ set listchars+=precedes:«   " display '«' if the line continues to the left
 
 " statusline
 set statusline=
-set statusline+=\ %<%.99f   " filename
+set statusline+=\ %<%.99f   " relative file path (use 't' for filename only)
 set statusline+=\ %h        " help buffer flag
 set statusline+=%w          " preview window flag
 set statusline+=%m          " modified flag
@@ -121,9 +104,6 @@ set statusline+=%r          " readonly flag
 set statusline+=%=          " right align
 set statusline+=%-12(\ %10l:%-7(%c%V%)\ %)  " line:column-virtualcolumn
 set statusline+=%P\         " percentage
-
-hi StatusLine   guifg=bg      guibg=#aaaaaa gui=bold
-hi StatusLineNC guifg=#dddddd guibg=#404040
 
 colorscheme lux
 
@@ -184,12 +164,6 @@ let g:nvim_tree_icons = {
 "-----------------------------------------------------------------------------
 let g:vim_markdown_folding_level = 6
 let g:vim_markdown_override_foldtext = 1
-
-" vim-yoink
-"-----------------------------------------------------------------------------
-" persist yank history across sessions
-"let g:yoinkSavePersistently = 1
-"let g:yoinkIncludeDeleteOperations = 1
 
 " matchit
 "-----------------------------------------------------------------------------
@@ -292,10 +266,14 @@ inoremap <silent> <F5> <C-R>=strftime("%Y-%m-%d %H:%M:%S")<CR>
 nnoremap <silent> <Leader>t2 :%s;^\(\s\+\);\=repeat(' ', len(submatch(0))/2);g<CR>
       \ :nohlsearch<CR>
 
-" built-in fuzzy open file
-"nnoremap <C-p>     :e **/*
-"nnoremap <Leader>v :vsplit **/*
-"nnoremap <Leader>s :split **/*
+" trim trailing whitespace
+function! TrimWhitespace()
+  let l:save = winsaveview()
+  keeppatterns %s/\s\+$//e
+  call winrestview(l:save)
+endfunction
+
+nnoremap <silent> ,W :call TrimWhitespace()<CR>
 
 " CtrlP
 "-----------------------------------------------------------------------------
@@ -311,32 +289,6 @@ endif
 "-----------------------------------------------------------------------------
 nnoremap <C-n> :NvimTreeToggle<CR>
 nnoremap <C-f> :NvimTreeFindFile<CR>
-
-" vim-cutlass
-"-----------------------------------------------------------------------------
-" move to clipboard ('d' uses the 'black hole' register)
-"nnoremap m d
-"xnoremap m d
-
-"nnoremap mm dd
-"nnoremap M D
-
-" get add mark back
-"nnoremap ma m
-
-" vim-yoink
-"-----------------------------------------------------------------------------
-" persist yank history across sessions
-"nmap p <plug>(YoinkPaste_p)
-"nmap P <plug>(YoinkPaste_P)
-
-" Also replace the default gp with yoink paste so we can toggle paste in this
-" case too
-"nmap gp <plug>(YoinkPaste_gp)
-"nmap gP <plug>(YoinkPaste_gP)
-
-"nmap y <plug>(YoinkYankPreserveCursorPosition)
-"xmap y <plug>(YoinkYankPreserveCursorPosition)
 
 " nvim-compe
 "-----------------------------------------------------------------------------
@@ -361,7 +313,7 @@ autocmd FileType css,scss,html,xhtml,htmldjango,markdown,javascript,vim,nim,pyth
 autocmd FileType python setlocal textwidth=72
 
 " autodetect Go templates
-function DetectGoHtmlTmpl()
+function! DetectGoHtmlTmpl()
   if expand('%:e') == "html" && search("{{") != 0
     set filetype=gohtmltmpl
   endif
@@ -371,68 +323,5 @@ augroup GoFileTypeDetect
   au! BufRead,BufNewFile * call DetectGoHtmlTmpl()
 augroup END
 
-"=============================================================================
-" Custom toggles
-"=============================================================================
-
-set pastetoggle=<F2>      " toggle paste mode
-
-" TODO this is buggy, fix it
-nnoremap <Leader>te :call VirtualEditToggle()<CR>
-
-let g:virtualedit_is_on = 0
-
-function! VirtualEditToggle()
-  if g:virtualedit_is_on
-    nnoremap <silent> j j
-    nnoremap <silent> k k
-    nnoremap <silent> 0 0
-    nnoremap <silent> $ $
-    nnoremap <silent> ^ ^
-    set list
-    set nolinebreak
-    set virtualedit=""
-    let g:virtualedit_is_on = 0
-  else
-    nnoremap <silent> j gj
-    nnoremap <silent> k gk
-    nnoremap <silent> 0 g0
-    nnoremap <silent> $ g$
-    nnoremap <silent> ^ g^
-    set nolist
-    set linebreak
-    set virtualedit=all
-    let g:virtualedit_is_on = 1
-  endif
-endfunction
-
-
-" TODO revisit for each platform (is it working? is it needed?)
-" System clipboard integration
-"-----------------------------------------------------------------------------
-" map Ctrl-x/c/v to use the system clipboard on Linux, Cygwin & Windows
-if g:os == 'linux' || g:os == 'windows' || g:os == 'cygwin'
-  vnoremap <C-x> "+x
-  vnoremap <C-c> "+y
-  noremap  <C-v> "+gP
-  inoremap <C-v> <C-r>+
-
-  " remap block mode from Ctrl-v to Ctrl-q
-  noremap <C-q> <C-v>
-
-elseif g:os == 'wsl'
-  augroup Yank
-    autocmd!
-    autocmd TextYankPost * :call system('clip.exe ',@")
-    augroup END
-
-" Using the system clipboard when running inside tmux on OS X doesn't work
-" in root mode, so only enable clipboard support on OS X for normal users
-" (unfortunately there doesn't seem to be a way to detect if we're running
-" inside a tmux session when vim is launched with sudo)
-elseif g:os == 'osx' && system('id -u') > 0
-  set clipboard=unnamed
-
-endif
 
 " vim: fdm=marker

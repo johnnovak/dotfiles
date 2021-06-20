@@ -3,18 +3,18 @@ set mouse=a
 
 " Set Editor Font
 if exists(':GuiFont')
-    " Use GuiFont! to ignore font errors
-    GuiFont! LiterationMono NF:h10.5
+  " Use GuiFont! to ignore font errors
+  GuiFont! LiterationMono NF:h10.5
 endif
 
 " Disable GUI Tabline
 if exists(':GuiTabline')
-    GuiTabline 0
+  GuiTabline 0
 endif
 
 " Disable GUI Popupmenu
 if exists(':GuiPopupmenu')
-    GuiPopupmenu 0
+  GuiPopupmenu 0
 endif
 
 " Right Click Context Menu (Copy-Cut-Paste)
