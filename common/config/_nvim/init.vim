@@ -323,5 +323,9 @@ augroup GoFileTypeDetect
   au! BufRead,BufNewFile * call DetectGoHtmlTmpl()
 augroup END
 
+augroup GridmongerTheme
+  au! BufRead,BufNewFile *.gmtheme set filetype=dosini
+augroup END
+
 
 " vim: fdm=marker
