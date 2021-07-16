@@ -121,6 +121,8 @@ let g:tmux_navigator_disable_when_zoomed = 1
 
 " nvim-tree
 "-----------------------------------------------------------------------------
+let g:nvim_tree_auto_resize = 0
+
 let g:nvim_tree_ignore = [ '.git', 'node_modules' ]
 let g:nvim_tree_gitignore = 1
 
