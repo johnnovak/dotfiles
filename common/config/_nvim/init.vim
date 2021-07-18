@@ -212,6 +212,7 @@ cnoremap jk <C-c>
 
 " enter command mode with one keystroke
 nnoremap ; :
+vnoremap ; :
 
 " quickly edit/reload the vimrc file
 nnoremap <silent> <Leader>ev :e  $MYVIMRC<CR>
