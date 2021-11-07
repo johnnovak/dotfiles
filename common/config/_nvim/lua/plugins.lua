@@ -7,8 +7,11 @@ return require('packer').startup(
     use 'troydm/zoomwintab.vim'
 
     -- file management
-    use 'kyazdani42/nvim-tree.lua'
-    use 'kyazdani42/nvim-web-devicons'
+    use {
+      'kyazdani42/nvim-tree.lua',
+       requires = 'kyazdani42/nvim-web-devicons',
+       config = function() require'nvim-tree'.setup {} end
+    }
     use 'ryanoasis/vim-devicons'
 
     use 'junegunn/fzf'
@@ -25,10 +28,10 @@ return require('packer').startup(
 
     -- filetype plugins
     use 'plasticboy/vim-markdown'
-    use 'cespare/vim-toml'
+    use {'cespare/vim-toml', branch='main'}
 --    use 'zah/nim.vim'
     use 'fatih/vim-go'
-    use 'GEverding/vim-hocon'
+    use 'satabin/hocon-vim'
 
     -- misc stuff
     use 'tpope/vim-commentary'
