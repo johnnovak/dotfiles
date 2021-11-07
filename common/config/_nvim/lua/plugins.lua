@@ -29,6 +29,7 @@ return require('packer').startup(
     use 'cespare/vim-toml'
 --    use 'zah/nim.vim'
     use 'fatih/vim-go'
+    use 'beyondmarc/glsl.vim'
 
     -- misc stuff
     use 'tpope/vim-commentary'
