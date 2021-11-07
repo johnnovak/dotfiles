@@ -2,7 +2,6 @@ return require('packer').startup(
   function()
     -- plugin management
     use {'wbthomason/packer.nvim'}
-
     -- window management
     use 'christoomey/vim-tmux-navigator'
     use 'troydm/zoomwintab.vim'
@@ -29,6 +28,7 @@ return require('packer').startup(
     use 'cespare/vim-toml'
 --    use 'zah/nim.vim'
     use 'fatih/vim-go'
+    use 'GEverding/vim-hocon'
 
     -- misc stuff
     use 'tpope/vim-commentary'

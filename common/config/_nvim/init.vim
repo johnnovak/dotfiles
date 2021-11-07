@@ -21,7 +21,7 @@ let g:loaded_zip         = 1
 
 let mapleader=","       " set Leader
 
-set shortmess+=I        " hide intro message when starting vim
+set shortmess+=IS       " hide intro message when starting vim
 
 set backup              " keep a backup file
 set undofile            " create undo files
