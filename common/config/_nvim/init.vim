@@ -21,7 +21,7 @@ let g:loaded_zip         = 1
 
 let mapleader=","       " set Leader
 
-set shortmess+=I        " hide intro message when starting vim
+set shortmess+=IS       " hide intro message when starting vim
 
 set backup              " keep a backup file
 set undofile            " create undo files
@@ -212,6 +212,7 @@ cnoremap jk <C-c>
 
 " enter command mode with one keystroke
 nnoremap ; :
+vnoremap ; :
 
 " quickly edit/reload the vimrc file
 nnoremap <silent> <Leader>ev :e  $MYVIMRC<CR>
@@ -320,7 +321,15 @@ function! DetectGoHtmlTmpl()
 endfunction
 
 augroup GoFileTypeDetect
-  au! BufRead,BufNewFile * call DetectGoHtmlTmpl()
+  au! BufRead,BufNewFile *  call DetectGoHtmlTmpl()
+augroup END
+
+augroup GridmongerThemeFileTypeDetect
+  au! BufNewFile,BufRead *.gmtheme  set syntax=hocon
+augroup END
+
+augroup GridmongerTheme
+  au! BufRead,BufNewFile *.gmtheme set filetype=dosini
 augroup END
 
 
