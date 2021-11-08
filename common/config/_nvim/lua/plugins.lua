@@ -2,6 +2,7 @@ return require('packer').startup(
   function()
     -- plugin management
     use {'wbthomason/packer.nvim'}
+
     -- window management
     use 'christoomey/vim-tmux-navigator'
     use 'troydm/zoomwintab.vim'
@@ -10,7 +11,12 @@ return require('packer').startup(
     use {
       'kyazdani42/nvim-tree.lua',
        requires = 'kyazdani42/nvim-web-devicons',
-       config = function() require'nvim-tree'.setup {} end
+       config = function() require'nvim-tree'.setup {
+         filters = {
+           dotfiles = false
+         }
+--         let g:nvim_tree_ignore = [ '.git', 'node_modules' ]
+       } end
     }
     use 'ryanoasis/vim-devicons'
 
@@ -35,6 +41,7 @@ return require('packer').startup(
     use 'satabin/hocon-vim'
 
     -- misc stuff
+    use 'lambdalisue/pastefix.vim'
     use 'tpope/vim-commentary'
     use 'tpope/vim-speeddating'
     use 'tpope/vim-repeat'
