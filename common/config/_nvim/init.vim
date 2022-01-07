@@ -121,8 +121,6 @@ let g:tmux_navigator_disable_when_zoomed = 1
 
 " nvim-tree
 "-----------------------------------------------------------------------------
-let g:nvim_tree_gitignore = 1
-
 let g:nvim_tree_indent_markers = 1
 
 let g:nvim_tree_show_icons = {

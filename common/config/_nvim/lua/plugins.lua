@@ -15,7 +15,6 @@ return require('packer').startup(
          filters = {
            dotfiles = false
          }
---         let g:nvim_tree_ignore = [ '.git', 'node_modules' ]
        } end
     }
     use 'ryanoasis/vim-devicons'

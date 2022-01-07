@@ -5,7 +5,7 @@ and Cygwin.
 
 Tested on:
 
-* OS X Mojave (10.14)
+* OS X Big Sur (10.16.2)
 * Debian 10 on WSL2 (Windows 10)
 * Latest cygwin on Windows 10
 
