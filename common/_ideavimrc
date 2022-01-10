@@ -1,0 +1,43 @@
+" turn off bell sound completely
+set visualbell
+set noerrorbells
+
+" show a few lines of context around the cursor
+set scrolloff=5
+
+" do incremental searching.
+set incsearch
+
+" fast escape
+inoremap jk <Esc>
+cnoremap jk <C-c>
+
+" enter command mode with one keystroke
+nnoremap ; :
+vnoremap ; :
+
+" jump to matching pairs easily, with Tab
+map    <Tab> %
+map  <S-Tab> g%
+vmap   <Tab> %
+vmap <S-Tab> g%
+
+" format current paragraph
+vnoremap ,f gq
+nnoremap ,f gqap
+
+" write file
+nnoremap <Leader>w :w<CR>
+
+
+"" -- Map IDE actions to IdeaVim -- https://jb.gg/abva4t
+"" Map \r to the Reformat Code action
+"map \r <Action>(ReformatCode)
+
+"" Map <leader>d to start debug
+"map <leader>d <Action>(Debug)
+
+"" Map \b to toggle the breakpoint on the current line
+"map \b <Action>(ToggleLineBreakpoint)
+
+" Find more examples here: https://jb.gg/share-ideavimrc
