@@ -65,7 +65,7 @@ bindkey -v
 KEYTIMEOUT=1
 
 # default editor
-export EDITOR=vim
+export EDITOR=nvim
 
 # set readline to vi mode
 set -o vi
