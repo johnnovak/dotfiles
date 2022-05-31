@@ -37,11 +37,8 @@ endif
 " Editing:
 "=============================================================================
 
-" use 2 spaces for tabs by default
-set expandtab
-set softtabstop=2
-set shiftwidth=2
-set tabstop=2
+set tabstop=4
+set shiftwidth=4
 
 set scrolloff=8             " keep 8 lines visible when scrolling
 set textwidth=78
@@ -121,40 +118,8 @@ let g:tmux_navigator_disable_when_zoomed = 1
 
 " nvim-tree
 "-----------------------------------------------------------------------------
-let g:nvim_tree_indent_markers = 1
-
-let g:nvim_tree_show_icons = {
-	\ 'git': 0,
-	\ 'folders': 1,
-	\ 'files': 1
-	\}
-
-let g:nvim_tree_icons = {
-    \ 'default':        '',
-    \ 'symlink':        '',
-    \ 'git': {
-    \   'unstaged':     "✗",
-    \   'staged':       "✓",
-    \   'unmerged':     "",
-    \   'renamed':      "➜",
-    \   'untracked':    "★",
-    \   'deleted':      "",
-    \  },
-    \ 'folder': {
-    \   'default':      "",
-    \   'open':         "",
-    \   'empty':        "",
-    \   'empty_open':   "",
-    \   'symlink':      "",
-    \   'symlink_open': "",
-    \  },
-    \  'lsp': {
-    \    'hint': "",
-    \    'info': "",
-    \    'warning': "",
-    \    'error': "",
-    \  }
-    \}
+"let g:nvim_tree_icons = {
+"    \ 'default':        '',
 
 " vim-markdown
 "-----------------------------------------------------------------------------
@@ -304,7 +269,7 @@ inoremap <silent><expr> <C-d>     compe#scroll({ 'delta': -4 })
 
 " filetypes with tabwidth of 2
 autocmd FileType css,scss,html,xhtml,htmldjango,markdown,javascript,vim,nim,python
-  \ setlocal ts=2 sw=2 sts=2
+  \ setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
 
 " wrap python comments at 72 chars
 autocmd FileType python setlocal textwidth=72

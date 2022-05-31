@@ -14,6 +14,16 @@ return require('packer').startup(
        config = function() require'nvim-tree'.setup {
          filters = {
            dotfiles = false
+         },
+		 renderer = {
+           indent_markers = {
+             enable = true
+           },
+		   icons = {
+		     show = {
+			   git = false
+		     }
+		   }
          }
        } end
     }
