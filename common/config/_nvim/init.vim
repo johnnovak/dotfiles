@@ -171,7 +171,7 @@ nnoremap <Leader>d :Bdelete<CR>
 nnoremap <Leader>w :w<CR>
 
 " turn off highlight search
-nnoremap <silent> ,/ :nohls<CR>
+nnoremap <silent> <Leader>/ :nohls<CR>
 
 " uppercase/lowercase word
 nnoremap <Leader>U mQviwU`Q
@@ -181,14 +181,14 @@ nnoremap <Leader>u mQviwu`Q
 nnoremap <silent> <Leader>tw :set invwrap<CR>:set wrap?<CR>
 
 " display the syntax highlighting group of the element under the cursor
-nnoremap <silent> ,hh :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name")
+nnoremap <silent> <Leader>hh :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name")
   \ . '> trans<' . synIDattr(synID(line("."),col("."),0),"name")
   \ . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name")
   \ . ">"<CR>
 
 " format current paragraph
-vnoremap ,f gq
-nnoremap ,f gqap
+vnoremap <Leader>f gq
+nnoremap <Leader>f gqap
 
 " format JSON
 nnoremap <Leader>jf gqad<CR>
@@ -208,7 +208,7 @@ function! TrimWhitespace()
   call winrestview(l:save)
 endfunction
 
-nnoremap <silent> ,W :call TrimWhitespace()<CR>
+nnoremap <silent> <Leader>W :call TrimWhitespace()<CR>
 
 " CtrlP
 "-----------------------------------------------------------------------------
@@ -227,10 +227,14 @@ nnoremap <C-f> :NvimTreeFindFile<CR>
 
 " telescope
 "-----------------------------------------------------------------------------
-nnoremap <leader>ff <cmd>Telescope find_files<cr>
-nnoremap <leader>fg <cmd>Telescope live_grep<cr>
-nnoremap <leader>fb <cmd>Telescope buffers<cr>
-nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+nnoremap <Leader>ff <cmd>Telescope find_files<CR>
+nnoremap <leader>fg <cmd>Telescope live_grep<CR>
+nnoremap <Leader>fb <cmd>Telescope buffers<CR>
+nnoremap <Leader>fh <cmd>Telescope help_tags<CR>
+
+" vim-clang-format
+"-----------------------------------------------------------------------------
+vnoremap <Leader>f gq
 
 " }}}
 

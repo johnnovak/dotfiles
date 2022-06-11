@@ -72,6 +72,9 @@ return require('packer').startup(function()
   -- LSP
   use 'neovim/nvim-lspconfig'
 
+  -- formatting
+  use 'rhysd/vim-clang-format'
+
   -- filetype plugins
   use 'plasticboy/vim-markdown'
   use {
