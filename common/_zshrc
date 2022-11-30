@@ -178,5 +178,4 @@ RPROMPT='${vim_mode}'
 
 . ~/.zshrc-post
 
-
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
