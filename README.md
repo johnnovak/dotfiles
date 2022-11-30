@@ -5,7 +5,7 @@ and Cygwin.
 
 Tested on:
 
-* OS X Big Sur (10.16.2)
+* macOS Monterey (12.5.1)
 * Debian 10 on WSL2 (Windows 10)
 * Latest cygwin on Windows 10
 
@@ -19,11 +19,11 @@ Tested on:
 - git 2.20+
 - GNU grep 3.3+
 - tmux 2.8+
-- neovim 0.5.0-dev (latest)
+- neovim 0.8.0+
 
 ## Platform specific
 
-### OS X
+### macOS
 
 - [kitty](https://sw.kovidgoyal.net/kitty/)
 
@@ -40,35 +40,27 @@ support in Neovim
 
 ### Linux
 
-```
-sudo apt install zsh tmux git curl
-```
+    sudo apt install zsh tmux git curl
 
 Optionally, if you want to use rxvt on X:
 
-```
-sudo apt install rxvt-unicode-256color
-```
+    sudo apt install rxvt-unicode-256color
 
 See [this blog post](https://blog.johnnovak.net/2016/11/13/a-minimalist-openbox-desktop-for-vim-freaks/)
 for instructions on setting up a Vim-friendly desktop environment on
 Crunchbang++.
 
 
-### OS X
+### macOS
 
 GNU coreutils are required. To install them on MacPorts:
 
-```
-sudo port install grep
-sudo port install coreutils +with_default_names
-```
 
-Then proceed to install the rest:
+    sudo port install grep coreutils zsh tmux git
 
-```
-sudo port install zsh tmux git curl
-```
+To set the MacPorts `zsh` as the default shell:
+
+    sudo chpass -s '/opt/local/bin/zsh' $USER
 
 
 ## Installing the dotfiles
@@ -87,3 +79,30 @@ If you are using a different location than `~/.dotfiles`, you must manually
 set `DOTFILES` to point to the cloned repo in `~/.bashrc-pre` and
 `~/.zshrc-pre` after the installation.
 
+
+## Installing NeoVim plugins
+
+1. Execute the following:
+
+    git clone --depth 1 https://github.com/wbthomason/packer.nvim\ &&
+      ~/.local/share/nvim/site/pack/packer/start/packer.nvim
+
+2. Start NeoVim, then execute `:PackerSync`
+
+Refer to the [packer instructions](https://github.com/wbthomason/packer.nvim)
+for further details
+
+
+## .zshrc-pre suggestions
+
+### macOS
+
+```
+# Aliases
+alias grep=ggrep
+alias vim=nvim
+alias dircolors=gdircolors
+
+# Use nvim when editing git commits
+EDITOR=nvim
+```
