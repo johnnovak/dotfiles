@@ -81,8 +81,10 @@ set `DOTFILES` to point to the cloned repo in `~/.bashrc-pre` and
 
 1. Execute the following:
 
-    git clone --depth 1 https://github.com/wbthomason/packer.nvim\ &&
-      ~/.local/share/nvim/site/pack/packer/start/packer.nvim
+```
+git clone --depth 1 https://github.com/wbthomason/packer.nvim\ &&
+    ~/.local/share/nvim/site/pack/packer/start/packer.nvim
+```
 
 2. Start NeoVim, then execute `:PackerSync`
 
