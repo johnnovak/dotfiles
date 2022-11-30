@@ -53,9 +53,6 @@ Crunchbang++.
 
 ### macOS
 
-GNU coreutils are required. To install them on MacPorts:
-
-
     sudo port install grep coreutils zsh tmux git
 
 To set the MacPorts `zsh` as the default shell:
@@ -97,7 +94,7 @@ for further details
 
 ### macOS
 
-```
+```zsh
 # Aliases
 alias grep=ggrep
 alias vim=nvim
