@@ -56,4 +56,13 @@ alias racket='racket -i -p neil/sicp -l xrepl'
 
 alias docker_rm='docker stop $(docker ps -a -q); docker rm $(docker ps -a -q)'
 
+# git replace
+grp() {
+    local -r search="$1"
+    local -r replace="$2"
+    shift; shift
+
+    sed -i "s^${search}^${replace}^g" $(git grep -l "${search}" "$@")
+}
+
 # vim: sw=2 ft=sh
