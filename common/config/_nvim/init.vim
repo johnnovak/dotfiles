@@ -53,6 +53,8 @@ set timeoutlen=500          " set timeout on mappings
 
 set clipboard+=unnamedplus  " enable system clipboard integration
 
+"set number                  " show line numbers
+
 "=============================================================================
 " Completion:
 "=============================================================================
@@ -236,6 +238,11 @@ nnoremap <Leader>fh <cmd>Telescope help_tags<CR>
 "-----------------------------------------------------------------------------
 vnoremap <Leader>f gq
 
+" vim-easy-align
+"-----------------------------------------------------------------------------
+" format markdown table
+vmap <Leader><Bslash> :EasyAlign*<Bar><Enter>
+
 " }}}
 
 "=============================================================================
@@ -243,7 +250,7 @@ vnoremap <Leader>f gq
 "=============================================================================
 
 " filetypes with tabwidth of 2
-autocmd FileType css,scss,html,xhtml,htmldjango,markdown,javascript,lua,vim,nim,python
+autocmd FileType css,scss,html,xhtml,htmldjango,markdown,javascript,typescript,json,lua,vim,nim,python
   \ setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
 
 " wrap python comments at 72 chars
