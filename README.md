@@ -5,7 +5,7 @@ and Cygwin.
 
 Tested on:
 
-* macOS Monterey (12.5.1)
+* macOS Sonoma (14.0)
 * Debian 10 on WSL2 (Windows 10)
 * Latest cygwin on Windows 10
 
@@ -14,9 +14,9 @@ Tested on:
 
 ## Common
 
-- bash 5.0+
-- zsh 5.7+
-- git 2.20+
+- bash 5.0+ (macOS default is fine)
+- zsh 5.7+ (macOS default is fine)
+- git 2.20+ (macOS default is fine)
 - GNU grep 3.3+
 - tmux 2.8+
 - neovim 0.8.0+
@@ -53,7 +53,7 @@ Crunchbang++.
 
 ### macOS
 
-    sudo port install grep coreutils zsh tmux git
+    sudo port install grep coreutils tmux
 
 To set the MacPorts `zsh` as the default shell:
 
