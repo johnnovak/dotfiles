@@ -31,31 +31,31 @@ return require('packer').startup(function()
   use 'ryanoasis/vim-devicons'
 
   -- searching/finding
-  use 'junegunn/fzf'
-  use 'junegunn/fzf.vim'
+--  use 'junegunn/fzf'
+--  use 'junegunn/fzf.vim'
 
   use 'ctrlpvim/ctrlp.vim'
 
   -- treesitter
-  use {
-    'nvim-treesitter/nvim-treesitter',
-    run = ':TSUpdate'
-  }
+--  use {
+--    'nvim-treesitter/nvim-treesitter',
+--    run = ':TSUpdate'
+--  }
 
 
   -- telescope
-  use {
-    'nvim-telescope/telescope-fzf-native.nvim',
-    run = 'make'
-  }
-  use {
-    'nvim-telescope/telescope.nvim',
-    config = [[require('config.telescope')]],
-    requires = {
-      'nvim-lua/popup.nvim',
-      'nvim-lua/plenary.nvim'
-    }
-  }
+--  use {
+--    'nvim-telescope/telescope-fzf-native.nvim',
+--    run = 'make'
+--  }
+--  use {
+--    'nvim-telescope/telescope.nvim',
+--    config = [[require('config.telescope')]],
+--    requires = {
+--      'nvim-lua/popup.nvim',
+--      'nvim-lua/plenary.nvim'
+--    }
+--  }
 
   -- autocomplete
   use {
@@ -70,10 +70,13 @@ return require('packer').startup(function()
   }
 
   -- LSP
-  use 'neovim/nvim-lspconfig'
+--  use 'neovim/nvim-lspconfig'
 
   -- formatting
   use 'rhysd/vim-clang-format'
+
+  -- align
+  use 'junegunn/vim-easy-align'
 
   -- filetype plugins
   use 'plasticboy/vim-markdown'
@@ -82,22 +85,22 @@ return require('packer').startup(function()
     branch = 'main'
   }
   -- use 'zah/nim.vim'
-  use 'fatih/vim-go'
+--  use 'fatih/vim-go'
   use 'beyondmarc/glsl.vim'
   use 'satabin/hocon-vim'
 
   -- misc stuff
   use 'lambdalisue/pastefix.vim'
-  use 'tpope/vim-commentary'
-  use 'tpope/vim-speeddating'
-  use 'tpope/vim-repeat'
-  use 'tpope/vim-surround'
+--  use 'tpope/vim-commentary'
+--  use 'tpope/vim-speeddating'
+--  use 'tpope/vim-repeat'
+--  use 'tpope/vim-surround'
   use 'famiu/bufdelete.nvim'
-  use {
-    'glts/vim-radical',
-    requires = 'glts/vim-magnum'
-  }
-  use 'godlygeek/tabular'
+--  use {
+--    'glts/vim-radical',
+--    requires = 'glts/vim-magnum'
+--  }
+--  use 'godlygeek/tabular'
 
 end
 )
