@@ -42,7 +42,10 @@ alias gch='git show --pretty="format:" --name-only'
 alias gco='git checkout'
 alias gbr='git branch'
 alias ghst='git log --pretty=format:"%h %ad | %s%d [%an]" --graph --date=short'
+alias glo='git log'
 alias grbi='git rebase -i'
+alias grbh='git rebase -i --autosquash origin/HEAD'
+alias grss='git reset --soft HEAD~'
 
 # used on OS X
 alias oo='open .'
