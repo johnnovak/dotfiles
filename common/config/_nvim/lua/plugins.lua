@@ -36,6 +36,7 @@ return require('packer').startup(function()
 
   use 'ctrlpvim/ctrlp.vim'
 
+  use 'nicwest/vim-camelsnek'
   -- treesitter
 --  use {
 --    'nvim-treesitter/nvim-treesitter',
