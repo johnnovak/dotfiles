@@ -1,25 +1,23 @@
 # Overview
 
-This repo contains my universal dotfiles for OS X, Linux (native and WSL2),
-and Cygwin.
+This repo contains my universal dotfiles for macOS and Linux.
 
 Tested on:
 
-* macOS Sonoma (14.0)
+* macOS Sonoma (14.2.1)
 * Debian 10 on WSL2 (Windows 10)
-* Latest cygwin on Windows 10
 
 
 # Requirements
 
 ## Common
 
-- bash 5.0+ (macOS default is fine)
-- zsh 5.7+ (macOS default is fine)
-- git 2.20+ (macOS default is fine)
-- GNU grep 3.3+
-- tmux 2.8+
-- neovim 0.8.0+
+- bash 5.2+
+- git 2.39.3+
+- GNU grep 3.1+
+- neovim 0.10+
+- tmux 3.4+
+- zsh 5.9+
 
 ## Platform specific
 
@@ -40,7 +38,7 @@ support in Neovim
 
 ### Linux
 
-    sudo apt install zsh tmux git curl
+    sudo apt install zsh tmux git curl tig
 
 Optionally, if you want to use rxvt on X:
 
@@ -53,7 +51,11 @@ Crunchbang++.
 
 ### macOS
 
-    sudo port install grep coreutils tmux
+Using MacPorts:
+
+    sudo port install grep coreutils tmux tig
+
+The system-provided **bash**, **zsh** and **git** versions are usually fine.
 
 To set the MacPorts `zsh` as the default shell:
 
@@ -77,6 +79,13 @@ set `DOTFILES` to point to the cloned repo in `~/.bashrc-pre` and
 `~/.zshrc-pre` after the installation.
 
 
+## Installing NeoVim
+
+It's best to download the latest binaries directly from the [NeoVim releases
+page](https://github.com/neovim/neovim/releases) on GitHub, then install it
+into `~/bin/`.
+
+
 ## Installing NeoVim plugins
 
 1. Execute the following:
@@ -97,6 +106,12 @@ for further details
 ### macOS
 
 ```zsh
+# Manually installed binaries
+export PATH="$HOME/bin:$PATH"
+
+# Make GNU sed the default
+export PATH="/opt/local/libexec/gnubin/:$PATH"
+
 # Aliases
 alias grep=ggrep
 alias vim=nvim
