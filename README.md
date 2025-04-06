@@ -4,7 +4,7 @@ This repo contains my universal dotfiles for macOS and Linux.
 
 Tested on:
 
-* macOS Sonoma (14.2.1)
+* macOS Sequoia 15.2
 * Debian 10 on WSL2 (Windows 10)
 
 
@@ -15,8 +15,8 @@ Tested on:
 - bash 5.2+
 - git 2.39.3+
 - GNU grep 3.1+
-- neovim 0.10+
-- tmux 3.4+
+- neovim 0.11+
+- tmux 3.5a+
 - zsh 5.9+
 
 ## Platform specific
@@ -29,7 +29,7 @@ Tested on:
 
 - [wsltty](https://github.com/mintty/wsltty)
 - [win32yank](https://github.com/equalsraf/win32yank) for clipboard
-support in Neovim
+    support in Neovim
 
 
 # Installation
@@ -53,18 +53,14 @@ Crunchbang++.
 
 Using MacPorts:
 
-    sudo port install grep coreutils tmux tig
+    sudo port install grep coreutils tmux tig neovim
 
 The system-provided **bash**, **zsh** and **git** versions are usually fine.
-
-To set the MacPorts `zsh` as the default shell:
-
-    sudo chpass -s '/opt/local/bin/zsh' $USER
 
 
 ## Installing the dotfiles
 
-Clone this repo somewhere (e.g. `~/.dotfiles`) and then do the following:
+Clone this repo to `~/.dotfiles` and then do the following:
 
 ```
 cd ~/.dotfiles
@@ -81,7 +77,9 @@ set `DOTFILES` to point to the cloned repo in `~/.bashrc-pre` and
 
 ## Installing NeoVim
 
-It's best to download the latest binaries directly from the [NeoVim releases
+On macOS, MacPorts usually has the latest NeoVim version.
+
+On Linux, download the latest binaries directly from the [NeoVim releases
 page](https://github.com/neovim/neovim/releases) on GitHub, then install it
 into `~/bin/`.
 
@@ -98,7 +96,16 @@ git clone --depth 1 https://github.com/wbthomason/packer.nvim\ &&
 2. Start NeoVim, then execute `:PackerSync`
 
 Refer to the [packer instructions](https://github.com/wbthomason/packer.nvim)
-for further details
+for further details.
+
+
+## Installing special font for NeoVim (optional)
+
+To get nice icons in NERDTree in NeoVim on Linux, install **JetBrainsMono Nerd
+Font** from [here](https://www.nerdfonts.com/font-downloads).
+
+This step is not necessary in Kitty on macOS as Kitty implements NERDFont
+glyph fallback out-of-the-box.
 
 
 ## .zshrc-pre suggestions
