@@ -36,7 +36,7 @@ Tested on:
 
 ## Installing the dependencies
 
-### Linux
+### Linux / WSL2
 
     sudo apt install zsh tmux git curl tig
 
@@ -106,6 +106,15 @@ Font** from [here](https://www.nerdfonts.com/font-downloads).
 
 This step is not necessary in Kitty on macOS as Kitty implements NERDFont
 glyph fallback out-of-the-box.
+
+
+## Windows / WSL2 setup
+
+### wsltty
+
+Copy the contents of `wsl/wsltty/` to
+`C:\Users\<USER>\AppData\Roaming\wsltty\`, restart WSL2, then set the `lux`
+theme in the settings.
 
 
 ## .zshrc-pre suggestions
