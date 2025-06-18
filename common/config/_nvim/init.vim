@@ -250,7 +250,7 @@ vmap <Leader><Bslash> :EasyAlign*<Bar><Enter>
 "=============================================================================
 
 " filetypes with tabwidth of 2
-autocmd FileType css,scss,html,xhtml,htmldjango,markdown,javascript,typescript,json,lua,vim,nim,python
+autocmd FileType cmake,css,scss,html,xhtml,htmldjango,markdown,javascript,typescript,json,lua,vim,nim,python
   \ setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
 
 " wrap python comments at 72 chars
