@@ -2,11 +2,17 @@
 set visualbell
 set noerrorbells
 
+" enable highlighting when searching
+set hlsearch
+
 " show a few lines of context around the cursor
 set scrolloff=5
 
 " do incremental searching.
 set incsearch
+
+" retain more of the history
+set history=1000
 
 " fast escape
 inoremap jk <Esc>
@@ -30,8 +36,11 @@ nnoremap ,f gqap
 nnoremap <Leader>w :w<CR>
 
 " move horizontally between splits
-nnoremap <C-l> <C-w>l
-nnoremap <C-h> <C-w>h
+map <C-l> <Action>(NextSplitter)
+map <C-h> <Action>(PrevSplitter)
+
+" move tab to the other split
+map <C-i> <Action>(MoveEditorToOppositeTabGroup)
 
 "" -- Map IDE actions to IdeaVim -- https://jb.gg/abva4t
 "" Map \r to the Reformat Code action
@@ -41,6 +50,6 @@ nnoremap <C-h> <C-w>h
 "map <leader>d <Action>(Debug)
 
 "" Map \b to toggle the breakpoint on the current line
-"map \b <Action>(ToggleLineBreakpoint)
+"map <Leader>b <Action>(ToggleLineBreakpoint)
 
 " Find more examples here: https://jb.gg/share-ideavimrc
