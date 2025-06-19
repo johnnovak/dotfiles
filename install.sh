@@ -27,7 +27,7 @@ unique_name() {
   fi
 }
 
-# $1 - OS type (osx|linux|cygwin)
+# $1 - OS type (macos|linux)
 # $2 - dest path prefix
 # $3 - max depth
 create_symlinks() {
@@ -79,9 +79,8 @@ detect_os() {
     echo "wsl"
   else
     case "$OSTYPE" in
-      darwin*) echo "osx"     ;;
+      darwin*) echo "macos"     ;;
       linux*)  echo "linux"   ;;
-      cygwin*) echo "cygwin"  ;;
       *)       echo "unknown" ;;
     esac
   fi
@@ -92,10 +91,9 @@ run() {
 
   OS=$(detect_os)
   case $OS in
-    osx)    create_platform_symlinks osx    ;;
+    macos)  create_platform_symlinks macos  ;;
     linux)  create_platform_symlinks linux  ;;
     wsl)    create_platform_symlinks wsl    ;;
-    cygwin) create_platform_symlinks cygwin ;;
     *)      echo "ERROR: unsupported platform"
             exit 1 ;;
   esac

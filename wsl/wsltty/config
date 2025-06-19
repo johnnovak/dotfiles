@@ -2,6 +2,7 @@
 FontHeight=10
 FontSmoothing=full
 AllowBlinking=yes
+AllowSetSelection=yes
 CursorType=block
 CursorBlinks=no
 Transparency=off
@@ -26,3 +27,4 @@ BoldAsColour=no
 FontWeight=400
 FontIsBold=no
 Emojis=apple
+RightClickAction=paste
