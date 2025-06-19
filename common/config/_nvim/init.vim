@@ -49,7 +49,7 @@ set inccommand=nosplit      " live substitution
 
 set hidden                  " no more nagging on buffer changes
 
-set timeoutlen=500          " set timeout on mappings
+set timeoutlen=200          " set timeout on mappings
 
 set clipboard+=unnamedplus  " enable system clipboard integration
 
