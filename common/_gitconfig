@@ -8,6 +8,7 @@
 [core]
 	excludesfile = ~/.gitignore_global
 	autocrlf = false
+	ignoreCase = true
 
 [tag]
 	sort = version:refname
@@ -20,3 +21,5 @@
 	helper = /usr/local/share/gcm-core/git-credential-manager
 [credential "https://dev.azure.com"]
 	useHttpPath = true
+[absorb]
+	maxStack = 100
