@@ -1,17 +1,14 @@
-return require('packer').startup(function()
+return {
 
-  -- plugin management
-  use 'wbthomason/packer.nvim'
-
-  -- window management
-  use 'christoomey/vim-tmux-navigator'
-  use 'troydm/zoomwintab.vim'
-
-  -- file management
-  use {
-    'kyazdani42/nvim-tree.lua',
-    requires = { 'kyazdani42/nvim-web-devicons' },
-    config = function() require('nvim-tree').setup {
+  -- nvim-tree
+  {
+    "nvim-tree/nvim-tree.lua",
+    version = "*",
+    lazy = false,
+    dependencies = {
+      "nvim-tree/nvim-web-devicons",
+    },
+    config = function() require("nvim-tree").setup {
       filters = {
         dotfiles = false
       },
@@ -26,82 +23,115 @@ return require('packer').startup(function()
         }
       }
     } end
-  }
-
-  use 'ryanoasis/vim-devicons'
-
-  -- searching/finding
---  use 'junegunn/fzf'
---  use 'junegunn/fzf.vim'
-
-  use 'ctrlpvim/ctrlp.vim'
-
-  use 'nicwest/vim-camelsnek'
-  -- treesitter
---  use {
---    'nvim-treesitter/nvim-treesitter',
---    run = ':TSUpdate'
---  }
-
+  },
 
   -- telescope
---  use {
---    'nvim-telescope/telescope-fzf-native.nvim',
---    run = 'make'
---  }
---  use {
---    'nvim-telescope/telescope.nvim',
---    config = [[require('config.telescope')]],
---    requires = {
---      'nvim-lua/popup.nvim',
---      'nvim-lua/plenary.nvim'
---    }
---  }
+  {
+    'nvim-telescope/telescope.nvim', version = '*',
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+      { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
+    },
+
+    keys = {
+      {
+        "<C-]>",
+        function()
+          require("telescope.builtin").live_grep({
+            default_text = vim.fn.expand("<cword>"),
+            initial_mode = "normal",
+          })
+        end,
+        desc = "Live grep word under cursor",
+      }, {
+        "<Leader>ff",
+        function()
+          require("telescope.builtin").find_files({ initial_mode = "normal" })
+        end,
+      }, {
+        "<Leader>g",
+        function()
+          require("telescope.builtin").live_grep({ initial_mode = "normal" })
+        end,
+      }, {
+        "<Leader>b",
+        function()
+          require("telescope.builtin").buffers({ initial_mode = "normal" })
+        end,
+      }
+    },
+
+    opts = function()
+      local actions = require("telescope.actions")
+      return {
+        defaults = {
+          mappings = {
+            i = {
+              -- close Telescope with Esc/Ctrl-[ in insert mode
+              ["<Esc>"] = actions.close,
+
+              -- enter normal mode when pressing Ctrl-] in insert mode
+              -- ["<C-]>"] = function() vim.cmd("stopinsert") end,
+            },
+            n = {
+              -- close Telescope with Esc/Ctrl-[ in normal mode
+              ["<Esc>"] = actions.close,
+
+              -- enter insert mode when pressing Ctrl-] in normal mode
+              -- ["<C-]>"] = function() vim.cmd("startinsert") end,
+            },
+          },
+        },
+      }
+    end,
+  },
+
+  -- vim-tmux-navigator
+  {
+    "christoomey/vim-tmux-navigator",
+    lazy = false
+  },
 
   -- autocomplete
-  use {
+  {
     'hrsh7th/nvim-cmp',
-    config = [[require('config.cmp')]],
-    requires = {
+    lazy = false,
+    dependencies = {
       'hrsh7th/cmp-buffer',
       'hrsh7th/cmp-nvim-lsp',
       'hrsh7th/cmp-path',
       'hrsh7th/cmp-nvim-lua'
-    }
-  }
+    },
+    config = function() require('config.cmp') end
+  },
 
-  -- LSP
---  use 'neovim/nvim-lspconfig'
+  -- ctrlp
+  {
+    "ctrlpvim/ctrlp.vim",
+    lazy = false,
+  },
 
-  -- formatting
-  use 'rhysd/vim-clang-format'
-
-  -- align
-  use 'junegunn/vim-easy-align'
-
-  -- filetype plugins
-  use 'plasticboy/vim-markdown'
-  use {
+  {
+    'troydm/zoomwintab.vim'
+  }, {
+    'ryanoasis/vim-devicons'
+  }, {
+    'nicwest/vim-camelsnek'
+  }, {
+    'rhysd/vim-clang-format'
+  }, {
+    'junegunn/vim-easy-align'
+  }, {
+    'plasticboy/vim-markdown'
+  }, {
     'cespare/vim-toml',
-    branch = 'main'
+  }, {
+    'beyondmarc/glsl.vim'
+  }, {
+    'satabin/hocon-vim'
+  }, {
+    'lambdalisue/pastefix.vim'
+  }, {
+    'famiu/bufdelete.nvim'
   }
-  -- use 'zah/nim.vim'
---  use 'fatih/vim-go'
-  use 'beyondmarc/glsl.vim'
-  use 'satabin/hocon-vim'
-
-  -- misc stuff
-  use 'lambdalisue/pastefix.vim'
---  use 'tpope/vim-commentary'
---  use 'tpope/vim-speeddating'
---  use 'tpope/vim-repeat'
---  use 'tpope/vim-surround'
-  use 'famiu/bufdelete.nvim'
---  use {
---    'glts/vim-radical',
---    requires = 'glts/vim-magnum'
---  }
---  use 'godlygeek/tabular'
-
-end
-)
+}

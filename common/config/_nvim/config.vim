@@ -1,7 +1,5 @@
-lua require('plugins')
-
 "=============================================================================
-" Disable Default Plugins:
+" Disable default plugins
 "=============================================================================
 
 let g:loaded_netrw       = 1
@@ -16,7 +14,7 @@ let g:loaded_zip         = 1
 " {{{ Settings
 "
 "=============================================================================
-" General Settings:
+" General settings
 "=============================================================================
 
 let mapleader=","       " set Leader
@@ -34,7 +32,7 @@ endif
 
 
 "=============================================================================
-" Editing:
+" Editing
 "=============================================================================
 
 set tabstop=4
@@ -56,7 +54,7 @@ set clipboard+=unnamedplus  " enable system clipboard integration
 "set number                  " show line numbers
 
 "=============================================================================
-" Completion:
+" Completion
 "=============================================================================
 
 " disable output and vcs files
@@ -72,7 +70,7 @@ set wildignore+=*/.bundle/*,*/.sass-cache/*
 set wildignore+=*.swp,*~,._*,.DS_Store
 
 "=============================================================================
-" Appearance:
+" Appearance
 "=============================================================================
 
 set termguicolors           " enable true color
@@ -111,7 +109,7 @@ colorscheme lux
 " " {{{ Plugin settings
 "
 "=============================================================================
-" Plugin Settings:
+" Plugin settings
 "=============================================================================
 
 " tmux-navigator
@@ -154,6 +152,7 @@ vnoremap ; :
 nnoremap <silent> <Leader>ev :e  $MYVIMRC<CR>
 nnoremap <silent> <Leader>sv :so $MYVIMRC<CR>
 nnoremap <silent> <Leader>ep :e  ~/.config/nvim/lua/plugins.lua<CR>
+nnoremap <silent> <Leader>ec :e  ~/.config/nvim/config.vim<CR>
 
 " jump to matching pairs easily, with Tab
 map    <Tab> %
@@ -227,13 +226,6 @@ endif
 nnoremap <C-n> :NvimTreeToggle<CR>
 nnoremap <C-f> :NvimTreeFindFile<CR>
 
-" telescope
-"-----------------------------------------------------------------------------
-nnoremap <Leader>ff <cmd>Telescope find_files<CR>
-nnoremap <leader>fg <cmd>Telescope live_grep<CR>
-nnoremap <Leader>fb <cmd>Telescope buffers<CR>
-nnoremap <Leader>fh <cmd>Telescope help_tags<CR>
-
 " vim-clang-format
 "-----------------------------------------------------------------------------
 vnoremap <Leader>f gq
@@ -245,6 +237,8 @@ vmap <Leader><Bslash> :EasyAlign*<Bar><Enter>
 
 " }}}
 
+" {{{ Filetype settings
+" 
 "=============================================================================
 " Filetype settings
 "=============================================================================
@@ -275,5 +269,6 @@ augroup GridmongerTheme
   au! BufRead,BufNewFile *.gmtheme set filetype=dosini
 augroup END
 
+" }}}
 
 " vim: fdm=marker
