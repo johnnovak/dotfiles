@@ -19,14 +19,11 @@ inoremap jk <Esc>
 cnoremap jk <C-c>
 
 " enter command mode with one keystroke
-nnoremap ; :
-vnoremap ; :
+noremap ; :
 
 " jump to matching pairs easily, with Tab
-map    <Tab> %
-map  <S-Tab> g%
-vmap   <Tab> %
-vmap <S-Tab> g%
+noremap   <Tab> %
+noremap <S-Tab> g%
 
 " format current paragraph
 vnoremap ,f gq
@@ -35,7 +32,7 @@ nnoremap ,f gqap
 " write file
 nnoremap <Leader>w :w<CR>
 
-" move horizontally between splits
+" move horizontally between splits with Ctrl+L/H
 map <C-l> <Action>(NextSplitter)
 map <C-h> <Action>(PrevSplitter)
 
