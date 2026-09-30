@@ -177,5 +177,3 @@ RPROMPT='${vim_mode}'
 . $DOTFILES/common/shell-includes/functions
 
 . ~/.zshrc-post
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
