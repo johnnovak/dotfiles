@@ -46,19 +46,35 @@ return {
       }, {
         "<Leader>ff",
         function()
-          require("telescope.builtin").find_files({ initial_mode = "normal" })
+          require("telescope.builtin").find_files()
         end,
       }, {
         "<Leader>g",
         function()
-          require("telescope.builtin").live_grep({ initial_mode = "normal" })
+          require("telescope.builtin").live_grep()
         end,
       }, {
         "<Leader>b",
         function()
-          require("telescope.builtin").buffers({ initial_mode = "normal" })
+          require("telescope.builtin").buffers()
         end,
-      }
+      }, {
+        '<Leader>r',
+        function()
+          vim.api.nvim_create_autocmd('User', {
+            pattern = 'TelescopeResumePost',
+            once = true,
+            callback = function(args)
+              local picker = require('telescope.actions.state').get_current_picker(args.buf)
+              if picker then
+                picker:refresh(picker.finder, { reset_prompt = false })
+              end
+            end,
+          })
+          require('telescope.builtin').resume()
+        end,
+        desc = 'Resume last search with fresh results',
+      },
     },
 
     opts = function()
@@ -68,17 +84,17 @@ return {
           mappings = {
             i = {
               -- close Telescope with Esc/Ctrl-[ in insert mode
-              ["<Esc>"] = actions.close,
+--              ["<Esc>"] = actions.close,
 
               -- enter normal mode when pressing Ctrl-] in insert mode
-              -- ["<C-]>"] = function() vim.cmd("stopinsert") end,
+ --             ["<C-]>"] = function() vim.cmd("stopinsert") end,
             },
             n = {
               -- close Telescope with Esc/Ctrl-[ in normal mode
-              ["<Esc>"] = actions.close,
+--              ["<Esc>"] = actions.close,
 
               -- enter insert mode when pressing Ctrl-] in normal mode
-              -- ["<C-]>"] = function() vim.cmd("startinsert") end,
+ --             ["<C-]>"] = function() vim.cmd("startinsert") end,
             },
           },
         },
