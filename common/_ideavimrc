@@ -39,6 +39,11 @@ map <C-h> <Action>(PrevSplitter)
 " move tab to the other split
 map <C-i> <Action>(MoveEditorToOppositeTabGroup)
 
+" wrap text (needs the "Wrap to Column" plugin)
+vmap gq <Action>(com.andrewbrookins.idea.wrap.WrapAction)
+nmap gqq <Action>(com.andrewbrookins.idea.wrap.WrapAction)
+nmap gqp <Action>(com.andrewbrookins.idea.wrap.WrapParagraphAction)
+
 "" -- Map IDE actions to IdeaVim -- https://jb.gg/abva4t
 "" Map \r to the Reformat Code action
 "map \r <Action>(ReformatCode)
